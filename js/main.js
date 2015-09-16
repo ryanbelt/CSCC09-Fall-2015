@@ -14,18 +14,18 @@ splat.AppRouter = Backbone.Router.extend({
 
     // When an instance of an AppRouter is declared, create a Header view
     initialize: function() {
-    // instantiate a Header view
+	// instantiate a Header view
         this.headerView = new splat.Header();  
-    // insert the rendered Header view element into the document DOM
+	// insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
     },
 
     home: function() {
-    // If the Home view doesn't exist, instantiate one
+	// If the Home view doesn't exist, instantiate one
         if (!this.homeView) {
             this.homeView = new splat.Home();
         };
-    // insert the rendered Home view element into the document DOM
+	// insert the rendered Home view element into the document DOM
         $('#content').html(this.homeView.render().el);
     }
 
