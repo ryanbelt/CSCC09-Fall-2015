@@ -45,10 +45,13 @@ body{
 }
 
 #footer{
+  background-color:black;
+  clear:both;
 	color:gray;
 	position:fixed;
 	bottom:0;
 	right:0;
 	height:30px;
-	width:-5px;
+	width:100%;
+  text-align:right;
 }
