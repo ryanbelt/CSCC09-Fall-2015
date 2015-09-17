@@ -1,0 +1,38 @@
+body{
+	background-color: black;
+}
+
+.home-hero {
+	background: url('../img/homeBG.jpg') no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	position:fixed ;
+	top:52px;
+	right:0;
+	bottom:0;
+	left:0;
+	text-align: center;
+  	color: white;
+
+
+}
+
+h1.home-hero{
+	font-size: 500pt;
+  	font-family: Verdana;
+}
+
+.about-hero{
+	color: red;
+}
+
+#footer{
+	color:gray;
+	position:fixed;
+	bottom:0;
+	right:0;
+	height:30px;
+	width:-5px;
+}
