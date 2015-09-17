@@ -38,9 +38,7 @@ splat.AppRouter = Backbone.Router.extend({
         $('#content').html(this.aboutView.render().el);
     },
 
-    selectMenuItem: function(menuItem){
-        $(this).addClass("active");
-    }
+
 });
 
 // Load HTML templates for Home, Header, About views, and when

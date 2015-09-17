@@ -1,5 +1,7 @@
 body{
 	background-color: black;
+  overflow: hidden;
+  height: 100%;
 }
 
 .home-hero {
@@ -9,23 +11,37 @@ body{
   	-o-background-size: cover;
   	background-size: cover;
   	position:fixed ;
-	top:52px;
-	right:0;
-	bottom:0;
-	left:0;
+
+    margin-top: 50px;
+    height: 100%;
+    top:0;
+    left: 0 ;
+    right: 0;
 	text-align: center;
+  vertical-align: middle;
   	color: white;
 
 
 }
 
-h1.home-hero{
-	font-size: 500pt;
+.home-hero h1{
+	font-size: 36pt;
   	font-family: Verdana;
+    text-shadow: 1px 1px black;
 }
 
+.home-hero h3{
+    font-family: Geneva, Helvetica  ;
+    text-shadow: 1px 1px black;
+  }
+
 .about-hero{
-	color: red;
+  margin-left: 32px;
+	color: white;
+}
+
+.about-hero h1{
+  color:#A95DBC;
 }
 
 #footer{
