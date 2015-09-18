@@ -32,6 +32,7 @@ splat.AppRouter = Backbone.Router.extend({
     },
 
     about: function(){
+        $('.header').html(this.headerView.selectMenuItem('about-header'));
         if(!this.aboutView){
             this.aboutView = new splat.About();
         };
