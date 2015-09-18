@@ -12,19 +12,24 @@ body{
     background: url('../img/homeBG.jpg') no-repeat center center; 
     background-size: cover;
     position:absolute; 
-    padding-bottom: 40%;
     margin-top: 50px;
-    height: 90%;
+    height: 100%;
     top:0;
     left: 0 ;
     right: 0;
+  	color: white;
+    display: table;
+    width: 100%; 
+}
+
+
+.home-text{
     text-align: center;
     vertical-align: middle;
-  	color: white;
+    display: table-cell;
     font-family: Verdana ,Geneva, Helvetica;
     text-shadow: 1px 1px black;
 }
-
 
 .home-hero h1{
 	font-size: 36pt;
@@ -54,4 +59,5 @@ body{
 
 .indent-right{
   margin-right: 10px;
+  height:  100%;
 }
