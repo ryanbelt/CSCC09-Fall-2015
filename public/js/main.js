@@ -24,6 +24,7 @@ splat.AppRouter = Backbone.Router.extend({
 
     home: function() {
     // If the Home view doesn't exist, instantiate one
+        $('.header').html(this.headerView.selectMenuItem('home-header'));
         if (!this.homeView) {
             this.homeView = new splat.Home();
         };
