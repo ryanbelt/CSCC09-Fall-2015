@@ -64,3 +64,8 @@ body{
   margin-right: 10px;
   height:  100%;
 }
+
+.navbar a.active {
+  background-color: black;
+  color: white;
+}
