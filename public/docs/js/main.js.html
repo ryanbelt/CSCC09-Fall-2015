@@ -6,7 +6,7 @@
   <link rel="stylesheet" media="all" href="../doc-style.css" />
   <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/songkai/CSCC09-Fall-2015//js/main.js", defaultSidebar = true;
+    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/panjian2/CSCC09-Fall-2015//js/main.js", defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
 </head>
@@ -139,6 +139,7 @@
 <p>If the Home view doesn't exist, instantiate one</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.header&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">headerView</span><span class="p">.</span><span class="nx">selectMenuItem</span><span class="p">(</span><span class="s1">&#39;home-header&#39;</span><span class="p">));</span>
         <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">homeView</span><span class="p">)</span> <span class="p">{</span>
             <span class="k">this</span><span class="p">.</span><span class="nx">homeView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">splat</span><span class="p">.</span><span class="nx">Home</span><span class="p">();</span>
         <span class="p">};</span>
