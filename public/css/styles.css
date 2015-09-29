@@ -69,3 +69,24 @@ body{
   background-color: black !important;
   color: white !important;
 }
+
+.home-btn{
+  opacity: 0.5;
+  border-spacing: 0px;
+  color:red;
+  background-color: #1B8087;
+  border-radius: 4px;
+  vertical-align: center;
+  text-align: center;
+  font-family: Arvo;
+  max-width: 200px;
+  margin: 10px 6px 10px 6px;
+  white-space: normal;
+}
+
+.home-btn #movie-ico{
+  height:50px;
+  position:relative; 
+  left:-20px;
+  bottom:-20px;
+}
