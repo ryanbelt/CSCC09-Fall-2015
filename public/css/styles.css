@@ -73,8 +73,8 @@ body{
 .home-btn{
   opacity: 0.5;
   border-spacing: 0px;
-  color:red;
-  background-color: #1B8087;
+  color:white;
+  background-color: #571A1A;
   border-radius: 4px;
   vertical-align: center;
   text-align: center;
@@ -85,8 +85,7 @@ body{
 }
 
 .home-btn #movie-ico{
-  height:50px;
-  position:relative; 
-  left:-20px;
-  bottom:-20px;
+  height:40px;
+  float: left;
+  padding-left: -10px;
 }

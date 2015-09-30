@@ -11,6 +11,9 @@ splat.AppRouter = Backbone.Router.extend({
     routes: {
         "": "home",
         "about": "about",
+        "browse": "movies",
+        "add": "movies/add",
+        "browseId":"movies/:id",
         "*default": "home"
     },
 
