@@ -22,7 +22,6 @@ body{
     width: 100%; 
 }
 
-
 .home-text{
     text-align: center;
     vertical-align: middle;
@@ -88,4 +87,10 @@ body{
   height:40px;
   float: left;
   padding-left: -10px;
+}
+
+.details-hero{
+  margin-left:40px;
+    color:white;
+  
 }
