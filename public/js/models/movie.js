@@ -24,4 +24,7 @@ splat.MovieModel = Backbone.Model.extend({
       	poster : "img/placeholder.png",  // movie-poster image URL
       	dated: new Date()  // date of movie posting
       }
+
+      initialize: function () {
+      }
 });
