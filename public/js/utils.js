@@ -48,5 +48,16 @@ splat.utils = {
 	// When all deferred template-loads have completed,
 	// invoke callback function.
         $.when.apply(null, deferreds).done(callback);
-    }
+    },
+    
+    showNotice: function(title, alertType, msg){
+         $('.alert').removeClass("alert-error alert-waring alert-success alert-info");
+         $('.alert').addClass("alert-" + alertType);
+         $('.alert').html('<strong>'+ title + '</strong>' + msg);
+         $('.alert').show();
+    },
+
+    hideNotice: function(){
+         $('.alert').hide();
+    },
 };

@@ -2,9 +2,10 @@
 
 var splat =  splat || {};  // our app's namespace
 
-splat.MovieModel = Backbone.Model.extend({
+splat.Movie = Backbone.Model.extend({
 	    // match localStorage use of _id 
       // rather than id
+      urlRoot: "/movies",
       idAttribute: "_id",
 
 
@@ -23,8 +24,7 @@ splat.MovieModel = Backbone.Model.extend({
       	trailer : null,  // URL for trailer/movie-streaming
       	poster : "img/placeholder.png",  // movie-poster image URL
       	dated: new Date()  // date of movie posting
-      }
+      },
 
-      initialize: function () {
-      }
+
 });

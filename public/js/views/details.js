@@ -20,17 +20,24 @@ splat.Details = Backbone.View.extend({
 	return this;    // support method chaining
     },
 
-    save: function(){
-        var data = new splat.MovieModel();
-        data.set("title", this.$("title").val());
-        data.set("released" , this.$("released").val());
-        data.set("director" , this.$("director").val());
-        data.set("rating" , this.$("rating").val());
-        data.set("starring" , this.$("starring").val());
-        data.set("duration" , this.$("duration").val());
-        data.set("genre" , this.$("genres").val());
-        data.set("synopsis" , this.$("synopsis").val());
-        data.set("trailer" , this.$("trailer").val());
-    }
+    save: function(e){
+        var data = new splat.Movie({_id: this.$("#title").val()});
 
+        /*
+        data.set("title", this.$("#title").val());
+        data.set("released" , this.$("#released").val());
+        data.set("director" , this.$("#director").val());
+        data.set("rating" , this.$("#rating").val());
+        data.set("starring" , this.$("#starring").val());
+        data.set("duration" , this.$("#duration").val());
+        data.set("genre" , this.$("#genres").val());
+        data.set("synopsis" , this.$("#synopsis").val());
+        data.set("trailer" , this.$("#trailer").val());
+        */
+        console.log(data);
+    },
+
+    delete: function(){
+
+    }
 });

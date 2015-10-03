@@ -44,12 +44,20 @@ splat.AppRouter = Backbone.Router.extend({
     },
 
     details:function(){
-        //var movieD=new splat.MovieModel();
+        var movieD = new splat.Movie();
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         if(!this.detailsView){
-            this.detailsView = new splat.Details();
+            this.detailsView = new splat.Details({model:movieD});
         };
         $('#content').html(this.detailsView.render().el); 
+    },
+
+    browse:function(){
+        $('.header').html(this.headerView.selectMenuItem('browse-header'));
+        if(!this.browseView){
+            this.browseView = new splat.Browse();
+        };
+        $('#content').html(this.browseView.render().el); 
     }
 
 });
@@ -57,7 +65,7 @@ splat.AppRouter = Backbone.Router.extend({
 // Load HTML templates for Home, Header, About views, and when
 // template loading is complete, instantiate a Backbone router
 // with history.
-splat.utils.loadTemplates(['Home', 'Header', 'About' , 'Details'], function() {
+splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details'], function() {
     splat.app = new splat.AppRouter();
     Backbone.history.start();
 });
