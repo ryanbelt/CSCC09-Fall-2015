@@ -50,11 +50,13 @@ splat.utils = {
         $.when.apply(null, deferreds).done(callback);
     },
     
-    showNotice: function(title, alertType, msg){
-         $('.alert').removeClass("alert-error alert-waring alert-success alert-info");
-         $('.alert').addClass("alert-" + alertType);
-         $('.alert').html('<strong>'+ title + '</strong>' + msg);
-         $('.alert').show();
+    showNotice: function(type, msg){
+         /*$('#alert').removeClass("alert-error alert-waring alert-success alert-info");
+         $('#alert').addClass("alert-" + alertType);
+         $('#alert').html('<strong>'+ title + '</strong>' + msg);
+         $('#alert').show();   */
+         $("#alert-area").append($("<div class='alert-message " + type + " fade in' data-alert><p> " + msg + " </p></div>"));
+        $(".alert-message").delay(5000).fadeOut("slow", function () { $(this).remove(); });
     },
 
     hideNotice: function(){

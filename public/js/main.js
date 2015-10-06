@@ -23,6 +23,8 @@ splat.AppRouter = Backbone.Router.extend({
         this.headerView = new splat.Header();  
     // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
+        this.collector=new splat.Movies();
+        this.collector.fetch();
     },
 
     home: function() {

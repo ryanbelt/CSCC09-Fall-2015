@@ -10,6 +10,7 @@ splat.Details = Backbone.View.extend({
 	events:{
     	  'click #moviesave': 'save',
     	  'click #moviedel': 'delete',
+          'focusout .form-input' : "save",
     },
 
 
@@ -17,27 +18,61 @@ splat.Details = Backbone.View.extend({
     render: function () {
 	// set the view element ($el) HTML content using its template
 	this.$el.html(this.template());
+    this.delegateEvents();
 	return this;    // support method chaining
     },
 
     save: function(e){
+        this.movies=new splat.Movies();
         var data = new splat.Movie({_id: this.$("#title").val()});
 
-        /*
+
+        
         data.set("title", this.$("#title").val());
         data.set("released" , this.$("#released").val());
         data.set("director" , this.$("#director").val());
         data.set("rating" , this.$("#rating").val());
-        data.set("starring" , this.$("#starring").val());
+        var star=(this.$("#starring").val()).split(",");
+        data.set("starring" , star);
         data.set("duration" , this.$("#duration").val());
-        data.set("genre" , this.$("#genres").val());
+        var genre=(this.$("#genres").val()).split(",");
+        data.set("genre" , genre);
         data.set("synopsis" , this.$("#synopsis").val());
         data.set("trailer" , this.$("#trailer").val());
-        */
+    this.movies.create(data,{
+    wait: true,  // don't destroy client model until server responds
+    success: function(model, response) {
+    // notification panel, defined in section 2.6
+        splat.utils.showAlert('Success', "Movie save", 'alert-success')
+    },
+    error: function(model,response) {
+    // display the error response from the server
+        splat.utils.requestFailed(response);
+
+        splat.utils.showNotice('alert-success',"good");
+    }
+    });
         console.log(data);
+
+        this.movies.fetch();
     },
 
     delete: function(){
+        this.movies=new splat.Movies();
+        this.movies.fetch();
+        this.movies.get({_id:this.$("#title").val() }).destroy({
+    wait: true,  // don't destroy client model until server responds
+    success: function(model, response) {
+    // later, we'll navigate to the browse view upon success
+        splat.app.navigate('#', {replace:true, trigger:true});
+    // notification panel, defined in section 2.6
+        splat.utils.showNotice('Success', "Movie deleted", 'alert-success')
+    },
+    error: function(model, response) {
+    // display the error response from the server
+        splat.utils.requestFailed(response);
+    }
+});
 
     }
 });
