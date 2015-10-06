@@ -10,7 +10,7 @@ splat.Details = Backbone.View.extend({
 	events:{
     	  'click #moviesave': 'save',
     	  'click #moviedel': 'delete',
-          'focusout .form-input' : "save",
+          'change    .form-input' : "save",
     },
 
 
@@ -39,19 +39,8 @@ splat.Details = Backbone.View.extend({
         data.set("genre" , genre);
         data.set("synopsis" , this.$("#synopsis").val());
         data.set("trailer" , this.$("#trailer").val());
-    this.movies.create(data,{
-    wait: true,  // don't destroy client model until server responds
-    success: function(model, response) {
-    // notification panel, defined in section 2.6
-        splat.utils.showAlert('Success', "Movie save", 'alert-success')
-    },
-    error: function(model,response) {
-    // display the error response from the server
-        splat.utils.requestFailed(response);
-
-        splat.utils.showNotice('alert-success',"good");
-    }
-    });
+        splat.utils.showNotice('success','danger',":::good");
+        this.movies.create(data)
         console.log(data);
 
         this.movies.fetch();
@@ -60,13 +49,14 @@ splat.Details = Backbone.View.extend({
     delete: function(){
         this.movies=new splat.Movies();
         this.movies.fetch();
+        splat.utils.showNotice('success','danger',":::good");
         this.movies.get({_id:this.$("#title").val() }).destroy({
     wait: true,  // don't destroy client model until server responds
     success: function(model, response) {
     // later, we'll navigate to the browse view upon success
         splat.app.navigate('#', {replace:true, trigger:true});
     // notification panel, defined in section 2.6
-        splat.utils.showNotice('Success', "Movie deleted", 'alert-success')
+        //splat.utils.showNotice('Success', "Movie deleted", 'alert-success')
     },
     error: function(model, response) {
     // display the error response from the server

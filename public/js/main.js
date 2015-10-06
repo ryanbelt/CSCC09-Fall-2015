@@ -46,10 +46,9 @@ splat.AppRouter = Backbone.Router.extend({
     },
 
     details:function(){
-        var movieD = new splat.Movie();
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         if(!this.detailsView){
-            this.detailsView = new splat.Details({model:movieD});
+            this.detailsView = new splat.Details({model: this.collector});
         };
         $('#content').html(this.detailsView.render().el); 
     },

@@ -26,34 +26,9 @@ splat.Movie = Backbone.Model.extend({
       	dated: new Date()  // date of movie posting
       },
 
-      validate: function (attrs) {
-        if (!attrs.title) {
-            return 'Please fill title field.';
-        }
-        if (!attrs.released) {
-            return 'Please fill released field.';
-        }
-        if (!attrs.director) {
-            return 'Please fill director field.';
-        }
-        if (!attrs.duration) {
-            return 'Please fill duration field.';
-        }
-        if (!attrs.rating) {
-            return 'Please fill rating field.';
-        }
-        if (!attrs.starring) {
-            return 'Please fill starring field.';
-        }
-        if (!attrs.genre) {
-            return 'Please fill genres field.';
-        }
-        if (!attrs.synopsis) {
-            return 'Please fill synopsis field.';
-        }
-        if (!attrs.trailer) {
-            return 'Please fill url field.';
-        }
+        initialize: function () {
+          this.validators={};
+
       },
 
       

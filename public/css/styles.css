@@ -3,6 +3,13 @@ body{
   height:100%;
 }
 
+.alert{
+   padding:10px;
+   width:90%
+   center;
+   display:block;
+}
+
 .header{
   font-size: 125%;
   width=:100%;
