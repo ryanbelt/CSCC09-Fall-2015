@@ -3,16 +3,22 @@
 <div class="thumbnails col-lg-2 col-md-3 col-sm-4 col-xs-6">
   <div class="thumbnail plain" title="some message">
     <div class="some_class">
-      <a href="#movies/34f1e586-5224-629d-640f-339376b1743e" class="plain">
+      <a href="#movies/<%=_id%>" class="plain">
         <video class="img-responsive" controls poster="google.com" >
             <source src="https://www.youtube.com/watch?v=xGibo53i1Mw" type="video/mp4"/>
             <!-- fallback -->
         </video>
 
         <div class="some_class_2">
-          <div>
-          "my title"
-          </div>
+          <p><span id="title"><%= title %></span>{"<span><%= released %></span> "}</p>
+          <br>
+          <p><span id="director">:<%= director %></span></p>
+          <br>
+          <p><span id="staring">:<%= starring %></span></p>
+          <br>
+          <p><span id="rating">:<%= rating %></span></p>
+          <br>
+          <p><span id="genre">:<%= genre %></span></p>
           <!-- ADD-CODE -->
         </div>
       </a>
