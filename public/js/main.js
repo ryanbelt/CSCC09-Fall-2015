@@ -46,11 +46,13 @@ splat.AppRouter = Backbone.Router.extend({
 
 
     browse:function(){
+        splat.utils.showNotice('Note:','info'," Loading.....");
         $('.header').html(this.headerView.selectMenuItem('browse-header'));
 
             this.browseView = new splat.MovieThumb({collection: this.movies});
 
         $('#content').html(this.browseView.render().el); 
+        splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
     },
 
     details:function(id){
@@ -59,7 +61,7 @@ splat.AppRouter = Backbone.Router.extend({
         if (!m)
             m=new splat.Movie();
         this.containDetailsView = new splat.Details({collection: this.movies , model: m});
-
+        splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.containDetailsView.render().el); 
     },
 });

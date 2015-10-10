@@ -1,24 +1,30 @@
 
 
 <div class="thumbnails col-lg-2 col-md-3 col-sm-4 col-xs-6">
-  <div class="thumbnail plain" title="some message">
-    <div class="some_class">
+  <div class="thumbnail plain" title="<%= title%>">
+    <div class="thumb_video">
       <a href="#movies/<%=_id%>" class="plain">
-        <video class="img-responsive" controls poster="<%=poster%>" >
-            <source src="https://www.youtube.com/watch?v=xGibo53i1Mw" type="video/mp4"/>
+        <video class="img-responsive" controls preload="none" controls poster="<%=poster%>" >
+            <source src="<%=trailer%>" type="video/mp4"/>
             <!-- fallback -->
         </video>
 
-        <div class="some_class_2">
-          <p><span id="title"><%= title %></span>{"<span><%= released %></span> "}</p>
-          <br>
-          <p><span id="director">:<%= director %></span></p>
-          <br>
-          <p><span id="staring">:<%= starring %></span></p>
-          <br>
-          <p><span id="rating">:<%= rating %></span></p>
-          <br>
-          <p><span id="genre">:<%= genre %></span></p>
+        <div class="thumb_info">
+        <div>
+          <span class="maintext"><%= title %></span><span class="sparetext">{<%= released %>}</span>
+          </div>
+          <div>
+          <span class="maintext">Directed by: </span><span class="sparetext"> <%= director %></span>
+          </div>
+          <div>
+          <span class="maintext">Starring: </span><span class="sparetext"> <%= starring %></span>
+          </div>
+          <div>
+          <span class="maintext">Genres: </span><span class="sparetext"> <%= genre %> 
+          </div>
+          <div>
+           </span><span class="maintext">Rating: </span><span class="sparetext"> <%= rating %></span>
+          </div>
           <!-- ADD-CODE -->
         </div>
       </a>

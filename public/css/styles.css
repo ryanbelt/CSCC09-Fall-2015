@@ -122,4 +122,31 @@ body{
   padding: 10px;
   margin-left:30px;
 }
-  
+
+.thumb_info{
+  text-align: right;
+}
+
+span.maintext{
+  font-weight: bold;
+  font-family: Avro;
+  color:white;
+}
+
+span.sparetext{
+  font-size:80%;
+  color:white;
+}
+
+.thumbnail{
+  position: relative;
+  border-width: 1px;
+  border-radius: 4px;
+border-color:#25383C !important;
+background-color:#181010 !important;
+  margin-right: 5px;
+}
+
+video.img-responsive{
+  max-width: 100% !important;
+}
