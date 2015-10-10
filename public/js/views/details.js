@@ -10,57 +10,66 @@ splat.Details = Backbone.View.extend({
 	events:{
     	  'click #moviesave': 'save',
     	  'click #moviedel': 'delete',
-          'change    .form-input' : "save",
+          //'change    .form-input' : "save",
     },
 
 
     // render the View
     render: function () {
 	// set the view element ($el) HTML content using its template
-	this.$el.html(this.template());
+	this.$el.html(this.template(this.model.toJSON()));
     this.delegateEvents();
 	return this;    // support method chaining
     },
 
     save: function(e){
-        this.movies=new splat.Movies();
-        var data = new splat.Movie({_id: this.$("#title").val()});
 
+        e.preventDefault();
+        var title=this.$("#title").val();
 
-        
-        data.set("title", this.$("#title").val());
-        data.set("released" , this.$("#released").val());
-        data.set("director" , this.$("#director").val());
-        data.set("rating" , this.$("#rating").val());
+        //this.movie.set("id",title);
+        this.model.set("title", this.$("#title").val());
+        this.model.set("released" , this.$("#released").val());
+        this.model.set("director" , this.$("#director").val());
+        this.model.set("rating" , this.$("#rating").val());
         var star=(this.$("#starring").val()).split(",");
-        data.set("starring" , star);
-        data.set("duration" , this.$("#duration").val());
+        this.model.set("starring" , star);
+        this.model.set("duration" , this.$("#duration").val());
         var genre=(this.$("#genres").val()).split(",");
-        data.set("genre" , genre);
-        data.set("synopsis" , this.$("#synopsis").val());
-        data.set("trailer" , this.$("#trailer").val());
-        splat.utils.showNotice('success','danger',":::good");
-        this.movies.create(data)
-        console.log(data);
+        this.model.set("genre" , genre);
+        this.model.set("synopsis" , this.$("#synopsis").val());
+        this.model.set("trailer" , this.$("#trailer").val());
 
-        this.movies.fetch();
+
+        //splat.utils.showNotice('Success:','success',title+" has been saved");
+        this.collection.create(this.model ,{
+            success: function(){
+                splat.app.navigate('#movies', {replace:true, trigger:true});
+                splat.utils.showNotice('Success:','success',title+" has been saved");
+            },
+            error: function() {
+    // display the error response from the server
+        splat.utils.requestFailed(response);
+        splat.utils.showNotice('Failur:', "danger", "Something wrong with saving");
+        }
+        });
     },
 
-    delete: function(){
-        this.movies=new splat.Movies();
-        this.movies.fetch();
-        splat.utils.showNotice('success','danger',":::good");
-        this.movies.get({_id:this.$("#title").val() }).destroy({
+    delete: function(e){
+
+    var title=this.$("#title").val();
+    this.model.destroy({
     wait: true,  // don't destroy client model until server responds
     success: function(model, response) {
     // later, we'll navigate to the browse view upon success
-        splat.app.navigate('#', {replace:true, trigger:true});
+        splat.app.navigate('#movies', {replace:true, trigger:true});
     // notification panel, defined in section 2.6
-        //splat.utils.showNotice('Success', "Movie deleted", 'alert-success')
+        splat.utils.showNotice('Success:', "success", title + ' has been deleted');
     },
     error: function(model, response) {
     // display the error response from the server
         splat.utils.requestFailed(response);
+        splat.utils.showNotice('Failur:', "danger", "Something wrong with deletion");
     }
 });
 

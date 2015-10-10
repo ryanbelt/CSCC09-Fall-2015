@@ -8,55 +8,55 @@
   <div class="form-horizontal">
     <div class="form-group">
       <label class="form-label" for="title">Title:</label>
-      <input class="form-input" type="text" id="title" name="title"  placeholder="e.g Day of the Jackal" />
+      <input class="form-input" type="text" id="title" name="title"  placeholder="e.g Day of the Jackal" value="<%= title %>" />
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
       <label class="form-label" for="released">Released:</label>
-      <input class="form-input" type="number"  id="released" placeholder="e.g 2000" />
+      <input class="form-input" type="number"  id="released" placeholder="e.g 2000" value="<%= released %>" />
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
       <label class="form-label" for="director">Director:</label>
-      <input class="form-input" type="text"  id="director" placeholder="e.g Steven Spellberg" />
+      <input class="form-input" type="text"  id="director" placeholder="e.g Steven Spellberg" value="<%= director %>" />
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
       <label class="form-label" for="rating">Rating:</label>
-      <input class="form-input" type="text"  id="rating" placeholder="e.g G, PG, PG-13, R, NC-17, NR" />
+      <input class="form-input" type="text"  id="rating" placeholder="e.g G, PG, PG-13, R, NC-17, NR" value="<%= rating %>"/>
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
       <label class="form-label" for="starring">Starring:</label>
-      <input class="form-input" type="text"  id="starring" placeholder="e.g Steve Martin, John Bekus" />
+      <input class="form-input" type="text"  id="starring" placeholder="e.g Steve Martin, John Bekus" value="<%= starring %>"/>
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
       <label class="form-label" for="duration">Duration:</label>
-      <input class="form-input" type="number"  id="duration" placeholder="e.g # in mins" />
+      <input class="form-input" type="number"  id="duration" placeholder="e.g # in mins" value="<%= duration %>"/>
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
       <label class="form-label" for="genre">Genre(s):</label>
-      <input class="form-input" type="text"  id="genres" placeholder="e.g commedy, action, tragedy"/>
+      <input class="form-input" type="text"  id="genres" placeholder="e.g commedy, action, tragedy" value="<%= genre%>"/>
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
-      <label class="form-label" for="syniosus">Synopsis:</label>
-      <textarea class="form-input" rows="3" type="url"  id="synopsis" placeholder="e.g summary of the movie plot"></textarea>
+      <label class="form-label" for="synopsis">Synopsis:</label>
+      <textarea class="form-input" rows="3" type="url"  id="synopsis" placeholder="e.g summary of the movie plot" ><%= synopsis %></textarea>
               </br>
        <span class="help-block"></span>
     </div>
     <div class="form-group">
       <label class="form-label" for="trailer">Trailer URL:</label>
-      <input class="form-input" type="url"  id="trailer" placeholder="e.g https://www.google.ca" />
+      <input class="form-input" type="url"  id="trailer" placeholder="e.g https://www.google.ca" value="<%= trailer %>" />
               </br>
        <span class="help-block"></span>
     </div>

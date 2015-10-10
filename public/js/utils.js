@@ -64,6 +64,7 @@ splat.utils = {
     },
 
     hideNotice: function(){
+        $('.alert').stop(true);
          $('.alert').hide();
     },
 };

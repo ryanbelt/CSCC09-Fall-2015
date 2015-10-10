@@ -10,7 +10,7 @@ splat.Movie = Backbone.Model.extend({
 
 
       defaults: {
-        
+
         title: '', //movie title
         released: null, //release year in Date
         director:'', //movie's director
@@ -31,6 +31,27 @@ splat.Movie = Backbone.Model.extend({
 
       },
 
-      
+  
 
 });
+
+splat.Movie.MovieViewModel = function(model) {
+    this.id = kb.observable(model, 'id');
+    this.title = kb.observable(model, 'title');
+    this.released = kb.observable(model, 'released');
+    this.director = kb.observable(model, 'director');
+    this.starring = kb.observable(model, 'starring');
+    this.rating = kb.observable(model, 'rating');
+    this.duration = kb.observable(model, 'duration');
+    this.genre = kb.observable(model, 'genre');
+    this.synopsis = kb.observable(model, 'synopsis');
+    this.freshTotal = kb.observable(model, 'freshTotal');
+    this.freshVotes = kb.observable(model, 'freshVotes');
+    this.trailer = kb.observable(model, 'trailer');
+    this.poster = kb.observable(model, 'poster');
+    this.dated = kb.observable(model, 'dated');
+
+    this.Url = ko.computed(function() {
+        return "#/movies/" + this.id();
+    }, this);
+};

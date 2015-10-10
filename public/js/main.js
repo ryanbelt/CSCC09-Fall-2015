@@ -13,7 +13,7 @@ splat.AppRouter = Backbone.Router.extend({
         "about": "about",
         "movies" :"browse",
         "movies/add": "details",
-        "movies/:id":"browseId",
+        "movies/:id":"details",
         "*default": "home"
     },
 
@@ -23,8 +23,8 @@ splat.AppRouter = Backbone.Router.extend({
         this.headerView = new splat.Header();  
     // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
-        this.collector=new splat.Movies();
-        this.collector.fetch();
+        this.movies = new splat.Movies();
+        this.movies.fetch();
     },
 
     home: function() {
@@ -45,22 +45,24 @@ splat.AppRouter = Backbone.Router.extend({
         $('#content').html(this.aboutView.render().el);
     },
 
-    details:function(){
-        $('.header').html(this.headerView.selectMenuItem('add-header'));
-        if(!this.detailsView){
-            this.detailsView = new splat.Details({model: this.collector});
-        };
-        $('#content').html(this.detailsView.render().el); 
-    },
 
     browse:function(){
         $('.header').html(this.headerView.selectMenuItem('browse-header'));
         if(!this.browseView){
-            this.browseView = new splat.Browse();
+            this.browseView = new splat.MovieThumb();
         };
         $('#content').html(this.browseView.render().el); 
-    }
+    },
 
+    details:function(id){
+        $('.header').html(this.headerView.selectMenuItem('add-header'));
+        var m =this.movies.get(id);
+        if (!m)
+            m=new splat.Movie();
+        this.containDetailsView = new splat.Details({collection: this.movies , model: m});
+
+        $('#content').html(this.containDetailsView.render().el); 
+    },
 });
 
 // Load HTML templates for Home, Header, About views, and when
