@@ -16,7 +16,13 @@ splat.MovieThumb = Backbone.View.extend({
 
 	// set the view element ($el) HTML content using its template
 	render: function(){
-        this.template = _.template(splat.thumbMarkup);
+	this.loadThumbTemplate =$.get('tpl/MovieThumb.html');
+
+	this.loadThumbTemplate.done(function(markup){
+    splat.thumbMarkup=markup;
+    this.template = _.template(splat.thumbMarkup);
+	});
+        
 
         // set the view element ($el) HTML content using its template
 	var moviesMarkup = this.thumbsTemplate({
