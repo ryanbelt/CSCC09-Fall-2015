@@ -22,7 +22,7 @@ splat.Movie = Backbone.Model.extend({
       	freshTotal : 0.0,// cumulative total of review fresh (1.0) votes
       	freshVotes : 0.0,  // number of review ratings
       	trailer : null,  // URL for trailer/movie-streaming
-      	poster : "img/placeholder.jpg",  // movie-poster image URL
+      	poster : "img/placeholder.png",  // movie-poster image URL
       	dated: new Date()  // date of movie posting
       },
 
