@@ -11,6 +11,9 @@ splat.Details = Backbone.View.extend({
     	  'click #moviesave': 'save',
     	  'click #moviedel': 'delete',
           'change' : "inputChange",
+          'drop #detail-picture': 'dropHandler',
+          'change #poster': 'selectImage',
+          'dragover #detail-picture': 'dragoverHandler',
     },
 
 
@@ -86,6 +89,79 @@ splat.Details = Backbone.View.extend({
             this.model.set(changed);
             splat.utils.showNotice("Note:","info"," click save before leaving the page");
         }
+    },
+
+    // image upload done in save-handler, to avoid
+    // multiple-upload cost if user reselects image
+    selectImage: function(event) {
+    // set object attribute for image uploader
+    this.pictureFile = event.target.files[0];
+    console.log(this.pictureFile);
+    // if the file type is image, read it
+    if ( this.pictureFile.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+var spictureFile=this._resize(this.pictureFile, this.pictureFile.type);
+        //console.log(this.pictureFile);
+        this._imageRead(this.pictureFile,this.pictureFile.type);
+    }else{// else display notification error
+            splat.utils.showNotice("Warning:","warning"," unable to dertermine image file type.");
+        }
+    },
+
+    dragoverHandler: function(event) {
+        // don't let parent element catch event
+        event.stopPropagation();
+        // prevent default to enable drop event
+        event.preventDefault();
+        // jQuery event doesn’t have dataTransfer
+        // field - so use originalEvent
+        event.originalEvent.dataTransfer.dropEffect ='copy';
+    },
+
+    dropHandler: function (event) {
+        event.stopPropagation(); 
+        event.preventDefault();
+        var ev = event.originalEvent;
+        // set object attribute for use by uploadPicture
+        this.pictureFile = ev.dataTransfer.files[0];
+        // only process image files
+        if ( this.pictureFile.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+            // Read image file and display in img tag
+            var spictureFile=this._resize(this.pictureFile, this.pictureFile.type);
+            this._imageRead(this.pictureFile, this.pictureFile.type);
+        }
+        else{// else display notification error
+            splat.utils.showNotice("Warning:","warning"," unable to dertermine file image type.");
+        }
+    },
+
+    _imageRead: function(pictureFile, type) {
+        var self = this;
+        var reader = new FileReader();
+        // callback for when read operation is finished
+        reader.onload = function(event) {
+            var targetImgElt = $('#poster')[0];
+        // reader.result is image data in base64 format
+            targetImgElt.src = reader.result;
+            self.model.set('poster', reader.result);
+            $('#detail-picture img').attr('src',reader.result);
+        };
+        reader.readAsDataURL(pictureFile); // read image file
+    },
+
+    _resize: function(sourceImg, type, quality) {
+        var type = type || "image/jpeg"; // default MIME image type
+        var quality = quality || "0.95"; // tradeoff quality vs size
+        var image = new Image(), MAX_HEIGHT = 300, MAX_WIDTH = 450;
+        image.src = sourceImg;
+        image.height = image.height // ADD CODE to scale height
+        image.width = image.width // ADD CODE to scale height
+        var canvas = document.createElement("canvas");
+        canvas.width = image.width; // scale canvas to match image
+        canvas.height = image.height;
+        var ctx = canvas.getContext("2d"); // get 2D rendering context
+        ctx.drawImage(image,0,0, image.width, image.height); // render
+        console.log(canvas.toDataURL(type, quality));
+        return canvas.toDataURL(type, quality);
     },
 
     _allValidation: function(){

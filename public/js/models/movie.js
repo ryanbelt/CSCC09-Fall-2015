@@ -105,6 +105,10 @@ splat.Movie = Backbone.Model.extend({
 
           this.validators.dated = function (value) {
               return {isValid: true};
+          },
+
+          this.validators.poster = function(value){
+            return {isValid: true};
           }
 
       },

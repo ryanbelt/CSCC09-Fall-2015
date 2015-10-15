@@ -5,69 +5,80 @@
         <button type="button" class="btn btn-primary save" id="moviesave">Save Changes</button>
     <button type="button" class="btn btn-danger delete" id="moviedel">Delete Movie</button>
   </div>
-  <div class="form-horizontal " id="detail_form">
+  <div class="row">
+  <div class="form-horizontal col-xs-10 col-sm-7 col-md-6 col-lg-6">
     <div class="form-group ">
       <label class="control-label col-sm-3" for="title">Title:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="text" id="title"  placeholder="e.g Day of the Jackal" value="<%= title %>" />
        <span class="help-block"></span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="released">Released:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="number"  id="released" placeholder="e.g 2000" value="<%= released %>" />
        <span class="help-block"></span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="director">Director:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="text"  id="director" placeholder="e.g Steven Spellberg" value="<%= director %>" />
        <span class="help-block"></span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="rating">Rating:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="text"  id="rating" placeholder="e.g G, PG, PG-13, R, NC-17, NR" value="<%= rating %>"/>
        <span class="help-block"></span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="starring">Starring:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="text"  id="starring" placeholder="e.g Steve Martin, John Bekus" value="<%= starring %>"/>
        <span class="help-block"></span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="duration">Duration:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="number"  id="duration" placeholder="e.g # in mins" value="<%= duration %>"/>
        <span class="help-block"></span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="genre">Genre(s):</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="text"  id="genre" placeholder="e.g commedy, action, tragedy" value="<%= genre%>"/>
        <span class="help-block"></span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="synopsis">Synopsis:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <textarea class="form-control " rows="3" type="url"  for="synopsis" id="synopsis" placeholder="e.g summary of the movie plot" ><%= synopsis %></textarea>
        <span class="help-block "> </span>
        </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="trailer">TrailerURL:</label>
-      <div class="col-sm-5">
+      <div class="col-sm-9">
       <input class=" form-control" type="url"  id="trailer" placeholder="e.g https://www.google.ca" value="<%= trailer %>" />
        <span class="help-block"> </span>
        </div>
     </div>
+  </div>
+  <div class="img-form col-xs-10 col-sm-5 col-md-5 col-lg-5">
+    <div id="detail-picture">
+    <img src="<%=poster%>" class="img-responsive"/>
+    </div>
+    <div id="choose-picture">
+        <label style="color:white;">Take/Upload/Drag-n-Drop a Pictrue</label>
+        <input type="file" id="poster" accept="image/*" capture="camera" class ="btn btn-primary"/>
+    </div>
+  </div>
   </div>
 </div>

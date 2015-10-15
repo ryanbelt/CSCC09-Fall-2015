@@ -104,8 +104,12 @@ body{
 }
 
 .details-hero{
-  margin-left:40px;
   padding-bottom: 30px;
+}
+
+.form-horizontal{
+  padding-left: 30px;
+  padding-right: 0px;
 }
 
 .control-label{
@@ -147,6 +151,18 @@ background-color:#181010 !important;
   margin-right: 5px;
 }
 
-video.img-responsive{
-  max-width: 100% !important;
+.details-hero .img-responsive{
+  max-width: 95% !important;
+  max-height:75%;
 }
+
+.details-hero .control-label{
+  text-align: left;
+}
+
+.img-form{
+  margin-top:2px;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
