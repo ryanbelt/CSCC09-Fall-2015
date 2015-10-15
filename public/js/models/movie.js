@@ -28,6 +28,7 @@ splat.Movie = Backbone.Model.extend({
         initialize: function () {
           this.validators={};
 
+          //validation regex
           var stringRegex = /^[a-zA-Z0-9 \,\.\?\-\'\*\!]+$/;
           var yearRegex = /^(19[1-9]\d|200\d|201[0-6])$/;
           var specialRegex = /^[a-zA-Z0-9 \,\-\']+$/;

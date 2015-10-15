@@ -51,32 +51,38 @@ splat.utils = {
     },
     
     showNotice: function(title,type, msg){
+        //each time showing notice show cancel the notification if exist
         this.hideNotice();
+        //1 sec to fade in
         $('.alert').fadeTo(1000,1);
+        //notification bar and message
          $('.alert').removeClass("fade out alert-danger alert-warning alert-success alert-info");
          $('.alert').addClass("alert-" + type);
          $('.alert').html('<strong>'+ title + '</strong>' + msg);
         $('.alert').show();
+        //4 sec to fade out
         $('.alert').fadeTo(4000,0);
-
-        //$("#alert-area").append($("<div class='alert-message " + type + " fade in' data-alert><p> " + msg + " </p></div>"));
-        //$(".alert-message").delay(5000).fadeOut("slow");
     },
 
     hideNotice: function(){
+        //always stop fading and hide it
         $('.alert').stop(true);
          $('.alert').hide();
     },
 
     addValidationError: function(field,msg){
+        //go to the input field grand parent
         var controlGroup = $("#"+field).parent().parent();
+        //adding error of that section
         controlGroup.removeClass('has-error has-success has-warning');
         controlGroup.addClass('has-error');
         controlGroup.find('.help-block').text(msg);
     },
 
     removeValidationError:function(field){
+        //go to the input field grand parent
         var controlGroup = $("#"+field).parent().parent();
+        //adding success of that section
         controlGroup.removeClass('has-error has-success has-warning');
         controlGroup.addClass('has-success');
         controlGroup.find('.help-block').text('');

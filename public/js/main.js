@@ -47,19 +47,23 @@ splat.AppRouter = Backbone.Router.extend({
 
     browse:function(){
         splat.utils.showNotice('Note:','info'," Loading.....");
+        //change nav bar section and load the borwse page
         $('.header').html(this.headerView.selectMenuItem('browse-header'));
-
-            this.browseView = new splat.MovieThumb({collection: this.movies});
-
+        this.browseView = new splat.MovieThumb({collection: this.movies});
         $('#content').html(this.browseView.render().el); 
+
         splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
     },
 
     details:function(id){
+        //change nav bar section
         $('.header').html(this.headerView.selectMenuItem('add-header'));
+        //get the model by id form the collection
         var m =this.movies.get(id);
+        //if model is not exist in the collection, we create a brand new model
         if (!m)
             m=new splat.Movie();
+        //put the collection and model into the detail html
         this.containDetailsView = new splat.Details({collection: this.movies , model: m});
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.containDetailsView.render().el); 

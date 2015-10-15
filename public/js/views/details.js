@@ -25,13 +25,17 @@ splat.Details = Backbone.View.extend({
 	return this;    // support method chaining
     },
 
+    //function for save
     save: function(event){
         event.preventDefault();
         var title=this.$("#title").val();
-        var i = 0;
+        var i = 0; //number of validation error variable
+        //check all the input boxes validation
         i= this._allValidation();
+        //if no validation error in boxes, then we save all the change
         if (i==0){
-        //splat.utils.showNotice('Success:','success',title+" has been saved");
+            //reset last edit date
+            this.model.set("dated",(new Date).toISOString().substr(0,10));
             this.collection.create(this.model ,{
                 success: function(){
                     splat.app.navigate('#movies', {replace:true, trigger:true});
@@ -49,8 +53,8 @@ splat.Details = Backbone.View.extend({
         }
     },
 
+    //function for delete
     delete: function(event){
-
         var title=this.$("#title").val();
         this.model.destroy({
         wait: true,  // don't destroy client model until server responds
@@ -69,23 +73,30 @@ splat.Details = Backbone.View.extend({
 
     },
 
+    //function to check validation when focus out the input box
     inputChange: function(event){
+        //get the input box id(attribute in model)
         var field = event.target.id;
+        //get the input box value
         var value = event.target.value;
-        //console.log(field, value);
         var changed={};
-        //console.log(changed);
+        //run the validation check for the field and value in this Movie model
         var validation = this.model.validateField(field,value);
+        //if the validation fail, we highlight the box and show the error message
         if(!validation.isValid){
             splat.utils.addValidationError(field, validation.message);
         }
         else{
+            //remove the validation highlight and error in the div
             splat.utils.removeValidationError(field);
+            //if the attribute is either genre or starring, we split the 
+            //value into array,
             if("genre"===field || "starring"===field){
                     var values = value.split(",");
                     changed[field]=values;
-                }
+                }//otherwise just stay as what it is
                 else{changed[field]=value;}
+            //add the value into corresponding field of the model
             this.model.set(changed);
             splat.utils.showNotice("Note:","info"," click save before leaving the page");
         }
@@ -145,6 +156,7 @@ splat.Details = Backbone.View.extend({
         reader.readAsDataURL(pictureFile); // read image file
     },
 
+    //idk how to make this work
     _resize: function(sourceImg, type, quality) {
         var type = type || "image/jpeg"; // default MIME image type
         var quality = quality || "0.95"; // tradeoff quality vs size
@@ -162,6 +174,8 @@ splat.Details = Backbone.View.extend({
         return canvas.toDataURL(type, quality);
     },
 
+    //checking all the input box in detail page validation
+    //return number of total errors
     _allValidation: function(){
         var i =0;
         var field = "";

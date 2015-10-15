@@ -13,7 +13,7 @@ splat.Header = Backbone.View.extend({
 	this.$el.html(this.template());
 	return this;    // support method chaining
     },
-
+    //change nav bar section and highlight it
     selectMenuItem: function(menuItem){
       this.$("a").removeClass("active");
       this.$("#"+menuItem).addClass("active");
