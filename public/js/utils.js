@@ -53,7 +53,7 @@ splat.utils = {
     showNotice: function(title,type, msg){
         this.hideNotice();
         $('.alert').fadeTo(1000,1);
-         $('.alert').removeClass("fade out alert-danger alert-waring alert-success alert-info");
+         $('.alert').removeClass("fade out alert-danger alert-warning alert-success alert-info");
          $('.alert').addClass("alert-" + type);
          $('.alert').html('<strong>'+ title + '</strong>' + msg);
         $('.alert').show();
@@ -67,4 +67,18 @@ splat.utils = {
         $('.alert').stop(true);
          $('.alert').hide();
     },
+
+    addValidationError: function(field,msg){
+        var controlGroup = $("#"+field).parent().parent();
+        controlGroup.removeClass('has-error has-success has-warning');
+        controlGroup.addClass('has-error');
+        controlGroup.find('.help-block').text(msg);
+    },
+
+    removeValidationError:function(field){
+        var controlGroup = $("#"+field).parent().parent();
+        controlGroup.removeClass('has-error has-success has-warning');
+        controlGroup.addClass('has-success');
+        controlGroup.find('.help-block').text('');
+    }
 };

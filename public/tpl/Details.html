@@ -5,60 +5,69 @@
         <button type="button" class="btn btn-primary save" id="moviesave">Save Changes</button>
     <button type="button" class="btn btn-danger delete" id="moviedel">Delete Movie</button>
   </div>
-  <div class="form-horizontal">
-    <div class="form-group">
-      <label class="form-label" for="title">Title:</label>
-      <input class="form-input" type="text" id="title" name="title"  placeholder="e.g Day of the Jackal" value="<%= title %>" />
-              </br>
+  <div class="form-horizontal " id="detail_form">
+    <div class="form-group ">
+      <label class="control-label col-sm-3" for="title">Title:</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="text" id="title"  placeholder="e.g Day of the Jackal" value="<%= title %>" />
        <span class="help-block"></span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="released">Released:</label>
-      <input class="form-input" type="number"  id="released" placeholder="e.g 2000" value="<%= released %>" />
-              </br>
+      <label class="control-label col-sm-3" for="released">Released:</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="number"  id="released" placeholder="e.g 2000" value="<%= released %>" />
        <span class="help-block"></span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="director">Director:</label>
-      <input class="form-input" type="text"  id="director" placeholder="e.g Steven Spellberg" value="<%= director %>" />
-              </br>
+      <label class="control-label col-sm-3" for="director">Director:</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="text"  id="director" placeholder="e.g Steven Spellberg" value="<%= director %>" />
        <span class="help-block"></span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="rating">Rating:</label>
-      <input class="form-input" type="text"  id="rating" placeholder="e.g G, PG, PG-13, R, NC-17, NR" value="<%= rating %>"/>
-              </br>
+      <label class="control-label col-sm-3" for="rating">Rating:</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="text"  id="rating" placeholder="e.g G, PG, PG-13, R, NC-17, NR" value="<%= rating %>"/>
        <span class="help-block"></span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="starring">Starring:</label>
-      <input class="form-input" type="text"  id="starring" placeholder="e.g Steve Martin, John Bekus" value="<%= starring %>"/>
-              </br>
+      <label class="control-label col-sm-3" for="starring">Starring:</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="text"  id="starring" placeholder="e.g Steve Martin, John Bekus" value="<%= starring %>"/>
        <span class="help-block"></span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="duration">Duration:</label>
-      <input class="form-input" type="number"  id="duration" placeholder="e.g # in mins" value="<%= duration %>"/>
-              </br>
+      <label class="control-label col-sm-3" for="duration">Duration:</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="number"  id="duration" placeholder="e.g # in mins" value="<%= duration %>"/>
        <span class="help-block"></span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="genre">Genre(s):</label>
-      <input class="form-input" type="text"  id="genres" placeholder="e.g commedy, action, tragedy" value="<%= genre%>"/>
-              </br>
+      <label class="control-label col-sm-3" for="genre">Genre(s):</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="text"  id="genre" placeholder="e.g commedy, action, tragedy" value="<%= genre%>"/>
        <span class="help-block"></span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="synopsis">Synopsis:</label>
-      <textarea class="form-input" rows="3" type="url"  id="synopsis" placeholder="e.g summary of the movie plot" ><%= synopsis %></textarea>
-              </br>
-       <span class="help-block"></span>
+      <label class="control-label col-sm-3" for="synopsis">Synopsis:</label>
+      <div class="col-sm-5">
+      <textarea class="form-control " rows="3" type="url"  for="synopsis" id="synopsis" placeholder="e.g summary of the movie plot" ><%= synopsis %></textarea>
+       <span class="help-block "> </span>
+       </div>
     </div>
     <div class="form-group">
-      <label class="form-label" for="trailer">Trailer URL:</label>
-      <input class="form-input" type="url"  id="trailer" placeholder="e.g https://www.google.ca" value="<%= trailer %>" />
-              </br>
-       <span class="help-block"></span>
+      <label class="control-label col-sm-3" for="trailer">TrailerURL:</label>
+      <div class="col-sm-5">
+      <input class=" form-control" type="url"  id="trailer" placeholder="e.g https://www.google.ca" value="<%= trailer %>" />
+       <span class="help-block"> </span>
+       </div>
     </div>
   </div>
 </div>
