@@ -95,11 +95,9 @@ splat.Details = Backbone.View.extend({
     // multiple-upload cost if user reselects image
     selectImage: function(event) {
     // set object attribute for image uploader
-    this.pictureFile = event.target.files[0];
-    console.log(this.pictureFile);
+    this.pictureFile = event.target.files[0];   
     // if the file type is image, read it
     if ( this.pictureFile.name.match(/\.(jpg|jpeg|png|gif)$/)) {
-var spictureFile=this._resize(this.pictureFile, this.pictureFile.type);
         //console.log(this.pictureFile);
         this._imageRead(this.pictureFile,this.pictureFile.type);
     }else{// else display notification error
@@ -126,7 +124,6 @@ var spictureFile=this._resize(this.pictureFile, this.pictureFile.type);
         // only process image files
         if ( this.pictureFile.name.match(/\.(jpg|jpeg|png|gif)$/)) {
             // Read image file and display in img tag
-            var spictureFile=this._resize(this.pictureFile, this.pictureFile.type);
             this._imageRead(this.pictureFile, this.pictureFile.type);
         }
         else{// else display notification error
@@ -139,7 +136,7 @@ var spictureFile=this._resize(this.pictureFile, this.pictureFile.type);
         var reader = new FileReader();
         // callback for when read operation is finished
         reader.onload = function(event) {
-            var targetImgElt = $('#poster')[0];
+            var targetImgElt =  $('#poster')[0];
         // reader.result is image data in base64 format
             targetImgElt.src = reader.result;
             self.model.set('poster', reader.result);
@@ -155,12 +152,13 @@ var spictureFile=this._resize(this.pictureFile, this.pictureFile.type);
         image.src = sourceImg;
         image.height = image.height // ADD CODE to scale height
         image.width = image.width // ADD CODE to scale height
+        console.log(image);
         var canvas = document.createElement("canvas");
         canvas.width = image.width; // scale canvas to match image
         canvas.height = image.height;
         var ctx = canvas.getContext("2d"); // get 2D rendering context
         ctx.drawImage(image,0,0, image.width, image.height); // render
-        console.log(canvas.toDataURL(type, quality));
+        console.log(ctx);
         return canvas.toDataURL(type, quality);
     },
 
