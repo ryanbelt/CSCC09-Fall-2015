@@ -140,6 +140,7 @@ splat.Details = Backbone.View.extend({
         // reader.result is image data in base64 format
             targetImgElt.src = reader.result;
             self.model.set('poster', reader.result);
+            $('#detail-picture img').attr('src',reader.result);
         };
         reader.readAsDataURL(pictureFile); // read image file
     },
