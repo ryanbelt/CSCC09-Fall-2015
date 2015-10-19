@@ -163,8 +163,8 @@ splat.Details = Backbone.View.extend({
         var quality = quality || "0.95"; // tradeoff quality vs size
         var image = new Image(), MAX_HEIGHT = 300, MAX_WIDTH = 450;
         image.src = sourceImg;
-        image.height = image.height // ADD CODE to scale height
-        image.width = image.width // ADD CODE to scale height
+        image.height = MAX_HEIGHT; // ADD CODE to scale height
+        image.width = MAX_WIDTH; // ADD CODE to scale height
         var canvas = document.createElement("canvas");
         canvas.width = image.width; // scale canvas to match image
         canvas.height = image.height;
