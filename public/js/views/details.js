@@ -150,8 +150,9 @@ splat.Details = Backbone.View.extend({
             var targetImgElt =  $('#poster')[0];
         // reader.result is image data in base64 format
             targetImgElt.src = reader.result;
-            self.model.set('poster', reader.result);
-            $('#detail-picture img').attr('src',reader.result);
+            var newImg=self._resize(reader.result);
+            self.model.set('poster',newImg);
+            $('#detail-picture img').attr('src',newImg);
         };
         reader.readAsDataURL(pictureFile); // read image file
     },
@@ -164,13 +165,11 @@ splat.Details = Backbone.View.extend({
         image.src = sourceImg;
         image.height = image.height // ADD CODE to scale height
         image.width = image.width // ADD CODE to scale height
-        console.log(image);
         var canvas = document.createElement("canvas");
         canvas.width = image.width; // scale canvas to match image
         canvas.height = image.height;
         var ctx = canvas.getContext("2d"); // get 2D rendering context
         ctx.drawImage(image,0,0, image.width, image.height); // render
-        console.log(ctx);
         return canvas.toDataURL(type, quality);
     },
 
