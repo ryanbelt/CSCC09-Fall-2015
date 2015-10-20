@@ -24,6 +24,7 @@ splat.AppRouter = Backbone.Router.extend({
         $('.header').html(this.headerView.render().el);
         this.movies = new splat.Movies();
         this.movies.fetch();
+        splat.utils.hideNotice();
     },
 
     home: function() {

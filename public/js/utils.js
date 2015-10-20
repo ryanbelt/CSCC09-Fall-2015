@@ -54,21 +54,20 @@ splat.utils = {
         //each time showing notice show cancel the notification if exist
         this.hideNotice();
         //1 sec to fade in
-        //$('.alert').fadeTo(1000,1);
+        $('.alert').fadeTo(1000,1);
         //notification bar and message
          $('.alert').removeClass("fade out alert-danger alert-warning alert-success alert-info");
          $('.alert').addClass("alert-" + type);
          $('.alert').html('<strong>'+ title + '</strong>' + msg);
-         $('.alert').delay(5000).fadeOut();
         $('.alert').show();
         //4 sec to fade out
-        //$('.alert').fadeTo(4000,0);
+        $('.alert').fadeTo(5000,0);
     },
 
     hideNotice: function(){
         //always stop fading and hide it
-        $('.alert').stop(true);
-         $('.alert').hide();
+        $('.alert').stop(true,true);
+        $('.alert').hide();
     },
 
     addValidationError: function(field,msg){
