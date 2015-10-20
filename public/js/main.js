@@ -46,6 +46,7 @@ splat.AppRouter = Backbone.Router.extend({
 
 
     browse:function(){
+        splat.utils.flush();
         splat.utils.showNotice('Note:','info'," Loading.....");
         //change nav bar section and load the borwse page
         $('.header').html(this.headerView.selectMenuItem('browse-header'));
@@ -57,6 +58,7 @@ splat.AppRouter = Backbone.Router.extend({
 
     details:function(id){
         //change nav bar section
+        splat.utils.flush();
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
         var m =this.movies.get(id);

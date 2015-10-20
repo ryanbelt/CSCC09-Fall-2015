@@ -6,7 +6,7 @@
   <link rel="stylesheet" media="all" href="../doc-style.css" />
   <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/panjian2/CSCC09-Fall-2015//css/styles.css", defaultSidebar = true;
+    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/songkai/CSCC09-Fall-2015//css/styles.css", defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
 </head>
@@ -42,6 +42,14 @@
   <span class="k">height</span><span class="o">:</span><span class="m">100</span><span class="o">%</span><span class="p">;</span>
 <span class="p">}</span>
 
+<span class="nc">.alert</span><span class="p">{</span>
+   <span class="k">padding</span><span class="o">:</span><span class="m">10px</span><span class="p">;</span>
+   <span class="k">width</span><span class="o">:</span><span class="m">90</span><span class="o">%</span>
+   <span class="k">center</span><span class="p">;</span>
+   <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
+   <span class="k">z-index</span><span class="o">:</span> <span class="m">100</span><span class="p">;</span>
+<span class="p">}</span>
+
 <span class="nc">.header</span><span class="p">{</span>
   <span class="k">font-size</span><span class="o">:</span> <span class="m">125</span><span class="o">%</span><span class="p">;</span>
   <span class="k">width</span><span class="o">=:</span><span class="m">100</span><span class="o">%</span><span class="p">;</span>
@@ -59,8 +67,9 @@
     <span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
     <span class="k">display</span><span class="o">:</span> <span class="n">table</span><span class="p">;</span>
     <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span> 
+    <span class="k">padding-bottom</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+    <span class="k">z-index</span><span class="o">:</span> <span class="m">-1</span><span class="p">;</span>
 <span class="p">}</span>
-
 
 <span class="nc">.home-text</span><span class="p">{</span>
     <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
@@ -77,7 +86,7 @@
 <span class="nc">.about-hero</span><span class="p">{</span>
   <span class="k">margin-left</span><span class="o">:</span> <span class="m">32px</span><span class="p">;</span>
   <span class="k">color</span><span class="o">:</span> <span class="m">#98AAAA</span><span class="p">;</span>
-  <span class="k">padding-bottom</span><span class="o">:</span> <span class="m">40</span><span class="o">%</span><span class="p">;</span>
+  <span class="k">padding-bottom</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nc">.about-hero</span> <span class="nt">h1</span><span class="p">{</span>
@@ -87,16 +96,20 @@
 <span class="nc">.about-table</span> <span class="nt">td</span><span class="p">{</span>
   <span class="k">padding</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
 <span class="p">}</span>
+
 <span class="nf">#footer</span><span class="p">{</span>
   <span class="k">background-color</span><span class="o">:</span><span class="nb">black</span><span class="p">;</span>
   <span class="k">clear</span><span class="o">:</span><span class="k">both</span><span class="p">;</span>
   <span class="k">color</span><span class="o">:</span><span class="nb">gray</span><span class="p">;</span>
   <span class="k">position</span><span class="o">:</span><span class="k">fixed</span><span class="p">;</span>
   <span class="k">bottom</span><span class="o">:</span><span class="m">0</span><span class="p">;</span>
+  <span class="k">left</span><span class="o">:</span><span class="m">0</span><span class="p">;</span>
   <span class="k">right</span><span class="o">:</span><span class="m">0</span><span class="p">;</span>
+  <span class="k">display</span><span class="o">:</span><span class="k">block</span><span class="p">;</span>
   <span class="k">height</span><span class="o">:</span><span class="m">30px</span><span class="p">;</span>
   <span class="k">width</span><span class="o">:</span><span class="m">100</span><span class="o">%</span><span class="p">;</span>
   <span class="k">text-align</span><span class="o">:</span><span class="k">right</span><span class="p">;</span>
+  <span class="k">vertical-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="nc">.indent-right</span><span class="p">{</span>
@@ -107,6 +120,74 @@
 <span class="nc">.navbar</span> <span class="nt">a</span><span class="nc">.active</span> <span class="p">{</span>
   <span class="k">background-color</span><span class="o">:</span> <span class="nb">black</span> <span class="cp">!important</span><span class="p">;</span>
   <span class="k">color</span><span class="o">:</span> <span class="nb">white</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.home-btn</span><span class="p">{</span>
+  <span class="k">opacity</span><span class="o">:</span> <span class="m">0</span><span class="o">.</span><span class="m">5</span><span class="p">;</span>
+  <span class="k">border-spacing</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+  <span class="k">color</span><span class="o">:</span><span class="nb">white</span><span class="p">;</span>
+  <span class="k">background-color</span><span class="o">:</span> <span class="m">#571A1A</span><span class="p">;</span>
+  <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">4px</span><span class="p">;</span>
+  <span class="k">vertical-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+  <span class="k">text-align</span><span class="o">:</span> <span class="k">center</span><span class="p">;</span>
+  <span class="k">font-family</span><span class="o">:</span> <span class="n">Arvo</span><span class="p">;</span>
+  <span class="k">max-width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+  <span class="k">margin</span><span class="o">:</span> <span class="m">10px</span> <span class="m">6px</span> <span class="m">10px</span> <span class="m">6px</span><span class="p">;</span>
+  <span class="k">white-space</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.home-btn</span> <span class="nf">#movie-ico</span><span class="p">{</span>
+  <span class="k">height</span><span class="o">:</span><span class="m">40px</span><span class="p">;</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+  <span class="k">padding-left</span><span class="o">:</span> <span class="m">-10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.details-hero</span><span class="p">{</span>
+  <span class="k">margin-left</span><span class="o">:</span><span class="m">40px</span><span class="p">;</span>
+  <span class="k">padding-bottom</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.form-label</span><span class="p">{</span>
+  <span class="k">color</span><span class="o">:</span><span class="nb">white</span><span class="p">;</span>
+  <span class="k">width</span><span class="o">:</span><span class="m">100px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.form-input</span><span class="p">{</span>
+  <span class="k">width</span><span class="o">:</span><span class="m">60</span><span class="o">%</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="nc">.editActions</span><span class="p">{</span>
+  <span class="k">padding</span><span class="o">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="k">margin-left</span><span class="o">:</span><span class="m">30px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.thumb_info</span><span class="p">{</span>
+  <span class="k">text-align</span><span class="o">:</span> <span class="k">right</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">span</span><span class="nc">.maintext</span><span class="p">{</span>
+  <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+  <span class="k">font-family</span><span class="o">:</span> <span class="n">Avro</span><span class="p">;</span>
+  <span class="k">color</span><span class="o">:</span><span class="nb">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">span</span><span class="nc">.sparetext</span><span class="p">{</span>
+  <span class="k">font-size</span><span class="o">:</span><span class="m">80</span><span class="o">%</span><span class="p">;</span>
+  <span class="k">color</span><span class="o">:</span><span class="nb">white</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.thumbnail</span><span class="p">{</span>
+  <span class="k">position</span><span class="o">:</span> <span class="k">relative</span><span class="p">;</span>
+  <span class="k">border-width</span><span class="o">:</span> <span class="m">1px</span><span class="p">;</span>
+  <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">4px</span><span class="p">;</span>
+<span class="k">border-color</span><span class="o">:</span><span class="m">#25383C</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="k">background-color</span><span class="o">:</span><span class="m">#181010</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="k">margin-right</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">video</span><span class="nc">.img-responsive</span><span class="p">{</span>
+  <span class="k">max-width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span> <span class="cp">!important</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
         </td>

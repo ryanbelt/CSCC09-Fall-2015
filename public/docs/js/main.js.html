@@ -6,7 +6,7 @@
   <link rel="stylesheet" media="all" href="../doc-style.css" />
   <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/panjian2/CSCC09-Fall-2015//js/main.js", defaultSidebar = true;
+    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/songkai/CSCC09-Fall-2015//js/main.js", defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
 </head>
@@ -82,6 +82,8 @@
     <span class="nx">routes</span><span class="o">:</span> <span class="p">{</span>
         <span class="s2">&quot;&quot;</span><span class="o">:</span> <span class="s2">&quot;home&quot;</span><span class="p">,</span>
         <span class="s2">&quot;about&quot;</span><span class="o">:</span> <span class="s2">&quot;about&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;movies&quot;</span> <span class="o">:</span><span class="s2">&quot;browse&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;movies/:id&quot;</span><span class="o">:</span><span class="s2">&quot;details&quot;</span><span class="p">,</span>
         <span class="s2">&quot;*default&quot;</span><span class="o">:</span> <span class="s2">&quot;home&quot;</span>
     <span class="p">},</span>
 
@@ -124,6 +126,8 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.header&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">headerView</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">el</span><span class="p">);</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">movies</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">splat</span><span class="p">.</span><span class="nx">Movies</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">movies</span><span class="p">.</span><span class="nx">fetch</span><span class="p">();</span>
     <span class="p">},</span>
 
     <span class="nx">home</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -167,6 +171,25 @@
     <span class="p">},</span>
 
 
+    <span class="nx">browse</span><span class="o">:</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">splat</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">showNotice</span><span class="p">(</span><span class="s1">&#39;Note:&#39;</span><span class="p">,</span><span class="s1">&#39;info&#39;</span><span class="p">,</span><span class="s2">&quot; Loading.....&quot;</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.header&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">headerView</span><span class="p">.</span><span class="nx">selectMenuItem</span><span class="p">(</span><span class="s1">&#39;browse-header&#39;</span><span class="p">));</span>
+
+            <span class="k">this</span><span class="p">.</span><span class="nx">browseView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">splat</span><span class="p">.</span><span class="nx">MovieThumb</span><span class="p">({</span><span class="nx">collection</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">movies</span><span class="p">});</span>
+
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">browseView</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">el</span><span class="p">);</span> 
+        <span class="nx">splat</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">showNotice</span><span class="p">(</span><span class="s1">&#39;Success:&#39;</span><span class="p">,</span><span class="s1">&#39;success&#39;</span><span class="p">,</span><span class="s2">&quot; Browse loading Finish!!&quot;</span><span class="p">);</span>
+    <span class="p">},</span>
+
+    <span class="nx">details</span><span class="o">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.header&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">headerView</span><span class="p">.</span><span class="nx">selectMenuItem</span><span class="p">(</span><span class="s1">&#39;add-header&#39;</span><span class="p">));</span>
+        <span class="kd">var</span> <span class="nx">m</span> <span class="o">=</span><span class="k">this</span><span class="p">.</span><span class="nx">movies</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">m</span><span class="p">)</span>
+            <span class="nx">m</span><span class="o">=</span><span class="k">new</span> <span class="nx">splat</span><span class="p">.</span><span class="nx">Movie</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">containDetailsView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">splat</span><span class="p">.</span><span class="nx">Details</span><span class="p">({</span><span class="nx">collection</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">movies</span> <span class="p">,</span> <span class="nx">model</span><span class="o">:</span> <span class="nx">m</span><span class="p">});</span>
+        <span class="nx">splat</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">showNotice</span><span class="p">(</span><span class="s1">&#39;Note:&#39;</span><span class="p">,</span><span class="s1">&#39;info&#39;</span><span class="p">,</span><span class="s2">&quot; Remember to click SAVE.&quot;</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#content&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">containDetailsView</span><span class="p">.</span><span class="nx">render</span><span class="p">().</span><span class="nx">el</span><span class="p">);</span> 
+    <span class="p">},</span>
 <span class="p">});</span>
 
 
@@ -183,10 +206,15 @@ template loading is complete, instantiate a Backbone router
 with history.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">splat</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">loadTemplates</span><span class="p">([</span><span class="s1">&#39;Home&#39;</span><span class="p">,</span> <span class="s1">&#39;Header&#39;</span><span class="p">,</span> <span class="s1">&#39;About&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="nx">splat</span><span class="p">.</span><span class="nx">utils</span><span class="p">.</span><span class="nx">loadTemplates</span><span class="p">([</span><span class="s1">&#39;Home&#39;</span><span class="p">,</span> <span class="s1">&#39;Header&#39;</span><span class="p">,</span> <span class="s1">&#39;About&#39;</span> <span class="p">,</span><span class="s1">&#39;MovieThumb&#39;</span><span class="p">,</span> <span class="s1">&#39;Details&#39;</span><span class="p">],</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
     <span class="nx">splat</span><span class="p">.</span><span class="nx">app</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">splat</span><span class="p">.</span><span class="nx">AppRouter</span><span class="p">();</span>
     <span class="nx">Backbone</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 <span class="p">});</span>
+
+<span class="nx">splat</span><span class="p">.</span><span class="nx">loadThumbTemplate</span> <span class="o">=</span><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;tpl/MovieThumb.html&#39;</span><span class="p">);</span>
+<span class="nx">splat</span><span class="p">.</span><span class="nx">loadThumbTemplate</span><span class="p">.</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">markup</span><span class="p">){</span>
+    <span class="nx">splat</span><span class="p">.</span><span class="nx">thumbMarkup</span><span class="o">=</span><span class="nx">markup</span><span class="p">;</span>
+<span class="p">})</span>
 </pre></div>
         </td>
       </tr>

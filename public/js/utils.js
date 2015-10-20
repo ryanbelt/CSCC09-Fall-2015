@@ -71,6 +71,10 @@ splat.utils = {
          $('.alert').hide();
     },
 
+    flush: function(){
+         $('.alert').stop(true);
+    },
+
     addValidationError: function(field,msg){
         //go to the input field grand parent
         var controlGroup = $("#"+field).parent().parent();

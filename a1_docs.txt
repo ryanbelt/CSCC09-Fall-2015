@@ -1,0 +1,3 @@
+﻿	The notification bar we have in “Browes Movies” page and “Add Movie” page take a space under and rest of content. It will leave empty if the bar is not called. Then it looks weird to have an empty space under the header bar. 
+	However, we can fix it by jumping content up when it is not displaying which will make the page have a bad user feeling.
+	We asked Prof. Allen about this question during tutorial, and he replied that since the handout didn't have any specification about that, we can leave it 

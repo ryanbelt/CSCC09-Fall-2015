@@ -6,7 +6,7 @@
   <link rel="stylesheet" media="all" href="../doc-style.css" />
   <script src="../doc-filelist.js"></script>
   <script>
-    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/panjian2/CSCC09-Fall-2015//js/utils.js", defaultSidebar = true;
+    var relativeDir = "../", thisFile = "courses/courses/cscc09f15/songkai/CSCC09-Fall-2015//js/utils.js", defaultSidebar = true;
   </script>
   <script src="../doc-script.js"></script>
 </head>
@@ -229,7 +229,36 @@ invoke callback function.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
         <span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">deferreds</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="nx">showNotice</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">title</span><span class="p">,</span><span class="nx">type</span><span class="p">,</span> <span class="nx">msg</span><span class="p">){</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">hideNotice</span><span class="p">();</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">fadeTo</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+         <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;fade out alert-danger alert-waring alert-success alert-info&quot;</span><span class="p">);</span>
+         <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="s2">&quot;alert-&quot;</span> <span class="o">+</span> <span class="nx">type</span><span class="p">);</span>
+         <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&lt;strong&gt;&#39;</span><span class="o">+</span> <span class="nx">title</span> <span class="o">+</span> <span class="s1">&#39;&lt;/strong&gt;&#39;</span> <span class="o">+</span> <span class="nx">msg</span><span class="p">);</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">fadeTo</span><span class="p">(</span><span class="mi">4000</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>$("#alert-area").append($("<div class='alert-message " + type + " fade in' data-alert><p> " + msg + " </p></div>"));
+$(".alert-message").delay(5000).fadeOut("slow");</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="p">},</span>
+
+    <span class="nx">hideNotice</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">stop</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+         <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.alert&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+    <span class="p">},</span>
 <span class="p">};</span>
 </pre></div>
         </td>

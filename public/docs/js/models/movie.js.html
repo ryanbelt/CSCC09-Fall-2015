@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>movie.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../", thisFile = "courses/courses/cscc09f15/songkai/CSCC09-Fall-2015//js/models/movie.js", defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>movie.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">splat</span> <span class="o">=</span>  <span class="nx">splat</span> <span class="o">||</span> <span class="p">{};</span>  <span class="c1">// our app&#39;s namespace</span>
+
+<span class="nx">splat</span><span class="p">.</span><span class="nx">Movie</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>match localStorage use of _id 
+rather than id</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="nx">urlRoot</span><span class="o">:</span> <span class="s2">&quot;/movies&quot;</span><span class="p">,</span>
+      <span class="nx">idAttribute</span><span class="o">:</span> <span class="s2">&quot;_id&quot;</span><span class="p">,</span>
+
+
+      <span class="nx">defaults</span><span class="o">:</span> <span class="p">{</span>
+
+        <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">//movie title</span>
+        <span class="nx">released</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">//release year in Date</span>
+        <span class="nx">director</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">//movie&#39;s director</span>
+        <span class="nx">starring</span><span class="o">:</span><span class="p">[],</span> <span class="c1">// array principal actors</span>
+        <span class="nx">rating</span><span class="o">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">// MPAA movie rating: G, PG, PG-13, R, NC-17, NR</span>
+        <span class="nx">duration</span> <span class="o">:</span><span class="kc">null</span><span class="p">,</span>   <span class="c1">// run-time in minutes in number</span>
+        <span class="nx">genre</span><span class="o">:</span> <span class="p">[],</span>  <span class="c1">// genre terms, e.g. action, comedy, etc</span>
+        <span class="nx">synopsis</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="c1">// brief outline of the movie</span>
+        <span class="nx">freshTotal</span> <span class="o">:</span> <span class="mf">0.0</span><span class="p">,</span><span class="c1">// cumulative total of review fresh (1.0) votes</span>
+        <span class="nx">freshVotes</span> <span class="o">:</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="c1">// number of review ratings</span>
+        <span class="nx">trailer</span> <span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// URL for trailer/movie-streaming</span>
+        <span class="nx">poster</span> <span class="o">:</span> <span class="s2">&quot;img/placeholder.jpg&quot;</span><span class="p">,</span>  <span class="c1">// movie-poster image URL</span>
+        <span class="nx">dated</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span>  <span class="c1">// date of movie posting</span>
+      <span class="p">},</span>
+
+        <span class="nx">initialize</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">validators</span><span class="o">=</span><span class="p">{};</span>
+
+      <span class="p">},</span>
+
+  
+
+<span class="p">});</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
