@@ -13,6 +13,7 @@ splat.AppRouter = Backbone.Router.extend({
         "about": "about",
         "movies" :"browse",
         "movies/:id":"details",
+        "movies/:id/reviews":"comments",
         "*default": "home"
     },
 
@@ -24,6 +25,8 @@ splat.AppRouter = Backbone.Router.extend({
         $('.header').html(this.headerView.render().el);
         this.movies = new splat.Movies();
         this.movies.fetch();
+        this.reviews= new splat.Reviews();
+        this.reviews.fetch();
         splat.utils.hideNotice();
     },
 
@@ -80,8 +83,3 @@ splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details'], 
     splat.app = new splat.AppRouter();
     Backbone.history.start();
 });
-
-splat.loadThumbTemplate =$.get('tpl/MovieThumb.html');
-splat.loadThumbTemplate.done(function(markup){
-    splat.thumbMarkup=markup;
-})
