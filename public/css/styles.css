@@ -4,31 +4,28 @@ body{
 }
 
 .alert{
-   padding:10px;
-   width:90%
-   center;
-   display:block;
+   margin-bottom: 30px !important;
 }
 
 .header{
   font-size: 125%;
-  width=:100%;
+  width:100%;
+}
+
+main{
+  margin-top:-20px;
 }
 
 .home-hero {
     background: url('../img/homeBG.jpg') no-repeat center center; 
     background-size: cover;
-    position:absolute; 
-    margin-top: 50px;
-    height: 100%;
-    top:0;
-    left: 0 ;
-    right: 0;
+    position:relative; 
+    height:91vh;
   	color: white;
     display: table;
     width: 100%; 
-    padding-bottom: 30px;
 }
+
 
 .home-text{
     text-align: center;
@@ -45,28 +42,36 @@ body{
 .about-hero{
   margin-left: 32px;
 	color: #98AAAA;
-  padding-bottom: 30px;
 }
 
 .about-hero h1{
   color:#80CCFF;
 }
 
-.about-table td{
-  padding: 5px;
+.about-hero #name{
+  font-weight: bold; 
+  font-family: Avro; 
+  font-size:150%
 }
 
-#footer{
+.about-hero #subname{
+  font-style:italic;
+  font-family: Avro; 
+  font-size:120%
+}
+
+.about-hero #bibliography{
+  font-family:serif;
+}
+
+.footer{
+  position: relative;
   background-color:black;
   clear:both;
 	color:gray;
-	position:fixed;
-	bottom:0;
-  left:0;
-  right:0;
-  display:block;
-	height:30px;
 	width:100%;
+  font-size:115%;
+  font-family: Avro; 
   text-align:right;
   vertical-align: center;
 }
@@ -99,10 +104,6 @@ body{
   height:40px;
   float: left;
   padding-left: -10px;
-}
-
-.details-hero{
-  padding-bottom: 30px;
 }
 
 .form-horizontal{
