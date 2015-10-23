@@ -1,11 +1,10 @@
 body{
-	background-color: black;
-  height:100%;
+	background: url('../img/homeBG.jpg') no-repeat;
 }
 
-.alert{
-   margin-bottom: 30px !important;
-}
+  .alert{
+     margin-bottom: 30px !important;
+  }
 
 .header{
   font-size: 125%;
@@ -17,8 +16,6 @@ main{
 }
 
 .home-hero {
-    background: url('../img/homeBG.jpg') no-repeat center center; 
-    background-size: cover;
     position:relative; 
     height:91vh;
   	color: white;
@@ -41,7 +38,9 @@ main{
 
 .about-hero{
   margin-left: 32px;
-	color: #98AAAA;
+	color: white;
+  font-size: 125%;
+  text-shadow: 1px 1px black;
 }
 
 .about-hero h1{
@@ -66,12 +65,10 @@ main{
 
 .footer{
   position: relative;
-  background-color:black;
   clear:both;
-	color:gray;
-	width:100%;
   font-size:115%;
   font-family: Avro; 
+  color:white ;
   text-align:right;
   vertical-align: center;
 }
@@ -146,7 +143,7 @@ span.sparetext{
   border-width: 1px;
   border-radius: 4px;
 border-color:#25383C !important;
-background-color:#181010 !important;
+background: rgba(64, 64, 64, .8);
   margin-right: 5px;
 }
 
@@ -165,3 +162,14 @@ background-color:#181010 !important;
   padding-right: 10px;
 }
 
+.has-error .control-label,
+.has-error .help-block,
+.has-error .form-control-feedback{
+  color:red;
+}
+
+.has-success .control-label,
+.has-success .help-block,
+.has-success .form-control-feedback {
+    color: #18bc9c;
+}

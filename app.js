@@ -11,7 +11,7 @@
  */
 var http = require(...),   // ADD CODE
     // NOTE, use the version of "express" linked to the assignment handout
-    express = require(...),   // ADD CODE
+    express = require("https://mathlab.utsc.utoronto.ca/courses/cscc09f15/rosselet/asn/node_modules/express/"),   // ADD CODE
     fs = require("fs"),
     path = require("path"),
     url = require("url"),
