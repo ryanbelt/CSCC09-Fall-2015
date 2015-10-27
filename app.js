@@ -30,7 +30,7 @@ var http = require("http"),   // ADD CODE
     config = require("./config"),
     splat = require('./routes/splat.js');  // route handlers ... ADD CODE
 
-var app = espress();  // Create Express app server
+var app = express();  // Create Express app server
 
 // Configure app server
 
