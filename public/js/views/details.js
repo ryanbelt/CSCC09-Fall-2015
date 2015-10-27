@@ -41,8 +41,8 @@ splat.Details = Backbone.View.extend({
                     var mId = model.id;
                     var temp= "movies/" + mId;
                     console.log(temp);
-                    splat.app.navigate(temp, {replace:true, trigger:true});
-                    //splat.app.navigate('#movies', {replace:true, trigger:true});
+                    //splat.app.navigate(temp, {replace:true, trigger:true});
+                    splat.app.navigate('#movies', {replace:true, trigger:true});
                     splat.utils.showNotice('Success:','success',title+" has been saved");
                 },
                 error: function(model, response) {
