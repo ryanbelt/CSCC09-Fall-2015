@@ -33,10 +33,10 @@ exports.getMovie = function(req, res){
 // upload an image file; returns image file-path on server
 exports.uploadImage = function(req, res) {
     // req.files is an object, attribute "file" is the HTML-input name attr
-    var filePath = req.files. ...   // ADD CODE to get file path
-        fileType = req.files. ...   // ADD CODE to get MIME type
+    var filePath = req.files.image.path,  // ADD CODE to get file path
+        fileType = req.files.image.name,   // ADD CODE to get MIME type
         // extract the MIME suffix for the user-selected file
-        suffix = // ADD CODE
+        suffix = ""; // ADD CODE
         // imageURL is used as the value of a movie-model poster field 
 	// id parameter is the movie's "id" attribute as a string value
         imageURL = 'img/uploads/' + req.params.id + suffix,
