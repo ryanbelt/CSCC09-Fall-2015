@@ -55,7 +55,6 @@ app.use(bodyParser.urlencoded({
 }));
 
 //client can log
-app.use('/public', express.static(__dirname+"/public"));
 // set file-upload directory for poster images
 app.use(multer({dest: __dirname + '/public/img/uploads/'}));
 
