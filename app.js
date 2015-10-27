@@ -66,7 +66,7 @@ app.use(methodOverride());
 // Perform route lookup based on HTTP method and URL.
 // Explicit routes go before express.static so that proper
 // handler is invoked rather than static-content processor
-
+app.use(express.static(__dirname + "/public"));
 // Heartbeat test of server API
 app.get('/', splat.api);
 
@@ -78,7 +78,7 @@ app.get('/', splat.api);
 app.post('/movies', splat.addMovie);
 
 // location of app's static content ... may need to ADD CODE
-app.use(express.static(__dirname + "/public"));
+
 
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
