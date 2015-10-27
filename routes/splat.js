@@ -47,6 +47,9 @@ exports.getMovie = function(req, res){
     });
 };
 
+exports.getMovie = function(req, res){
+    
+};
 // upload an image file; returns image file-path on server
 exports.uploadImage = function(req, res) {
     // req.files is an object, attribute "file" is the HTML-input name attr

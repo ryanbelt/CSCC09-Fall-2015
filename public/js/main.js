@@ -52,12 +52,14 @@ splat.AppRouter = Backbone.Router.extend({
 
 
     browse:function(){
-        splat.utils.flush();
+        $('.header').html(this.headerView.selectMenuItem('browse-header'));
         splat.utils.showNotice('Note:','info'," Loading.....");
         //change nav bar section and load the borwse page
-        $('.header').html(this.headerView.selectMenuItem('browse-header'));
-        this.browseView = new splat.MovieThumb({collection: this.movies});
+        this.movies.fetch({
+                    this.browseView = new splat.MovieThumb({collection: this.movies});
         $('#content').html(this.browseView.render().el); 
+        });
+
 
         splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
     },
