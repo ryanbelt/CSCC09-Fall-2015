@@ -65,7 +65,7 @@ app.use(methodOverride());
 // handler is invoked rather than static-content processor
 
 // Heartbeat test of server API
-app.get('/', splat.api).listen(config.port);
+app.get('/', splat.api);
 
 // Retrieve a single movie by its id attribute
 
