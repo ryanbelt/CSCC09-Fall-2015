@@ -72,6 +72,7 @@ app.get('/', splat.api);
 //app.get('/movies/:id', splat.getMovie);
 
 // ADD CODE to support other routes listed on assignment handout
+app.post('/movies', splat.addMovie);
 
 // location of app's static content ... may need to ADD CODE
 app.use(express.static(__dirname + "/public"));

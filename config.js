@@ -5,7 +5,7 @@ var config = {
 	dbname:"panjian2",
 	//testing db
 	//mongo ds045064.mongolab.com:45064/heroz -u a -p a
-	db:"mongodb://a:a@ds045064.mongolab.com:45064/heroz",
+	//db:"mongodb://a:a@ds045064.mongolab.com:45064/heroz",
 
 	//local tester
 	//db="127.0.0.1:27017/test";

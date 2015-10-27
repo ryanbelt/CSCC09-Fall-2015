@@ -13,7 +13,24 @@ var fs = require('fs'),
 
 // heartbeat response for server API
 exports.api = function(req, res){
-  res.status(200).send('<h3>Eatz API is running!</h3>');
+  res.status(200).send('<h3>Heroz API is running!</h3>');
+};
+
+exports.addMovie = function(req, res){
+    console.log("addMove");
+    var movie= new MovieModel(req.body);
+    console.log(req);
+    console.log(movie);
+    movie.save(function(err,movie){
+    if (err) {
+        res.status(500).send("Sorry, unable to add movie at this time (" 
+            +err.message+ ")" );
+    } else if (!movie) {
+        res.status(404).send("Sorry, that movie already exist");
+    } else {
+        res.status(200).send(movie);
+    }
+    });
 };
 
 // retrieve an individual movie model, using it's id as a DB key
@@ -60,16 +77,26 @@ mongoose.connect('mongodb://' +config.dbuser+ ':' +config.dbpass+
 
 // Schemas
 var MovieSchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    director: { type: String, required: true },
+    title:{ type: String, required:true},
+    released:{ type: Number, required:true},
+    director:{ type: String, required:true},
+    starring:{ type: [String], required:true},
+    rating:{ type: String, required:true},
+    duration:{ type: Number, required:true},
+    genre:{ type: [String], required:true},
+    synopsis:{ type: String, required:true},
+    poster:{ type: String, required:true},
+    dated:{ type: String, required:true},
+    trailer:{ type: String, required:false},
+    freshTotal:{ type: Number, required:true},
+    freshVotes:{ type: Number, required:true},
     // ADD CODE for other Movie attributes
 });
 
+
 // Constraints
 // each title:director pair must be unique; duplicates are dropped
-MovieSchema.index({
-title:{ type: String, required:true}
-});  // ADD CODE
+MovieSchema.index({title:1, director:1},{unique: true});  // ADD CODE
 
 // Models
 var MovieModel = mongoose.model('Movie', MovieSchema);
