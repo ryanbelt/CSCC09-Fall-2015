@@ -21,6 +21,7 @@ splat.AppRouter = Backbone.Router.extend({
     // When an instance of an AppRouter is declared, create a Header view
     initialize: function() {
     // instantiate a Header view
+        splat.pubSub = _.extend({},Backbone.Events);
         this.headerView = new splat.Header();  
     // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
