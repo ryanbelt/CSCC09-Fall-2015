@@ -46,12 +46,16 @@ app.use(logger('dev'));  // 'default', 'short', 'tiny', 'dev'
 // use compression (gzip) to reduce size of HTTP responses
 app.use(compression());
 
+
+
 // parse HTTP request body
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
         extended: true
 }));
 
+//client can log
+app.use('/public', express.static(__dirname+"/public"));
 // set file-upload directory for poster images
 app.use(multer({dest: __dirname + '/public/img/uploads/'}));
 
