@@ -67,7 +67,9 @@ var MovieSchema = new mongoose.Schema({
 
 // Constraints
 // each title:director pair must be unique; duplicates are dropped
-MovieSchema.index(title:{ type: String, required:true});  // ADD CODE
+MovieSchema.index({
+title:{ type: String, required:true}
+});  // ADD CODE
 
 // Models
 var MovieModel = mongoose.model('Movie', MovieSchema);
