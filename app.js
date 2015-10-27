@@ -47,7 +47,7 @@ app.use(logger('dev'));  // 'default', 'short', 'tiny', 'dev'
 app.use(compression());
 
 // location of app's static content ... may need to ADD CODE
-app.use(express.static(__dirname + "/public"));
+app.use('/public',express.static(__dirname + "/public"));
 
 // parse HTTP request body
 app.use(bodyParser.json());
