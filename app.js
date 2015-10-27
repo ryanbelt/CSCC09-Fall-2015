@@ -9,9 +9,9 @@
  * the value returned by require(), in this case e.g. splat.api
  * The convention is use the same name for variable and module.
  */
-var http = require(...),   // ADD CODE
+var http = require("http"),   // ADD CODE
     // NOTE, use the version of "express" linked to the assignment handout
-    express = require("https://mathlab.utsc.utoronto.ca/courses/cscc09f15/rosselet/asn/node_modules/express/"),   // ADD CODE
+    express = require("express"),   // ADD CODE
     fs = require("fs"),
     path = require("path"),
     url = require("url"),
@@ -41,7 +41,7 @@ app.set('port', process.env.PORT || config.port);
 //app.use(basicAuth('username', 'password'));  // REPLACE username/password
 
 // change param value to control level of logging  ... ADD CODE
-app.use(logger(...));  // 'default', 'short', 'tiny', 'dev'
+app.use(logger('dev'));  // 'default', 'short', 'tiny', 'dev'
 
 // use compression (gzip) to reduce size of HTTP responses
 app.use(compression());

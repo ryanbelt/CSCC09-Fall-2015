@@ -1,8 +1,11 @@
 var config = {
-
+	port=41127;
+	dbuser="herozadmin";
+	dbpass="herozpassword";
+	dbname="panjian2";
 	//testing db
-	//mongo ds051838.mongolab.com:51838/tester -u herozadmin -p herozpassword
-	db="mongodb://herozadmin:herozpassword@ds051838.mongolab.com:51838/tester";
+	//mongo ds045064.mongolab.com:45064/heroz -u a -p a
+	db="mongodb://a:a@ds045064.mongolab.com:45064/heroz";
 
 	//local tester
 	//db="127.0.0.1:27017/test";

@@ -51,3 +51,23 @@ exports.uploadImage = function(req, res) {
 	}
     });
 };
+
+var mongoose = require('mongoose'); // MongoDB integration
+
+// Connect to database, using credentials specified in your config module
+mongoose.connect('mongodb://' +config.dbuser+ ':' +config.dbpass+
+                '@10.15.2.164/' + config.dbname);
+
+// Schemas
+var MovieSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    director: { type: String, required: true },
+    // ADD CODE for other Movie attributes
+});
+
+// Constraints
+// each title:director pair must be unique; duplicates are dropped
+MovieSchema.index(...);  // ADD CODE
+
+// Models
+var MovieModel = mongoose.model('Movie', MovieSchema);
