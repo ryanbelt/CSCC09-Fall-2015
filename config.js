@@ -1,5 +1,5 @@
 var config = {
-	port:1127,
+	port:41127,
 	dbuser:"herozadmin",
 	dbpass:"herozpassword",
 	dbname:"panjian2",
