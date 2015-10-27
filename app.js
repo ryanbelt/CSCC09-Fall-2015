@@ -11,7 +11,7 @@
  */
 var http = require("http"),   // ADD CODE
     // NOTE, use the version of "express" linked to the assignment handout
-    express = require("./node_modules/express"),   // ADD CODE
+    express = require("express"),   // ADD CODE
     fs = require("fs"),
     path = require("path"),
     url = require("url"),
@@ -68,7 +68,8 @@ app.use(methodOverride());
 app.get('/', splat.api);
 
 // Retrieve a single movie by its id attribute
-app.get('/movies/:id', splat.getMovie);
+
+//app.get('/movies/:id', splat.getMovie);
 
 // ADD CODE to support other routes listed on assignment handout
 
