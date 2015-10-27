@@ -12,7 +12,8 @@ splat.AppRouter = Backbone.Router.extend({
         "": "home",
         "about": "about",
         "movies" :"browse",
-        "movies/:id":"details",
+        "movies/:id":"edits",
+        "movies/add":"edits",
         "movies/:id/reviews":"comments",
         "*default": "home"
     },
@@ -60,10 +61,11 @@ splat.AppRouter = Backbone.Router.extend({
         splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
     },
 
-    details:function(id){
+    edits:function(id){
         //change nav bar section
         splat.utils.flush();
         $('.header').html(this.headerView.selectMenuItem('add-header'));
+        console.log("edit call");
         //get the model by id form the collection
         var m =this.movies.get(id);
         //if model is not exist in the collection, we create a brand new model

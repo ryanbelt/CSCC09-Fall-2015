@@ -26,7 +26,7 @@ splat.Details = Backbone.View.extend({
     },
 
     //function for save
-    save: function(event){
+    save: function(){
         event.preventDefault();
         var title=this.$("#title").val();
         var i = 0; //number of validation error variable
@@ -36,16 +36,20 @@ splat.Details = Backbone.View.extend({
         if (i==0){
             //reset last edit date
             this.model.set("dated",(new Date).toISOString().substr(0,10));
-            this.collection.create(this.model ,{
-                success: function(){
+            this.model.save ({},{wait:true,
+                success: function(model,response){
+                    var mId = model.id;
+                    var temp= "movies/" + mId;
+                    console.log(temp);
+                    splat.app.navigate(temp, {replace:true, trigger:true});
                     splat.app.navigate('#movies', {replace:true, trigger:true});
                     splat.utils.showNotice('Success:','success',title+" has been saved");
                 },
-                error: function() {
-        // display the error response from the server
-            splat.utils.requestFailed(response);
-            splat.utils.showNotice('Failur:', "danger", "Something wrong with saving");
-            }
+                error: function(model, response) {
+                 // display the error response from the server
+                splat.utils.requestFailed(response);
+                splat.utils.showNotice('Failur:', "danger", "Something wrong with saving");
+                }
             });
         }
         else{
