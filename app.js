@@ -46,7 +46,8 @@ app.use(logger('dev'));  // 'default', 'short', 'tiny', 'dev'
 // use compression (gzip) to reduce size of HTTP responses
 app.use(compression());
 
-
+// location of app's static content ... may need to ADD CODE
+app.use(express.static(__dirname + "/public"));
 
 // parse HTTP request body
 app.use(bodyParser.json());
@@ -84,8 +85,7 @@ app.post('/movies', splat.addMovie);
 
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
-// location of app's static content ... may need to ADD CODE
-app.use(express.static(__dirname + "/public"));
+
 
 // Default-route middleware, in case none of above match
 app.use(function (req, res) {

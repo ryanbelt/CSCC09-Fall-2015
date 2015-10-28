@@ -46,14 +46,13 @@ exports.getMovie = function(req, res){
 };
 
 exports.getMovies = function(req, res){
-    //console.log("call get moveis");
     MovieModel.find({}, function(err,movies){
         if (err) {
               res.send(404, "Sorry, no movies were found! ("
                   +err.message+ ")" );
            } else {
-            //console.log(movies);
-              res.send(200, movies);
+            console.log(movies);
+              res.status(200).send(movies);
            }
     });
 };

@@ -62,6 +62,7 @@ splat.AppRouter = Backbone.Router.extend({
                 splat.utils.showNotice('Failure:','danger'," Bad");
             }
         });
+        console.log(this.movies);
                                 this.browseView = new splat.MovieThumb({collection: this.movies});
                 $('#content').html(this.browseView.render().el); 
         splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
