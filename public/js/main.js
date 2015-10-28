@@ -1,5 +1,4 @@
 // catch simple errors
-"use strict";
 
 // declare splat-app namespace if it doesn't already exist
 var splat =  splat || {};
@@ -55,16 +54,16 @@ splat.AppRouter = Backbone.Router.extend({
         splat.utils.showNotice('Note:','info'," Loading.....");
         //change nav bar section and load the borwse page
         this.movies.fetch({
-            success:function(){
-
+            success:function(movies,response){
+                var browseView = new splat.MovieThumb({collection: movies});
+                $('#content').html(browseView.render().el); 
             },
             failure:function(){
                 splat.utils.showNotice('Failure:','danger'," Bad");
             }
         });
         console.log(this.movies);
-                                this.browseView = new splat.MovieThumb({collection: this.movies});
-                $('#content').html(this.browseView.render().el); 
+
         splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
     },
 
