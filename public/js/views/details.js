@@ -38,9 +38,9 @@ splat.Details = Backbone.View.extend({
             this.model.set("dated",(new Date).toISOString().substr(0,10));
             this.model.save ({},{wait:true,
                 success: function(model,response){
-                    var mId = model.id;
-                    var temp= "movies/" + mId;
-                    console.log(temp);
+                    //var mId = model.id;
+                    //var temp= "movies/" + mId;
+                    //console.log(temp);
                     //splat.app.navigate(temp, {replace:true, trigger:true});
                     splat.app.navigate('#movies', {replace:true, trigger:true});
                     splat.utils.showNotice('Success:','success',title+" has been saved");
