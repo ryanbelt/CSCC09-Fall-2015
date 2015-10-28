@@ -21,7 +21,6 @@ splat.AppRouter = Backbone.Router.extend({
     // When an instance of an AppRouter is declared, create a Header view
     initialize: function() {
     // instantiate a Header view
-        splat.pubSub = _.extend({},Backbone.Events);
         this.headerView = new splat.Header();  
     // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
@@ -55,12 +54,16 @@ splat.AppRouter = Backbone.Router.extend({
         $('.header').html(this.headerView.selectMenuItem('browse-header'));
         splat.utils.showNotice('Note:','info'," Loading.....");
         //change nav bar section and load the borwse page
-        //this.movies.fetch({
-                    this.browseView = new splat.MovieThumb({collection: this.movies});
-        $('#content').html(this.browseView.render().el); 
-        //});
+        this.movies.fetch({
+            success:function(){
 
-
+            },
+            failure:function(){
+                splat.utils.showNotice('Failure:','danger'," Bad");
+            }
+        });
+                                this.browseView = new splat.MovieThumb({collection: this.movies});
+                $('#content').html(this.browseView.render().el); 
         splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
     },
 

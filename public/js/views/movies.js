@@ -6,7 +6,6 @@ var splat =  splat || {};
 
 // note View-name (Home) matches name of template file Home.html
 splat.MovieThumb = Backbone.View.extend({
-
 	//teacher given code, still need to figure why
     thumbsTemplate: _.template([
 	"<% titles.each(function(title) { %>",

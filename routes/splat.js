@@ -17,9 +17,7 @@ exports.api = function(req, res){
 };
 
 exports.addMovie = function(req, res){
-    console.log("addMove");
     var movie= new MovieModel(req.body);
-    console.log(req);
     console.log(movie);
     movie.save(function(err,movie){
     if (err) {
@@ -47,8 +45,17 @@ exports.getMovie = function(req, res){
     });
 };
 
-exports.getMovie = function(req, res){
-    
+exports.getMovies = function(req, res){
+    //console.log("call get moveis");
+    MovieModel.find({}, function(err,movies){
+        if (err) {
+              res.send(404, "Sorry, no movies were found! ("
+                  +err.message+ ")" );
+           } else {
+            //console.log(movies);
+              res.send(200, movies);
+           }
+    });
 };
 // upload an image file; returns image file-path on server
 exports.uploadImage = function(req, res) {
