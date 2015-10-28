@@ -47,7 +47,7 @@ splat.Details = Backbone.View.extend({
                 },
                 error: function(model, response) {
                  // display the error response from the server
-                splat.utils.requestFailed(response);
+                //splat.utils.requestFailed(response);
                 splat.utils.showNotice('Failur:', "danger", "Something wrong with saving");
                 }
             });
