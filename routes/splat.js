@@ -18,7 +18,6 @@ exports.api = function(req, res){
 
 exports.addMovie = function(req, res){
     var movie= new MovieModel(req.body);
-    console.log(movie);
     movie.save(function(err,movie){
     if (err) {
         res.status(500).send("Sorry, unable to add movie at this time (" 
@@ -51,9 +50,52 @@ exports.getMovies = function(req, res){
               res.send(404, "Sorry, no movies were found! ("
                   +err.message+ ")" );
            } else {
-            console.log(movies);
               res.status(200).send(movies);
            }
+    });
+};
+
+exports.editMovie = function(req, res){
+    MovieModel.findById(req.params.id, function(err, movie) {
+        if (err) {
+              res.send(404, "Sorry, no movies were found! ("
+                  +err.message+ ")" );
+           }else if(!movie){
+                res.send(404, "Sorry, no movies were found!" );
+            }else {
+            for(var attr in req.body){
+               movie[attr]=req.body[attr];
+            }
+            console.log(movie);
+                movie.save(function(serr,movie){
+                    if(serr){
+                        res.send("something wrong to add");
+                    }else{
+                        res.send(movie);
+                    }
+                });
+           }
+    });
+};
+
+exports.deleteMovie = function(req, res){
+    MovieModel.findById(req.params.id, function(err, movie) {
+                    console.error(err);
+        if(err){
+            res.send(500, "Error with finding this movie");
+        }else if(!movie){
+                res.send(404, "Sorry, no movies were found!" );
+            }else{
+            movie.remove(function(err){
+                if(!err){
+                    console.log(req.params.id+"movie delete success");
+                    res.status(200).send(movie);
+                }else{
+                    console.log(req.params.id+"movie delete fail");
+                    res.send(404,"cannot delete this movie");
+                }
+            })
+        }
     });
 };
 // upload an image file; returns image file-path on server

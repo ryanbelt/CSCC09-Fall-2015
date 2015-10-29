@@ -11,8 +11,8 @@ splat.AppRouter = Backbone.Router.extend({
         "": "home",
         "about": "about",
         "movies" :"browse",
+        "movies/add":"adds",
         "movies/:id":"edits",
-        "movies/add":"edits",
         "movies/:id/reviews":"comments",
         "*default": "home"
     },
@@ -53,23 +53,29 @@ splat.AppRouter = Backbone.Router.extend({
         $('.header').html(this.headerView.selectMenuItem('browse-header'));
         splat.utils.showNotice('Note:','info'," Loading.....");
         //change nav bar section and load the borwse page
-        this.movies.fetch({
+        this.movies.fetch({wait: true,
             success:function(movies,response){
                 var browseView = new splat.MovieThumb({collection: movies});
                 $('#content').html(browseView.render().el); 
             },
             failure:function(){
-                splat.utils.showNotice('Failure:','danger'," Bad");
+                splat.utils.showNotice('Failure:','danger'," Unable to load");
             }
         });
-        console.log(this.movies);
-
         splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
+    },
+    adds:function(){
+        //change nav bar section
+        $('.header').html(this.headerView.selectMenuItem('add-header'));
+        m=new splat.Movie();
+        //put the collection and model into the detail html
+        this.containDetailsView = new splat.Details({model: m});
+        splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
+        $('#content').html(this.containDetailsView.render().el); 
     },
 
     edits:function(id){
         //change nav bar section
-        splat.utils.flush();
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
         var m =this.movies.get(id);
@@ -77,7 +83,7 @@ splat.AppRouter = Backbone.Router.extend({
         if (!m)
             m=new splat.Movie();
         //put the collection and model into the detail html
-        this.containDetailsView = new splat.Details({collection: this.movies , model: m});
+        this.containDetailsView = new splat.Details({model: m});
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.containDetailsView.render().el); 
     },

@@ -81,7 +81,9 @@ app.get('/movies', splat.getMovies);
 
 app.post('/movies', splat.addMovie);
 
+app.put('/movies/:id', splat.editMovie);
 
+app.delete('/movies/:id', splat.deleteMovie);
 
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));

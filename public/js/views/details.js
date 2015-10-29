@@ -58,10 +58,10 @@ splat.Details = Backbone.View.extend({
     },
 
     //function for delete
-    delete: function(event){
-        var title=this.$("#title").val();
-        this.model.destroy({
-        wait: true,  // don't destroy client model until server responds
+    delete: function(){
+        var title=this.$("#title").val();  
+        this.model.destroy ({
+        wait: true,  // don't destroy client model until save-handlerver responds
         success: function(model, response) {
         // later, we'll navigate to the browse view upon success
             splat.app.navigate('#movies', {replace:true, trigger:true});
@@ -70,7 +70,6 @@ splat.Details = Backbone.View.extend({
         },
         error: function(model, response) {
         // display the error response from the server
-            splat.utils.requestFailed(response);
             splat.utils.showNotice('Failur:', "danger", "Something wrong with deletion");
             }
         });
@@ -104,7 +103,7 @@ splat.Details = Backbone.View.extend({
             this.model.set(changed);
             splat.utils.showNotice("Note:","info"," click save before leaving the page");
         }
-    },
+    }, 
 
     // image upload done in save-handler, to avoid
     // multiple-upload cost if user reselects image
