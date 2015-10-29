@@ -41,6 +41,7 @@ splat.AppRouter = Backbone.Router.extend({
     },
 
     about: function(){
+        splat.utils.hideNotice();
         $('.header').html(this.headerView.selectMenuItem('about-header'));
         if(!this.aboutView){
             this.aboutView = new splat.About();
