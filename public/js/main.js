@@ -58,12 +58,12 @@ splat.AppRouter = Backbone.Router.extend({
             success:function(movies,response){
                 var browseView = new splat.MovieThumb({collection: movies});
                 $('#content').html(browseView.render().el); 
+                splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
             },
             failure:function(){
                 splat.utils.showNotice('Failure:','danger'," Unable to load");
             }
         });
-        splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
     },
     adds:function(){
         //change nav bar section
