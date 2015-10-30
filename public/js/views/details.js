@@ -111,6 +111,7 @@ splat.Details = Backbone.View.extend({
     // set object attribute for image uploader
     this.pictureFile = event.target.files[0];   
     // if the file type is image, read it
+        var reader=new FileReader();
     if ( this.pictureFile.name.match(/\.(jpg|jpeg|png|gif)$/)) {
         //console.log(this.pictureFile);
         this._imageRead(this.pictureFile,this.pictureFile.type);
@@ -149,13 +150,16 @@ splat.Details = Backbone.View.extend({
         var self = this;
         var reader = new FileReader();
         // callback for when read operation is finished
-        reader.onload = function(event) {
+        reader.onloadend = function() {
             var targetImgElt =  $('#poster')[0];
         // reader.result is image data in base64 format
             targetImgElt.src = reader.result;
             var newImg=self._resize(reader.result);
+            console.log(newImg);
             self.model.set('poster',newImg);
+
             $('#detail-picture img').attr('src',newImg);
+
         };
         reader.readAsDataURL(pictureFile); // read image file
     },

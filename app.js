@@ -74,7 +74,6 @@ app.get('/', splat.api);
 app.get('/movies/:id', splat.getMovie);
 
 // ADD CODE to support other routes listed on assignment handout
-app.post('movies/image', splat.uploadImage);
 app.get('/movies', splat.getMovies);
 
 app.post('/movies', splat.addMovie);
