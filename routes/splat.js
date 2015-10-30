@@ -127,7 +127,7 @@ function uploadImage(imagePoster, id) {
             console.log(err); // writes out file without error, but it's not a valid image
         });
         console.log(newPath);
-        return newPath;
+        return imageURL;
     }
 }
 
