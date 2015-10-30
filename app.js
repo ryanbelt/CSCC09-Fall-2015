@@ -47,8 +47,8 @@ app.use(logger('dev'));  // 'default', 'short', 'tiny', 'dev'
 app.use(compression());
 
 // parse HTTP request body
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+app.use(bodyParser.json({limit:'1mb'}));
+app.use(bodyParser.urlencoded({limit:'1mb',
         extended: true
 }));
 
