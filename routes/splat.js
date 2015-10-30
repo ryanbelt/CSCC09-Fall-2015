@@ -118,17 +118,15 @@ function uploadImage(imagePoster, id) {
             imageURL = 'img/uploads/' + id + suffix,
             // rename the image file to match the imageURL
             newPath = __dirname + '/../public/' + imageURL;
-        console.log(data);
-        console.log(suffix);
-        console.log(encodeType);
+
         var buf = new Buffer(data, encodeType);
-        console.log(buf);
+
         fs.writeFile(newPath, buf, function(err) {
             console.log(err); // writes out file without error, but it's not a valid image
         });
-        console.log(newPath);
         return imageURL;
     }
+    return imagePoster;
 }
 
 // upload an image file; returns image file-path on server
