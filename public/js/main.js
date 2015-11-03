@@ -51,6 +51,7 @@ splat.AppRouter = Backbone.Router.extend({
 
 
     browse:function(){
+        var self = this;
         $('.header').html(this.headerView.selectMenuItem('browse-header'));
         splat.utils.showNotice('Note:','info'," Loading.....");
         //change nav bar section and load the borwse page
@@ -60,7 +61,7 @@ splat.AppRouter = Backbone.Router.extend({
                 $('#content').html(browseView.render().el); 
                 splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
             },
-            failure:function(){
+            error:function(){
                 splat.utils.showNotice('Failure:','danger'," Unable to load");
             }
         });
