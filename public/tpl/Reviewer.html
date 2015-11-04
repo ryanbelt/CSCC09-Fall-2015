@@ -1,14 +1,33 @@
-<div class="mid-view">
-    <form role="form">
-        <label class="radio-inline">
-            <input type="radio" name="optradio">Option 1
+<div class="mid-view review-back">
+    <div class="form-horizontal">
+        <label class="radio-inline review-form">
+            <input type="radio" name="optradio">Fresh<span><img src="img/fresh.gif"/></span>
         </label>
-        <label class="radio-inline">
-            <input type="radio" name="optradio">Option 2
+        <label class="radio-inline review-form">
+            <input type="radio"  name="optradio">Rotten<span><img src="img/rotten.gif"/></span>
         </label>
-        <label class="radio-inline">
-            <input type="radio" name="optradio">Option 3
-        </label>
-    </form>
-
+        <div class="form-group">
+            <label class="control-label col-sm-6  review-form" for="reviewText">Enter your review:</label>
+            <div class="col-sm-12">
+                <textarea class="form-control " rows="3" type="text"  for="reviewText" id="reviewText"></textarea>
+                <span class="help-block "> </span>
+            </div>
+        </div>
+        <div class="form-group">
+        <div class="form-group col-lg-5 col-md-6">
+            <label class="control-label col-md-3 col-sm-2 review-form" for="reviewName">Name:</label>
+            <div class="col-sm-5">
+                <input class=" form-control" type="text"  id="reviewName" placeholder="Oscar"/>
+                <span class="help-block"></span>
+            </div>
+        </div>
+        <div class="form-group col-lg-5 col-md-6">
+            <label class="control-label col-md-3 col-sm-2 review-form" for="reviewName">Affiliation:</label>
+            <div class="col-sm-5">
+                <input class=" form-control" type="text"  id="reviewName" placeholder="HollyWood" />
+                <span class="help-block"></span>
+            </div>
+        </div>
+        </div>
+</div>
 </div>

@@ -144,6 +144,7 @@ span.sparetext{
 
 .thumbnail{
   position: relative;
+  border-style: solid;
   border-width: 1px;
   border-radius: 4px;
 border-color:#25383C !important;
@@ -176,4 +177,36 @@ background: rgba(64, 64, 64, .8);
 .has-success .help-block,
 .has-success .form-control-feedback {
     color: #18bc9c;
+}
+
+.review-back{
+  position: relative;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 4px;
+  border-color:#26E646 !important;
+  background: rgba(255, 251, 178, .8);
+  margin-right: 5px;
+  padding:10px;
+}
+
+.review-form{
+  color:black;
+  font-weight: bold;
+  font-family: Avro;
+}
+
+.top-view,
+.mid-view,
+.sub-view{
+  margin:2px 5px 2px 5px;
+}
+
+.mid-view .control-label{
+  width:100%;
+  text-align: left;
+}
+
+.mid-view .form-group{
+  margin-bottom:0px;
 }
