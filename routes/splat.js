@@ -173,6 +173,14 @@ var MovieSchema = new mongoose.Schema({
     // ADD CODE for other Movie attributes
 });
 
+var ReviewSchema = new mongoose.Schema({
+    freshness: {type: Number, required: true},
+    reviewName:{type: String, required: true},
+    reviewAffil:{type: String, required: true},
+    reviewText:{type: String, required: true},
+    movieId:{type: String, required: true},
+});
+
 
 // Constraints
 // each title:director pair must be unique; duplicates are dropped
@@ -180,3 +188,5 @@ MovieSchema.index({title:1, director:1},{unique: true});  // ADD CODE
 
 // Models
 var MovieModel = mongoose.model('Movie', MovieSchema);
+
+var ReviewModel = mongoose.model('Review', ReviewSchema);

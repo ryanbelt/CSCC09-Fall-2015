@@ -17,6 +17,18 @@ splat.AppRouter = Backbone.Router.extend({
         "*default": "home"
     },
 
+    comments: function(id){
+        $('.header').html(this.headerView.selectMenuItem('add-header'));
+        //get the model by id form the collection
+        var m =this.movies.get(id);
+        //if model is not exist in the collection, we create a brand new model
+        if (!m)
+            m=new splat.Movie();
+        //put the collection and model into the detail html
+        this.reviewerView = new splat.Reviewer({model: m});
+        splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
+        $('#content').html(this.reviewerView.render().el);
+    },
     // When an instance of an AppRouter is declared, create a Header view
     initialize: function() {
     // instantiate a Header view
@@ -94,7 +106,7 @@ splat.AppRouter = Backbone.Router.extend({
 // Load HTML templates for Home, Header, About views, and when
 // template loading is complete, instantiate a Backbone router
 // with history.
-splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details'], function() {
+splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details',"Reviewer"], function() {
     splat.app = new splat.AppRouter();
     Backbone.history.start();
 });
