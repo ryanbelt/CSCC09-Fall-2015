@@ -10,6 +10,7 @@ splat.Details = Backbone.View.extend({
 	events:{
     	  'click #moviesave': 'save',
     	  'click #moviedel': 'delete',
+          'click #moviereview': 'review',
           'change' : "inputChange",
           'drop #detail-picture': 'dropHandler',
           'change #poster': 'selectImage',
@@ -25,6 +26,10 @@ splat.Details = Backbone.View.extend({
 	return this;    // support method chaining
     },
 
+    review: function(){
+        console.log(this.model);
+    splat.app.navigate('#movies/'+this.model['id']+'/reviews' ,{trigger:true});
+    },
     //function for save
     save: function(){
         event.preventDefault();
