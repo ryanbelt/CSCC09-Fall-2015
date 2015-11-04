@@ -5,7 +5,7 @@
 var splat =  splat || {};
 
 // note View-name (Home) matches name of template file Home.html
-splat.Comment = Backbone.View.extend({
+splat.ReviewsView = Backbone.View.extend({
 
     // render the View
     render: function () {

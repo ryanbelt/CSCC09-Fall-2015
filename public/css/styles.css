@@ -199,7 +199,7 @@ background: rgba(64, 64, 64, .8);
 .top-view,
 .mid-view,
 .sub-view{
-  margin:2px 5px 2px 5px;
+  margin:5px 5px 10px 5px;
 }
 
 .mid-view .control-label{
@@ -209,4 +209,8 @@ background: rgba(64, 64, 64, .8);
 
 .mid-view .form-group{
   margin-bottom:0px;
+}
+
+.view-score{
+  color:red;
 }

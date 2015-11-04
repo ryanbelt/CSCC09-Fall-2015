@@ -17,6 +17,18 @@ splat.AppRouter = Backbone.Router.extend({
         "*default": "home"
     },
 
+    initialize: function() {
+        // instantiate a Header view
+        this.headerView = new splat.Header();
+        // insert the rendered Header view element into the document DOM
+        $('.header').html(this.headerView.render().el);
+        this.movies = new splat.Movies();
+        this.movies.fetch();
+        this.reviews= new splat.Reviews();
+        this.reviews.fetch();
+        splat.utils.hideNotice();
+    },
+
     comments: function(id){
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
@@ -25,22 +37,13 @@ splat.AppRouter = Backbone.Router.extend({
         if (!m)
             m=new splat.Movie();
         //put the collection and model into the detail html
+        this.reviewsView = new splat.ReviewsView({model: m});
         this.reviewerView = new splat.Reviewer({model: m});
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.reviewerView.render().el);
+        $('#reviewer_score').html(this.reviewsView.render().el);
     },
     // When an instance of an AppRouter is declared, create a Header view
-    initialize: function() {
-    // instantiate a Header view
-        this.headerView = new splat.Header();  
-    // insert the rendered Header view element into the document DOM
-        $('.header').html(this.headerView.render().el);
-        this.movies = new splat.Movies();
-        this.movies.fetch();
-        this.reviews= new splat.Reviews();
-        this.reviews.fetch();
-        splat.utils.hideNotice();
-    },
 
     home: function() {
     // If the Home view doesn't exist, instantiate one
@@ -106,7 +109,7 @@ splat.AppRouter = Backbone.Router.extend({
 // Load HTML templates for Home, Header, About views, and when
 // template loading is complete, instantiate a Backbone router
 // with history.
-splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details',"Reviewer"], function() {
+splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details',"Reviewer","ReviewsView"], function() {
     splat.app = new splat.AppRouter();
     Backbone.history.start();
 });
