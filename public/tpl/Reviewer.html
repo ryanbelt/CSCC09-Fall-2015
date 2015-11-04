@@ -1,16 +1,18 @@
 <div class="top-view review-back">
-    <div class="form-horizontal">
-        <label class="radio-inline review-form">
-            <input type="radio" name="optradio">Fresh<span><img src="img/fresh.gif"/></span>
-        </label>
-        <label class="radio-inline review-form">
-            <input type="radio"  name="optradio">Rotten<span><img src="img/rotten.gif"/></span>
-        </label>
         <label class="form-inline"><div id="reviewer_score"></div> </label>
-    </div>
 </div>
 <div class="mid-view review-back">
     <div class="form-horizontal">
+        <div class="form-group">
+            <div>
+        <label class="radio-inline review-form">
+            <input  class="option" type="radio" id="fresh" name="option">Fresh<span><img src="img/fresh.gif"/></span>
+        </label>
+        <label class="radio-inline review-form">
+            <input class="option" type="radio"  id="rotten" name="option">Rotten<span><img src="img/rotten.gif"/></span>
+        </label><span class="help-block "> </span>
+            </div>
+            </div>
         <div class="form-group">
             <label class="control-label col-sm-6  review-form" for="reviewText">Enter your review:</label>
             <div class="col-sm-12">

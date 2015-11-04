@@ -23,9 +23,7 @@ splat.AppRouter = Backbone.Router.extend({
         // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
         this.movies = new splat.Movies();
-        this.movies.fetch();
         this.reviews= new splat.Reviews();
-        this.reviews.fetch();
         splat.utils.hideNotice();
     },
 
@@ -37,8 +35,8 @@ splat.AppRouter = Backbone.Router.extend({
         if (!m)
             m=new splat.Movie();
         //put the collection and model into the detail html
-        this.reviewsView = new splat.ReviewsView({model: m});
-        this.reviewerView = new splat.Reviewer({model: m});
+        this.reviewsView = new splat.ReviewsView({id:id, collection:this.reviews});
+        this.reviewerView = new splat.Reviewer({id:id, collection:this.reviews});
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.reviewerView.render().el);
         $('#reviewer_score').html(this.reviewsView.render().el);
@@ -84,28 +82,30 @@ splat.AppRouter = Backbone.Router.extend({
     adds:function(){
         //change nav bar section
         $('.header').html(this.headerView.selectMenuItem('add-header'));
-        m=new splat.Movie();
+        var m=new splat.Movie();
+        var r=new splat.Review();
         //put the collection and model into the detail html
-        this.containDetailsView = new splat.Details({model: m});
+        this.containDetailsView = new splat.Details({model: m, reviewmodel:r});
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.containDetailsView.render().el);
-
+        this.reviewsView = new splat.ReviewsView({model: m, reviewmodel:r});
+        $('#detail-score').html(this.reviewsView.render().el);
     },
 
     edits:function(id){
         //change nav bar section
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
-        var m =this.movies.get(id);
-        //if model is not exist in the collection, we create a brand new model
-        if (!m)
-            m=new splat.Movie();
-        //put the collection and model into the detail html
-        this.containDetailsView = new splat.Details({model: m});
-        splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
-        $('#content').html(this.containDetailsView.render().el);
-        this.reviewsView = new splat.ReviewsView({model: m});
-        $('#detail-score').html(this.reviewsView.render().el);
+        m=new splat.Movie({_id:id});
+        m.fetch({success:function(m,response){
+            console.log(m);
+            //put the collection and model into the detail html
+            this.containDetailsView = new splat.Details({model: m, collection:this.reviews});
+            splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
+            $('#content').html(this.containDetailsView.render().el);
+            this.reviewsView = new splat.ReviewsView({model: m, collection:this.reviews});
+            $('#detail-score').html(this.reviewsView.render().el);
+        }});
 
     },
 });

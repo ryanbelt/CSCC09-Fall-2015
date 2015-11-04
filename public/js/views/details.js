@@ -1,12 +1,8 @@
-// catch simple errors
-"use strict";
-
 // declare splat-app namespace if it doesn't already exist
 var splat =  splat || {};
 
 // note View-name (Home) matches name of template file Home.html
 splat.Details = Backbone.View.extend({
-
 	events:{
     	  'click #moviesave': 'save',
     	  'click #moviedel': 'delete',
@@ -21,13 +17,15 @@ splat.Details = Backbone.View.extend({
     // render the View
     render: function () {
 	// set the view element ($el) HTML content using its template
+        a=this.model;
+        console.log(this.model.toJSON());
+        console.log(this.model);
 	this.$el.html(this.template(this.model.toJSON()));
     this.delegateEvents();
 	return this;    // support method chaining
     },
 
     review: function(){
-        console.log(this.model);
     splat.app.navigate('#movies/'+this.model['id']+'/reviews' ,{trigger:true});
     },
     //function for save

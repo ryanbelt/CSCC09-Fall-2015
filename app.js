@@ -82,6 +82,8 @@ app.put('/movies/:id', splat.editMovie);
 
 app.delete('/movies/:id', splat.deleteMovie);
 
+app.post('/movies/:id/reviews', splat.addReview);
+
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
 

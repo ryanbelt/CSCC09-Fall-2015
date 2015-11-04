@@ -32,6 +32,21 @@ exports.addMovie = function(req, res){
     });
 };
 
+exports.addReview = function(req, res){
+    var review= new ReviewModel(req.body);
+    console.log(review);
+    review.save(function(err,movie){
+        if (err) {
+            res.status(500).send("Sorry, unable to add review at this time ("
+                +err.message+ ")" );
+        } else if (!movie) {
+            res.status(404).send("Sorry, review error");
+        } else {
+            res.status(200).send(review);
+        }
+    });
+};
+
 // retrieve an individual movie model, using it's id as a DB key
 exports.getMovie = function(req, res){
     MovieModel.findById(req.params.id, function(err, movie) {

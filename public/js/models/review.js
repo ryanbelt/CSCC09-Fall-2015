@@ -14,4 +14,35 @@ splat.Review = Backbone.Model.extend({
         movieId:'' //id of reviewed movie
       },
 
+    initialize: function () {
+      this.validators = {};
+
+      var stringRegex = /^[a-zA-Z0-9 \,\.\?\-\'\*\!]+$/;
+
+          this.validators.reviewName = function (value) {
+            return ((value && stringRegex.test(value))?{isValid: true}
+              : {isValid: false,
+              message: "name require,Only 1 or more letters-digits-spaces allowed"});
+          },
+          this.validators.reviewAffil = function (value) {
+            return ((value && stringRegex.test(value))?{isValid: true}
+                : {isValid: false,
+              message: "name require,Only 1 or more letters-digits-spaces allowed"});
+          },
+          this.validators.reviewText = function (value) {
+            return ((value && stringRegex.test(value))?{isValid: true}
+                : {isValid: false,
+              message: "name require,Only 1 or more letters-digits-spaces allowed"});
+          },
+          this.validators.freshness = function(value){
+             return {isValid: true};
+          },
+          this.validators.movieId = function(value){
+            return {isValid: true};
+          }
+    },
+
+    validateField: function(field, value){
+      return this.validators[field](value);
+    },
 });
