@@ -73,7 +73,7 @@ exports.getMovies = function(req, res){
 };
 
 exports.getReviews = function(req, res){
-    console.log(req.params);
+    console.log(req);
     ReviewModel.find({}, function(err,reviews){
         if (err) {
             res.send(404, "Sorry, no movies were found! ("
@@ -212,7 +212,7 @@ var ReviewSchema = new mongoose.Schema({
 // Constraints
 // each title:director pair must be unique; duplicates are dropped
 MovieSchema.index({title:1, director:1},{unique: true});  // ADD CODE
-
+ReviewSchema.index({reviewName:1, reviewAffil:1},   {unique: true});
 // Models
 var MovieModel = mongoose.model('Movie', MovieSchema);
 

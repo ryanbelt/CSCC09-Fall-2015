@@ -35,7 +35,7 @@ splat.Reviewer = Backbone.View.extend({
             this.model.save ({},
                 {wait:true,
                 success: function(){
-                    //splat.app.navigate('#movies/'+this.id+'/reviews' , {replace:true, trigger:true});
+                    //splat.app.navigate('#movies/'+self.id+'/reviews' , {replace:true, trigger:true});
                     splat.app.navigate('#movies/'+self.id , {replace:true, trigger:true});
                     splat.utils.showNotice('Success:','success',"Review has been saved");
                 },

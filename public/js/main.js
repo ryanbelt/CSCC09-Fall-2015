@@ -33,20 +33,20 @@ splat.AppRouter = Backbone.Router.extend({
         var r=new splat.Review();
         this.reviewsView = new splat.ReviewsView({id:id, collection:this.reviews});
         this.reviewerView = new splat.Reviewer({id:id, model:r});
-        //this.thumbView = new splat.ReviewThumb();
-        /*this.reviews.fetch({wait: true,
-            success:function(reviews,response){
-                console.log(reviews);
-                splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
-            },
-            error:function(){
-                splat.utils.showNotice('Failure:','danger'," Unable to load");
-            }
-        });*/
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.reviewerView.render().el);
         $('#reviewer_score').html(this.reviewsView.render().el);
-        //$('#sub-view').html(this.thumbView.render().el);
+        this.reviews.fetch({movieId:id},{wait: true,
+            success:function(reviews,response){
+                console.log(reviews);
+                this.thumbView = new splat.ReviewThumb({collection:reviews});
+                $('#sub-view').html(this.thumbView.render().el);
+                splat.utils.showNotice('Success:','success'," Reviews loading Finish!!");
+            },
+            error:function(reviews,response){
+                splat.utils.showNotice('Failure:','danger'," Unable to load");
+            }
+        });
         //put the collection and model into the detail html
 
     },

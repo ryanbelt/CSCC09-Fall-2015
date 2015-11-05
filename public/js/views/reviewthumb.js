@@ -18,7 +18,7 @@ splat.ReviewThumb = Backbone.View.extend({
     // render the View
 
     // set the view element ($el) HTML content using its template
-    /*render: function(){
+    render: function(){
         this.loadThumbTemplate =$.get('tpl/ReviewThumb.html');
 
         //teacher given code, still need to figure why
@@ -34,11 +34,6 @@ splat.ReviewThumb = Backbone.View.extend({
             titleTemplate: this.template,
         });
         this.$el.append(moviesMarkup);
-        return this;    // support method chaining
-    }*/
-    render: function () {
-        // set the view element ($el) HTML content using its template
-        this.$el.html(this.template());
         return this;    // support method chaining
     }
 

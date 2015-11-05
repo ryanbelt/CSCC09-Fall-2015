@@ -3,7 +3,7 @@
 var splat =  splat || {};  // our app's namespace
 
 splat.Review = Backbone.Model.extend({
-	urlRoot: "/movies/:id",
+	urlRoot: "/movies/:id/reviews",
     idAttribute: "_id",
 
       defaults: {

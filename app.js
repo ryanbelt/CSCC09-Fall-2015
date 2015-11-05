@@ -84,7 +84,7 @@ app.delete('/movies/:id', splat.deleteMovie);
 
 app.get('/movies/:id/reviews', splat.getReviews);
 
-app.post('/movies/:id', splat.addReview);
+app.post('/movies/:id/reviews', splat.addReview);
 
 
 // return error details to client - use only during development
