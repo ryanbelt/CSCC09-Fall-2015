@@ -72,6 +72,18 @@ exports.getMovies = function(req, res){
     });
 };
 
+exports.getReviews = function(req, res){
+    console.log(req.params);
+    ReviewModel.find({}, function(err,reviews){
+        if (err) {
+            res.send(404, "Sorry, no movies were found! ("
+                +err.message+ ")" );
+        } else {
+            res.status(200).send(reviews);
+        }
+    });
+};
+
 exports.editMovie = function(req, res){
     MovieModel.findById(req.params.id, function(err, movie) {
         if (err) {

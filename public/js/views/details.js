@@ -17,9 +17,6 @@ splat.Details = Backbone.View.extend({
     // render the View
     render: function () {
 	// set the view element ($el) HTML content using its template
-        a=this.model;
-        console.log(this.model.toJSON());
-        console.log(this.model);
 	this.$el.html(this.template(this.model.toJSON()));
     this.delegateEvents();
 	return this;    // support method chaining

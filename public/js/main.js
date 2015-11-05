@@ -30,16 +30,25 @@ splat.AppRouter = Backbone.Router.extend({
     comments: function(id){
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
-        var m =this.movies.get(id);
-        //if model is not exist in the collection, we create a brand new model
-        if (!m)
-            m=new splat.Movie();
-        //put the collection and model into the detail html
+        var r=new splat.Review();
         this.reviewsView = new splat.ReviewsView({id:id, collection:this.reviews});
-        this.reviewerView = new splat.Reviewer({id:id, collection:this.reviews});
+        this.reviewerView = new splat.Reviewer({id:id, model:r});
+        //this.thumbView = new splat.ReviewThumb();
+        /*this.reviews.fetch({wait: true,
+            success:function(reviews,response){
+                console.log(reviews);
+                splat.utils.showNotice('Success:','success'," Browse loading Finish!!");
+            },
+            error:function(){
+                splat.utils.showNotice('Failure:','danger'," Unable to load");
+            }
+        });*/
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.reviewerView.render().el);
         $('#reviewer_score').html(this.reviewsView.render().el);
+        //$('#sub-view').html(this.thumbView.render().el);
+        //put the collection and model into the detail html
+
     },
     // When an instance of an AppRouter is declared, create a Header view
 
@@ -83,13 +92,12 @@ splat.AppRouter = Backbone.Router.extend({
         //change nav bar section
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         var m=new splat.Movie();
-        var r=new splat.Review();
         //put the collection and model into the detail html
-        this.containDetailsView = new splat.Details({model: m, reviewmodel:r});
-        splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
+        this.containDetailsView = new splat.Details({model: m});
         $('#content').html(this.containDetailsView.render().el);
-        this.reviewsView = new splat.ReviewsView({model: m, reviewmodel:r});
-        $('#detail-score').html(this.reviewsView.render().el);
+        this.reviewsView = new splat.ReviewsView({model: m});
+        $('#moviereview').removeClass('btn btn-success');
+        $('#moviereview').text('');
     },
 
     edits:function(id){
@@ -101,7 +109,6 @@ splat.AppRouter = Backbone.Router.extend({
             console.log(m);
             //put the collection and model into the detail html
             this.containDetailsView = new splat.Details({model: m, collection:this.reviews});
-            splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
             $('#content').html(this.containDetailsView.render().el);
             this.reviewsView = new splat.ReviewsView({model: m, collection:this.reviews});
             $('#detail-score').html(this.reviewsView.render().el);

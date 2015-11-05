@@ -18,9 +18,8 @@ splat.Reviewer = Backbone.View.extend({
     },
 
     initialize:function(){
-        this.review=new splat.Review();
-        console.log(this.id);
-        this.review.set('movieId',this.id);
+        //this.review=new splat.Review();
+        this.model.set('movieId',this.id);
     },
 
     events:{
@@ -30,13 +29,14 @@ splat.Reviewer = Backbone.View.extend({
 
     save:function(){
         var i = this._allValidation();
+        var self=this;
         if (i==0){
             //reset last edit date
-            console.log(this.review);
-            this.review.save ({},{wait:true,
-                success: function(review,response){
+            this.model.save ({},
+                {wait:true,
+                success: function(){
                     //splat.app.navigate('#movies/'+this.id+'/reviews' , {replace:true, trigger:true});
-                    splat.app.navigate('#movies' , {replace:true, trigger:true});
+                    splat.app.navigate('#movies/'+self.id , {replace:true, trigger:true});
                     splat.utils.showNotice('Success:','success',"Review has been saved");
                 },
                 error: function(model, response) {
@@ -45,6 +45,7 @@ splat.Reviewer = Backbone.View.extend({
                     splat.utils.showNotice('Failur:', "danger", "Something wrong with saving review");
                 }
             });
+            console.log(this.model);
         }
         else{
             splat.utils.showNotice("Warning:","warning"," please fix your input(s) ");
@@ -52,7 +53,34 @@ splat.Reviewer = Backbone.View.extend({
     },
 
     inputChange:function(){
-
+        var field = event.target.id;
+        if(field!="rotten" && field!='fresh') {
+            //get the input box value
+            var value = event.target.value;
+            var changed = {};
+            //run the validation check for the field and value in this Movie model
+            var validation = this.model.validateField(field, value);
+            //if the validation fail, we highlight the box and show the error message
+            if (!validation.isValid) {
+                splat.utils.addValidationError(field, validation.message);
+            }
+            else {
+                //remove the validation highlight and error in the div
+                splat.utils.removeValidationError(field);
+                //if the attribute is either genre or starring, we split the
+                //value into array,
+                if ("genre" === field || "starring" === field) {
+                    var values = value.split(",");
+                    changed[field] = values;
+                }//otherwise just stay as what it is
+                else {
+                    changed[field] = value;
+                }
+                //add the value into corresponding field of the model
+                this.model.set(changed);
+                splat.utils.showNotice("Note:", "info", " click save before leaving the page");
+            }
+        }
     },
 
     _allValidation: function(){
@@ -66,7 +94,7 @@ splat.Reviewer = Backbone.View.extend({
             field = allInput[k].id;
             value = allInput[k].value;
             changed={};
-            var validation = this.review.validateField(field,value);
+            var validation = this.model.validateField(field,value);
             if(!validation.isValid){
                 splat.utils.addValidationError(field, validation.message);
                 i+=1;
@@ -74,7 +102,7 @@ splat.Reviewer = Backbone.View.extend({
             else{
                 changed[field]=value;
                 splat.utils.removeValidationError(field);
-                this.review.set(changed);
+                this.model.set(changed);
             }
         }
         allInput = document.getElementsByClassName("option");
@@ -91,7 +119,7 @@ splat.Reviewer = Backbone.View.extend({
                 changed['freshness'] = 0;
             }
             splat.utils.removeValidationError("fresh");
-            this.review.set(changed);
+            this.model.set(changed);
         }
         return i;
     }
