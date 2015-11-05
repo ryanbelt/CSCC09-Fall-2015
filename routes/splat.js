@@ -73,12 +73,13 @@ exports.getMovies = function(req, res){
 };
 
 exports.getReviews = function(req, res){
-    console.log(req);
-    ReviewModel.find({}, function(err,reviews){
+    console.log(req.params);
+    ReviewModel.find({movieId: req.params.id}, function(err,reviews){
         if (err) {
             res.send(404, "Sorry, no movies were found! ("
                 +err.message+ ")" );
         } else {
+            console.log(reviews);
             res.status(200).send(reviews);
         }
     });

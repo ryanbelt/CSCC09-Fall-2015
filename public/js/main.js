@@ -23,7 +23,6 @@ splat.AppRouter = Backbone.Router.extend({
         // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
         this.movies = new splat.Movies();
-        this.reviews= new splat.Reviews();
         splat.utils.hideNotice();
     },
 
@@ -36,7 +35,8 @@ splat.AppRouter = Backbone.Router.extend({
         splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
         $('#content').html(this.reviewerView.render().el);
         $('#reviewer_score').html(this.reviewsView.render().el);
-        this.reviews.fetch({movieId:id},{wait: true,
+        this.reviews= new (splat.Reviews.extend({url: "/movies/"+id+"/reviews"}));
+        this.reviews.fetch({wait: true,
             success:function(reviews,response){
                 console.log(reviews);
                 this.thumbView = new splat.ReviewThumb({collection:reviews});
