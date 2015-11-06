@@ -11,7 +11,8 @@ splat.Review = Backbone.Model.extend({
         reviewName: '',  //name of reviewer
        	reviewAffil:'', // affiliation of reviewer
         reviewText:'', // review comments
-        movieId:'' //id of reviewed movie
+        movieId:'', //id of reviewed movie
+          reviewImg:'img/rotten.gif'
       },
 
     initialize: function () {
@@ -39,7 +40,10 @@ splat.Review = Backbone.Model.extend({
           },
           this.validators.movieId = function(value){
             return {isValid: true};
-          }
+          },
+              this.validators.reviewImg = function(value){
+                  return {isValid: true};
+              }
     },
 
     validateField: function(field, value){

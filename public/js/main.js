@@ -30,17 +30,17 @@ splat.AppRouter = Backbone.Router.extend({
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
         var r=new splat.Review();
-        this.reviewsView = new splat.ReviewsView({id:id, collection:this.reviews});
-        this.reviewerView = new splat.Reviewer({id:id, model:r});
-        splat.utils.showNotice('Note:','info'," Remember to click SAVE.");
-        $('#content').html(this.reviewerView.render().el);
-        $('#reviewer_score').html(this.reviewsView.render().el);
         this.reviews= new (splat.Reviews.extend({url: "/movies/"+id+"/reviews"}));
         this.reviews.fetch({wait: true,
             success:function(reviews,response){
                 console.log(reviews);
-                this.thumbView = new splat.ReviewThumb({collection:reviews});
-                $('#sub-view').html(this.thumbView.render().el);
+                var reviewsView = new splat.ReviewsView({id:id, collection:reviews});
+                var thumbView = new splat.ReviewThumb({collection:reviews});
+                var reviewerView = new splat.Reviewer({id:id, model:r});
+                $('#content').html(reviewerView.render().el);
+                $('#reviewer_score').html(reviewsView.render().el);
+                $('#sub-view').html(thumbView.render().el);
+
                 splat.utils.showNotice('Success:','success'," Reviews loading Finish!!");
             },
             error:function(reviews,response){

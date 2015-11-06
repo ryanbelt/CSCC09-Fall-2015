@@ -114,9 +114,11 @@ splat.Reviewer = Backbone.View.extend({
             changed={};
             if(allInput[0].checked) {
                 changed['freshness'] = 1;
+                this.model.set({'reviewImg':'img/fresh.gif'});
             }
             else{
                 changed['freshness'] = 0;
+                this.model.set({'reviewImg':'img/rotten.gif'});
             }
             splat.utils.removeValidationError("fresh");
             this.model.set(changed);

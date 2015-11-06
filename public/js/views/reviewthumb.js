@@ -11,8 +11,8 @@ var splat =  splat || {};
 splat.ReviewThumb = Backbone.View.extend({
     //teacher given code, still need to figure why
     thumbsTemplate: _.template([
-        "<% titles.each(function(title) { %>",
-        "<%= titleTemplate(title.toJSON()) %>",
+        "<% reviews.each(function(review) { %>",
+        "<%= reviewTemplate(review.toJSON()) %>",
         "<% }); %>",
     ].join('')),
     // render the View
@@ -30,8 +30,8 @@ splat.ReviewThumb = Backbone.View.extend({
 
         // set the view element ($el) HTML content using its template
         var moviesMarkup = this.thumbsTemplate({
-            titles: this.collection,
-            titleTemplate: this.template,
+            reviews: this.collection,
+            reviewTemplate: this.template,
         });
         this.$el.append(moviesMarkup);
         return this;    // support method chaining
