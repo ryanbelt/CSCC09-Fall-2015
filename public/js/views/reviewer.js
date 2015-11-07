@@ -36,7 +36,8 @@ splat.Reviewer = Backbone.View.extend({
                 {wait:true,
                 success: function(){
                     //splat.app.navigate('#movies/'+self.id+'/reviews' , {replace:true, trigger:true});
-                    splat.app.navigate('#movies/'+self.id , {replace:true, trigger:true});
+                    self._successReset();
+                    //splat.app.navigate('#movies/'+self.id , {replace:true, trigger:true});
                     splat.utils.showNotice('Success:','success',"Review has been saved");
                 },
                 error: function(model, response) {
@@ -80,6 +81,19 @@ splat.Reviewer = Backbone.View.extend({
                 this.model.set(changed);
                 splat.utils.showNotice("Note:", "info", " click save before leaving the page");
             }
+        }
+    },
+
+    _successReset: function(){
+        var allInput = document.getElementsByClassName("form-control");
+        var length= allInput.length;
+        for (var k=0; k<length;k++){
+            allInput[k].value="";
+        }
+        allInput = document.getElementsByClassName("option");
+        for (var k=0; k<length;k++){
+            console.log(allInput[k]);
+            allInput[k].checked=false;
         }
     },
 

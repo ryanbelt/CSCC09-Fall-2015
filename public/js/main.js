@@ -36,7 +36,7 @@ splat.AppRouter = Backbone.Router.extend({
                 console.log(reviews);
                 var reviewsView = new splat.ReviewsView({id:id, collection:reviews});
                 var thumbView = new splat.ReviewThumb({collection:reviews});
-                var reviewerView = new splat.Reviewer({id:id, model:r});
+                var reviewerView = new splat.Reviewer({id:id, model:r, collection:reviews});
                 $('#content').html(reviewerView.render().el);
                 $('#reviewer_score').html(reviewsView.render().el);
                 $('#sub-view').html(thumbView.render().el);
@@ -104,13 +104,17 @@ splat.AppRouter = Backbone.Router.extend({
         //change nav bar section
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
+        var self=this;
+        this.reviews= new (splat.Reviews.extend({url: "/movies/"+id+"/reviews"}));
+        this.reviews.fetch();
         m=new splat.Movie({_id:id});
         m.fetch({success:function(m,response){
             console.log(m);
             //put the collection and model into the detail html
-            this.containDetailsView = new splat.Details({model: m, collection:this.reviews});
+            ed=self.reviews;
+            this.containDetailsView = new splat.Details({model: m});
             $('#content').html(this.containDetailsView.render().el);
-            this.reviewsView = new splat.ReviewsView({model: m, collection:this.reviews});
+            this.reviewsView = new splat.ReviewsView({model: m, collection:self.reviews});
             $('#detail-score').html(this.reviewsView.render().el);
         }});
 

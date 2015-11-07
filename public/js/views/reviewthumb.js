@@ -29,11 +29,11 @@ splat.ReviewThumb = Backbone.View.extend({
 
 
         // set the view element ($el) HTML content using its template
-        var moviesMarkup = this.thumbsTemplate({
+        var reviewsMarkup = this.thumbsTemplate({
             reviews: this.collection,
             reviewTemplate: this.template,
         });
-        this.$el.append(moviesMarkup);
+        this.$el.append(reviewsMarkup);
         return this;    // support method chaining
     }
 
