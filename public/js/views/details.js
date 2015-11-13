@@ -23,7 +23,7 @@ splat.Details = Backbone.View.extend({
     },
 
     review: function(){
-    splat.app.navigate('#movies/'+this.model['id']+'/reviews' ,{trigger:true});
+        splat.app.navigate('#movies/'+this.model['id']+'/reviews' ,{replace:true,trigger:true});
     },
     //function for save
     save: function(){

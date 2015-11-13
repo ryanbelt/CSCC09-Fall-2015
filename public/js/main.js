@@ -33,7 +33,7 @@ splat.AppRouter = Backbone.Router.extend({
         this.reviews.fetch({wait: true,
             success:function(reviews,response){
                 console.log(reviews);
-                var reviewerView = new splat.Reviewer({id:id, collection:reviews});
+                var reviewerView = new splat.Reviewer({id:id, model: new splat.Review(), collection:reviews});
                 $('#content').html(reviewerView.render().el);
                 splat.utils.showNotice('Success:','success'," Reviews loading Finish!!");
             },
@@ -100,15 +100,16 @@ splat.AppRouter = Backbone.Router.extend({
         //get the model by id form the collection
         var self=this;
         this.reviews= new (splat.Reviews.extend({url: "/movies/"+id+"/reviews"}));
-        this.reviews.fetch();
         m=new splat.Movie({_id:id});
-        m.fetch({success:function(m,response){
+        m.fetch({wait:true, success:function(m,response){
             console.log(m);
             //put the collection and model into the detail html
             this.containDetailsView = new splat.Details({model: m});
             $('#content').html(this.containDetailsView.render().el);
-            this.scoreView = new splat.ScoreView({model: m, collection:self.reviews});
-            $('#detail-score').html(this.scoreView.render().el);
+            self.reviews.fetch({wait:true, success:function(r,response){
+            var scoreView = new splat.ScoreView({model: m, collection:r});
+            $('#detail-score').html(scoreView.render().el);
+            }});
         }});
 
     },

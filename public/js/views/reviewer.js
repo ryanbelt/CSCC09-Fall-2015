@@ -12,22 +12,29 @@ splat.Reviewer = Backbone.View.extend({
     // render the View
     render: function () {
         // set the view element ($el) HTML content using its template
-        console.log(this.collection);
         this.$el.html(this.template());
-        this.$('#reviewer_score').html(this.scoreView.render().el);
-        this.$('#sub-view').html(this.thumbView.render().el);
+        //this.$('#reviewer_score').html(this.scoreView.render().el);
+        //this.$('#sub-view').html(this.thumbView.render().el);
         return this;            // support method chaining
     },
 
     initialize:function(){
         //this.review=new splat.Review();
         console.log("initialize work");
-        this.model= new splat.Review();
         this.model.set('movieId',this.id);
-        this.listenTo(this.collection, "sync", this.render);
-        this.listenTo(this.review, "sync", this.render);
         this.scoreView = new splat.ScoreView({id:this.id, collection:this.collection});
         this.thumbView = new splat.ReviewThumb({collection:this.collection});
+        this.listenTo(this.collection, "sync", this.Rerender);
+        //this.listenTo(this.review, "sync", this.render);
+    },
+
+    Rerender: function () {
+        // set the view element ($el) HTML content using its template
+        console.log("render");
+        this.$('#reviewer_score').html(this.scoreView.render().el);
+        this.$('#sub-view div').html('');
+        this.$('#sub-view').html(this.thumbView.render().el);
+
     },
 
     events:{
@@ -43,18 +50,20 @@ splat.Reviewer = Backbone.View.extend({
             this.model.save ({},
                 {wait:true,
                 success: function(){
-                    //splat.app.navigate('#movies/'+self.id+'/reviews' , {replace:true, trigger:true});
+
                     //self._successReset();
                     //self.render();
-                    self.collection = new (splat.Reviews.extend({url: "/movies/"+self.id+"/reviews"}));
                     self.collection.fetch();
+
                     //splat.app.navigate('#movies/'+self.id , {replace:true, trigger:true});
+                    splat.app.navigate('#movies/'+self.id+"/reviews" , { replace:true,trigger:true});
                     //splat.utils.showNotice('Success:','success',"Review has been saved");
                 },
                 error: function(model, response) {
                     // display the error response from the server
                     //splat.utils.requestFailed(response);
-                    splat.utils.showNotice('Failur:', "danger", "Something wrong with saving review");
+                    console.log(response);
+                    splat.utils.showNotice('Failur:', "danger", response.responseText);
                 }
             });
             console.log(this.model);
