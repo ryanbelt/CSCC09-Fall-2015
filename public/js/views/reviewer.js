@@ -9,17 +9,25 @@ var splat =  splat || {};
 
 // note View-name (Home) matches name of template file Home.html
 splat.Reviewer = Backbone.View.extend({
-
     // render the View
     render: function () {
         // set the view element ($el) HTML content using its template
+        console.log(this.collection);
         this.$el.html(this.template());
-        return this;    // support method chaining
+        this.$('#reviewer_score').html(this.scoreView.render().el);
+        this.$('#sub-view').html(this.thumbView.render().el);
+        return this;            // support method chaining
     },
 
     initialize:function(){
         //this.review=new splat.Review();
+        console.log("initialize work");
+        this.model= new splat.Review();
         this.model.set('movieId',this.id);
+        this.listenTo(this.collection, "sync", this.render);
+        this.listenTo(this.review, "sync", this.render);
+        this.scoreView = new splat.ScoreView({id:this.id, collection:this.collection});
+        this.thumbView = new splat.ReviewThumb({collection:this.collection});
     },
 
     events:{
@@ -36,9 +44,12 @@ splat.Reviewer = Backbone.View.extend({
                 {wait:true,
                 success: function(){
                     //splat.app.navigate('#movies/'+self.id+'/reviews' , {replace:true, trigger:true});
-                    self._successReset();
+                    //self._successReset();
+                    //self.render();
+                    self.collection = new (splat.Reviews.extend({url: "/movies/"+self.id+"/reviews"}));
+                    self.collection.fetch();
                     //splat.app.navigate('#movies/'+self.id , {replace:true, trigger:true});
-                    splat.utils.showNotice('Success:','success',"Review has been saved");
+                    //splat.utils.showNotice('Success:','success',"Review has been saved");
                 },
                 error: function(model, response) {
                     // display the error response from the server
@@ -70,13 +81,7 @@ splat.Reviewer = Backbone.View.extend({
                 splat.utils.removeValidationError(field);
                 //if the attribute is either genre or starring, we split the
                 //value into array,
-                if ("genre" === field || "starring" === field) {
-                    var values = value.split(",");
-                    changed[field] = values;
-                }//otherwise just stay as what it is
-                else {
                     changed[field] = value;
-                }
                 //add the value into corresponding field of the model
                 this.model.set(changed);
                 splat.utils.showNotice("Note:", "info", " click save before leaving the page");

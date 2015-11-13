@@ -29,18 +29,12 @@ splat.AppRouter = Backbone.Router.extend({
     comments: function(id){
         $('.header').html(this.headerView.selectMenuItem('add-header'));
         //get the model by id form the collection
-        var r=new splat.Review();
         this.reviews= new (splat.Reviews.extend({url: "/movies/"+id+"/reviews"}));
         this.reviews.fetch({wait: true,
             success:function(reviews,response){
                 console.log(reviews);
-                var reviewsView = new splat.ReviewsView({id:id, collection:reviews});
-                var thumbView = new splat.ReviewThumb({collection:reviews});
-                var reviewerView = new splat.Reviewer({id:id, model:r, collection:reviews});
+                var reviewerView = new splat.Reviewer({id:id, collection:reviews});
                 $('#content').html(reviewerView.render().el);
-                $('#reviewer_score').html(reviewsView.render().el);
-                $('#sub-view').html(thumbView.render().el);
-
                 splat.utils.showNotice('Success:','success'," Reviews loading Finish!!");
             },
             error:function(reviews,response){
@@ -95,7 +89,7 @@ splat.AppRouter = Backbone.Router.extend({
         //put the collection and model into the detail html
         this.containDetailsView = new splat.Details({model: m});
         $('#content').html(this.containDetailsView.render().el);
-        this.reviewsView = new splat.ReviewsView({model: m});
+        this.scoreView = new splat.ScoreView({model: m});
         $('#moviereview').removeClass('btn btn-success');
         $('#moviereview').text('');
     },
@@ -111,11 +105,10 @@ splat.AppRouter = Backbone.Router.extend({
         m.fetch({success:function(m,response){
             console.log(m);
             //put the collection and model into the detail html
-            ed=self.reviews;
             this.containDetailsView = new splat.Details({model: m});
             $('#content').html(this.containDetailsView.render().el);
-            this.reviewsView = new splat.ReviewsView({model: m, collection:self.reviews});
-            $('#detail-score').html(this.reviewsView.render().el);
+            this.scoreView = new splat.ScoreView({model: m, collection:self.reviews});
+            $('#detail-score').html(this.scoreView.render().el);
         }});
 
     },
@@ -124,7 +117,7 @@ splat.AppRouter = Backbone.Router.extend({
 // Load HTML templates for Home, Header, About views, and when
 // template loading is complete, instantiate a Backbone router
 // with history.
-splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details',"Reviewer","ReviewsView","ReviewThumb"], function() {
+splat.utils.loadTemplates(['Home', 'Header', 'About' ,'MovieThumb', 'Details',"Reviewer","ScoreView","ReviewThumb"], function() {
     splat.app = new splat.AppRouter();
     Backbone.history.start();
 });

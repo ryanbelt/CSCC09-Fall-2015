@@ -1,3 +1,6 @@
+/**
+ * Created by ryan on 11/13/2015.
+ */
 
 // declare splat-app namespace if it doesn't already exist
 var splat =  splat || {};
@@ -7,10 +10,10 @@ splat.ScoreView = Backbone.View.extend({
 
     // render the View
     render: function () {
-	// set the view element ($el) HTML content using its template
-    this.showScore();
-	this.$el.html(this.template(this.red));
-	return this;    // support method chaining
+        // set the view element ($el) HTML content using its template
+        this.showScore();
+        this.$el.html(this.template(this.red));
+        return this;    // support method chaining
     },
 
     initialize: function () {
