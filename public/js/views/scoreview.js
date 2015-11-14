@@ -21,17 +21,9 @@ splat.ScoreView = Backbone.View.extend({
     },
 
     showScore: function(){
-        var score=0;
-        var length=this.collection.length;
-        var self=this;
-        if(length < 1){
-            self.red={'ret':'...No reviews yet!!','pic':'','total':''};
-        }else{
-            var movie=new splat.Movie({_id:self.id});
-            for (var k=0; k<length;k++){
-
-                score+=self.collection.models[k].get('freshness');
-            }
+        var score= this.model.get('freshVotes');
+        var length= this.model.get('freshTotal');
+        if(length!=0){
             var rounded = Math.round( score/length *100 * 10 ) / 10;
             if(rounded >=50){
                 var pic='img/fresh.gif';
@@ -39,15 +31,12 @@ splat.ScoreView = Backbone.View.extend({
             else{
                 var pic='img/rotten.gif';
             }
-            movie.fetch({success:function(movie,response){
-                if(movie.freshTotal != length){
-                    movie.set('freshTotal',length);
-                    movie.set('freshVotes',score);
-                    movie.save();
-                }
-            }});
             this.red={'ret':'Current Score:'+rounded+'%','pic':pic,'total':length};
         }
+        else{
+            this.red={ret:'No Reviews yet.....',pic:'',total:0};
+        }
+
     }
 
 

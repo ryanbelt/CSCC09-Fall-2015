@@ -43,7 +43,25 @@ exports.addReview = function(req, res){
         } else if (!review) {
             res.status(404).send("Sorry, review error");
         } else {
-            res.status(200).send(review);
+            MovieModel.findById(review.movieId, function(err, movie) {
+                if (err) {
+                    res.status(500).send("Sorry, unable to retrieve movie at this time ("
+                        +err.message+ ")" );
+                } else if (!movie) {
+                    res.status(404).send("Sorry, that movie doesn't exist; try reselecting from Browse view");
+                } else {
+                    movie.freshTotal=movie.freshTotal+1;
+                    movie.freshVotes=movie.freshVotes+review.freshness;
+                    movie.save(function(serr,movie){
+                        if(serr){
+                            res.send("something wrong to add");
+                        }else{
+                            res.status(200).send(review);
+                        }
+                    });
+                }
+            });
+
         }
     });
 };

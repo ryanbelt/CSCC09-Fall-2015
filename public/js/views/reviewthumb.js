@@ -27,7 +27,6 @@ splat.ReviewThumb = Backbone.View.extend({
             this.template = _.template(splat.thumbMarkup);
         });
 
-        console.log("render thumb");
         // set the view element ($el) HTML content using its template
         var reviewsMarkup = this.thumbsTemplate({
             reviews: this.collection,

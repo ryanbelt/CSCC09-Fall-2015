@@ -2,7 +2,6 @@
  * Created by ryan on 11/3/2015.
  */
 // catch simple errors
-"use strict";
 
 // declare splat-app namespace if it doesn't already exist
 var splat =  splat || {};
@@ -19,19 +18,25 @@ splat.Reviewer = Backbone.View.extend({
     },
 
     initialize:function(){
-        //this.review=new splat.Review();
-        console.log("initialize work");
+        var self=this;
         this.model.set('movieId',this.id);
-        this.scoreView = new splat.ScoreView({id:this.id, collection:this.collection});
+        this.movie=new splat.Movie({_id:this.id});
+        this.movie.fetch({wait:true, success:function(m,response) {
+            self.scoreView = new splat.ScoreView({model:m});
+        }});
         this.thumbView = new splat.ReviewThumb({collection:this.collection});
-        this.listenTo(this.collection, "sync", this.Rerender);
+        this.listenTo(this.movie, "sync", this.Scorerender);
+        this.listenTo(this.collection, "sync", this.Thumbrender);
         //this.listenTo(this.review, "sync", this.render);
     },
 
-    Rerender: function () {
+    Scorerender: function () {
         // set the view element ($el) HTML content using its template
-        console.log("render");
         this.$('#reviewer_score').html(this.scoreView.render().el);
+    },
+
+    Thumbrender: function () {
+        // set the view element ($el) HTML content using its template
         this.$('#sub-view div').html('');
         this.$('#sub-view').html(this.thumbView.render().el);
 
@@ -51,22 +56,19 @@ splat.Reviewer = Backbone.View.extend({
                 {wait:true,
                 success: function(){
 
-                    //self._successReset();
                     //self.render();
                     self.collection.fetch();
-
+                    self.movie.fetch();
+                    self._successReset();
                     //splat.app.navigate('#movies/'+self.id , {replace:true, trigger:true});
-                    splat.app.navigate('#movies/'+self.id+"/reviews" , { replace:true,trigger:true});
-                    //splat.utils.showNotice('Success:','success',"Review has been saved");
+                    splat.utils.showNotice('Success:','success',"Review has been saved");
                 },
                 error: function(model, response) {
                     // display the error response from the server
                     //splat.utils.requestFailed(response);
-                    console.log(response);
                     splat.utils.showNotice('Failur:', "danger", response.responseText);
                 }
             });
-            console.log(this.model);
         }
         else{
             splat.utils.showNotice("Warning:","warning"," please fix your input(s) ");
@@ -102,13 +104,21 @@ splat.Reviewer = Backbone.View.extend({
         var allInput = document.getElementsByClassName("form-control");
         var length= allInput.length;
         for (var k=0; k<length;k++){
+            var controlGroup = $("#"+allInput[k].id).parent().parent();
+            //adding success of that section
+            controlGroup.removeClass('has-error has-success has-warning');
             allInput[k].value="";
         }
         allInput = document.getElementsByClassName("option");
+        length= allInput.length;
+        var controlGroup = $("#fresh").parent().parent();
+        //adding success of that section
+        controlGroup.removeClass('has-error has-success has-warning');
         for (var k=0; k<length;k++){
-            console.log(allInput[k]);
             allInput[k].checked=false;
         }
+        this.model=new splat.Review();
+        this.model.set('movieId',this.id);
     },
 
     _allValidation: function(){
