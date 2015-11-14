@@ -213,4 +213,6 @@ background: rgba(64, 64, 64, .8);
 
 .view-score{
   color:red;
+  font-weight: bold;
+  font-size: 14px;
 }
