@@ -12,10 +12,20 @@ splat.MovieThumb = Backbone.View.extend({
 	    "<%= titleTemplate(title.toJSON()) %>",
 	"<% }); %>",
     ].join('')),
+	initialize: function () {
+		this.listenTo(Backbone, 'orderevent', this.render);
+	},
     // render the View
 
 	// set the view element ($el) HTML content using its template
 	render: function(){
+		$("#content div").html("");
+		if(splat.order){
+				this.collection.comparator = function(movie) {
+					return movie.get(splat.order);
+				}
+			this.collection.sort();
+		}
 	this.loadThumbTemplate =$.get('tpl/MovieThumb.html');
 
 	//teacher given code, still need to figure why

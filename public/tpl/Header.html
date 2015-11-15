@@ -12,7 +12,21 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navHeaderCollapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav pull-left">
-        <li><a id="browse-header" href="#movies">Browse Movies</a></li>
+        <!--<li><a id="browse-header" href="#movies">Browse Movies</a></li>-->
+        <li id="orderdrop" class="browse-menu dropdown">
+          <a id="ordering" href="#movies" >Browse Movies</a>
+          <div class="dropdown-menu" id="orderDiv">
+            <form id="orderForm">
+              <fieldset>
+                <h4>Sort Order</h4>
+                <input class="sortOrder" name="sortOrder" type="radio" value="title" />
+                <label for="sortOrder">Title</label><br/>
+                <input class="sortOrder" name="sortOrder" type="radio" value="director" />
+                <label for="sortOrder">Director</label><br/>
+              </fieldset>
+            </form>
+          </div>
+        </li>
         <li><a id="add-header" href="#movies/add">Add Movie</a></li>
       </ul>
       <ul class="nav navbar-nav pull-right">

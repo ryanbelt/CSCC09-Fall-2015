@@ -216,3 +216,8 @@ background: rgba(64, 64, 64, .8);
   font-weight: bold;
   font-size: 14px;
 }
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; // remove the gap so it doesn't close
+}
