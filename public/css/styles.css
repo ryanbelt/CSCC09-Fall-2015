@@ -135,10 +135,11 @@ span.maintext{
   font-weight: bold;
   font-family: Avro;
   color:white;
+  font-size:90%;
 }
 
 span.sparetext{
-  font-size:80%;
+  font-size:75%;
   color:white;
 }
 
@@ -225,7 +226,34 @@ background: rgba(64, 64, 64, .8);
 #moviereview{
   width:87px;
   height:85px;
-  text-align: center;
   vertical-align: 50%;
   color:white;
+  position: relative;
+  background-repeat: no-repeat;
+}
+
+#moviereview span{
+  left: 0;
+  position:absolute;
+  text-align:center;
+  top: 30px;
+  width: 100%
+}
+
+.flex-container{
+  height: 115px;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.review-flex{
+
+}
+
+.info-flex{
+
+}
+
+.flex-item{
+  text-overflow:ellipsis;
 }

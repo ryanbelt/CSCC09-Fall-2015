@@ -88,6 +88,7 @@ splat.AppRouter = Backbone.Router.extend({
         //put the collection and model into the detail html
         this.containDetailsView = new splat.Details({model: m});
         $('#content').html(this.containDetailsView.render().el);
+        $('#moviereview').remove();
     },
 
     edits:function(id){

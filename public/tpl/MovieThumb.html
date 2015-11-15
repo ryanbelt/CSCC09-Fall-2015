@@ -7,24 +7,29 @@
             <!-- fallback -->
         </video>
         <!--content info show on thumbnail-->
-        <div class="thumb_info">
-        <div>
+        <div class="thumb_info flex-container">
+          <div class="review-flex">
+            <div id="moviereview" style="background-image: url('img/fresh_lg.png')"><span>50%</span></div>
+            </div>
+          <div class="info-flex">
+        <div class="flex-item">
           <span class="maintext"><%= title %></span><span class="sparetext">{<%= released %>}</span>
           </div>
-          <div>
-          <span class="maintext">Directed by: </span><span class="sparetext"> <%= director %></span>
+          <div class="flex-item">
+          <span class="maintext">Director: </span><span class="sparetext"> <%= director %></span>
           </div>
-          <div>
+          <div class="flex-item">
           <span class="maintext">Starring: </span><span class="sparetext"> <%= starring %></span>
           </div>
-          <div>
+          <div class="flex-item">
           <span class="maintext">Genres: </span><span class="sparetext"> <%= genre %> 
           </div>
-          <div>
+          <div class="flex-item">
            </span><span class="maintext">Rating: </span><span class="sparetext"> <%= rating %></span>
           </div>
-          <div>
-           </span><span class="maintext">Last Edit: </span><span class="sparetext"> <%= dated %></span>
+          <div class="flex-item">
+           </span><span class="maintext">(L)Edit: </span><span class="sparetext"> <%= dated %></span>
+          </div>
           </div>
           <!-- ADD-CODE -->
         </div>
