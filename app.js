@@ -86,6 +86,7 @@ app.get('/movies/:id/reviews', splat.getReviews);
 
 app.post('/movies/:id/reviews', splat.addReview);
 
+//app.get('/movies/:id/video', splat.playMovie);
 
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
