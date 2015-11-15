@@ -88,9 +88,6 @@ splat.AppRouter = Backbone.Router.extend({
         //put the collection and model into the detail html
         this.containDetailsView = new splat.Details({model: m});
         $('#content').html(this.containDetailsView.render().el);
-        this.scoreView = new splat.ScoreView({model: m});
-        $('#moviereview').removeClass('btn btn-success');
-        $('#moviereview').text('');
     },
 
     edits:function(id){
@@ -103,9 +100,6 @@ splat.AppRouter = Backbone.Router.extend({
             //put the collection and model into the detail html
             this.containDetailsView = new splat.Details({model: m});
             $('#content').html(this.containDetailsView.render().el);
-            var scoreView = new splat.ScoreView({model: m});
-            $('#detail-score').html(scoreView.render().el);
-
         }});
 
     },

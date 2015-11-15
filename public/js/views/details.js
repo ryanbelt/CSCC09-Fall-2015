@@ -17,7 +17,24 @@ splat.Details = Backbone.View.extend({
     // render the View
     render: function () {
 	// set the view element ($el) HTML content using its template
-	this.$el.html(this.template(this.model.toJSON()));
+        var score= this.model.get('freshVotes');
+        var length= this.model.get('freshTotal');
+        this.jas=this.model.toJSON();
+        if(length!=0){
+            var rounded = score/length*100;
+            if(rounded >=50){
+                this.jas['detailReviewImg']='img/fresh_lg.png';
+            }
+            else{
+                this.jas['detailReviewImg']='img/rotten_lg.png';
+            }
+            this.jas['detailReviewScore']=rounded.toFixed(0)+'%('+length+')';
+        }
+        else{
+            this.jas['detailReviewImg']='img/rotten_lg.png';
+            this.jas['detailReviewScore']='NA/A';
+        }
+	this.$el.html(this.template(this.jas));
     this.delegateEvents();
 	return this;    // support method chaining
     },

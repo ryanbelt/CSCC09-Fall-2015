@@ -17,7 +17,7 @@ splat.ScoreView = Backbone.View.extend({
     },
 
     initialize: function () {
-        this.red={ret:"",pic:""};
+        this.red={};
     },
 
     showScore: function(){
