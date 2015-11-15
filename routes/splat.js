@@ -52,6 +52,16 @@ exports.addReview = function(req, res){
                 } else {
                     movie.freshTotal=movie.freshTotal+1;
                     movie.freshVotes=movie.freshVotes+review.freshness;
+                    var score=(movie.freshVotes/movie.freshTotal *100);
+                    if(movie.freshTotal!=0){
+                        movie.scoreVotes=score.toFixed(0)+'%('+movie.freshTotal+')';
+                        if(score>=50){
+                            movie.scoreImg='img/fresh_lg.png';
+                        }
+                        else{
+                            movie.scoreImg=='img/rotten_lg.png';
+                        }
+                    }
                     movie.save(function(serr,movie){
                         if(serr){
                             res.send("something wrong to add");
@@ -196,6 +206,8 @@ var MovieSchema = new mongoose.Schema({
     trailer:{ type: String, required:false},
     freshTotal:{ type: Number, required:true},
     freshVotes:{ type: Number, required:true},
+    scoreVotes:{ type: String, required:true},
+    scoreImg:{ type: String, required:true},
     // ADD CODE for other Movie attributes
 });
 

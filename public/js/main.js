@@ -97,10 +97,10 @@ splat.AppRouter = Backbone.Router.extend({
         //get the model by id form the collection
         var self=this;
         m=new splat.Movie({_id:id});
-        m.fetch({wait:true, success:function(m,response){
+        m.fetch({wait:true, success:function(m){
             //put the collection and model into the detail html
-            this.containDetailsView = new splat.Details({model: m});
-            $('#content').html(this.containDetailsView.render().el);
+            self.containDetailsView = new splat.Details({model: m});
+            $('#content').html(self.containDetailsView.render().el);
         }});
 
     },
