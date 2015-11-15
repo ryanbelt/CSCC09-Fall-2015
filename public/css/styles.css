@@ -251,11 +251,11 @@ span.sparetext{
 }
 
 .review-flex{
-  order:1;
+  flex-grow:1;
 }
 
 .info-flex{
-  order:2;
+  flex-grow:2;
   white-space: nowrap;
   overflow: hidden;
 
