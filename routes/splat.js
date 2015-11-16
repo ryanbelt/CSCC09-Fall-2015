@@ -95,7 +95,7 @@ exports.addReview = function(req, res){
                             movie.scoreImg='img/fresh_lg.png';
                         }
                         else{
-                            movie.scoreImg=='img/rotten_lg.png';
+                            movie.scoreImg='img/rotten_lg.png';
                         }
                     }
                     movie.save(function(serr,movie){
