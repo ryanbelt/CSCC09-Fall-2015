@@ -268,3 +268,7 @@ span.sparetext{
   overflow: hidden;
   color: white;
 }
+
+.browse-dropdown{
+  padding-left:20px;
+}
