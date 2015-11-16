@@ -28,7 +28,7 @@ splat.AppRouter = Backbone.Router.extend({
 
     comments: function(id){
         $('.header').html(this.headerView.selectMenuItem('add-header'));
-        //get the model by id form the collection
+        //create review collection with all the review movie id same as current movie id
         this.reviews= new (splat.Reviews.extend({url: "/movies/"+id+"/reviews"}));
         this.reviews.fetch({wait: true,
             success:function(reviews){

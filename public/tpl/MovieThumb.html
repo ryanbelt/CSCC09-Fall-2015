@@ -3,11 +3,13 @@
     <div class="thumb_video">
       <a href="#movies/<%=_id%>" class="plain">
         <video class="img-responsive" controls preload="none" controls poster="<%=poster%>" >
+          <!--mp4 will only accept from the server-->
             <source src="movies/<%=_id%>/video" type="video/mp4"/>
             <!-- fallback -->
         </video>
         <!--content info show on thumbnail-->
         <div class="thumb_info flex-container">
+          <!-- need added review score with flex detail content css-->
           <div class="review-flex">
             <div id="moviereview" style="background-image: url(<%=scoreImg%>)"><span><%=scoreVotes%></span></div>
             </div>

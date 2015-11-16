@@ -20,7 +20,9 @@ splat.ScoreView = Backbone.View.extend({
         this.red={};
     },
 
+    //score calculation
     showScore: function(){
+        //get score by the movie model freshvotes and fresh total
         var score= this.model.get('freshVotes');
         var length= this.model.get('freshTotal');
         if(length!=0){
