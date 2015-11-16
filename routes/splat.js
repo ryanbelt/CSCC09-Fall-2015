@@ -15,48 +15,78 @@ exports.api = function(req, res){
   res.status(200).send('<h3>Heroz API is running!</h3>');
 };
 
-/*exports.playMovie = function(req, res) {
+exports.playMovie = function(req, res) {
     // compute absolute file-system video path from __dirname and URL with id
-    var file = // ADD CODE
+    MovieModel.findById(req.params.id, function(err, movie) {
+        if (err) {
+            res.status(500).send("Sorry, unable to retrieve movie trailer"
+                +err.message+ ")" );
+        } else if (!movie) {
+            res.status(404).send("Sorry, that movie doesn't exist; try reselecting from Browse view");
+        } else {
+            if(movie.trailer==''){
+                res.status(404).send('movie trailer undefiend' );
+            }else {
+                var file = __dirname + '/../public/img/videos/' + movie.trailer;// ADD CODE
+                // get HTTP request "range" header, and parse it to get starting byte position
+                var range = req.headers.range; // ADD CODE to access range header
+                var pos = range.split("=")[1].split('-');
+                var start = Number(pos[0]); // ADD CODE to compute starting byte position
 
-    // get HTTP request "range" header, and parse it to get starting byte position
-    var range = req.headers // ADD CODE to access range header
-    var start = // ADD CODE to compute starting byte position
+                // get a file-stats object for the requested video file, including its size
+                fs.stat(file, function (err, stats) {
+                    // set end position from range header or default to video file size
+                    if(stats){
+                        if (pos[1] == '') {
+                            var end = Number(stats.size) - 1;// ADD CODE
 
-        // get a file-stats object for the requested video file, including its size
-        fs.stat(file, function(err, stats) {
-            // set end position from range header or default to video file size
-            var end = // ADD CODE
-                // set chunksize to be the difference between end and start values +1
+                        } else {
+                            var end = Number(pos[1]);// ADD CODE
+                        }
+                        // set chunksize to be the difference between end and start values +1
 
-                // send HTTP "partial-content" status (206) together with
-                // HTML5-compatible response-headers describing video being sent
-                res.writeHead(206, {
-                    // ADD CODE - see tutorial 7 classroom slide #22
+                        // send HTTP "partial-content" status (206) together with
+                        // HTML5-compatible response-headers describing video being sent
+                        res.writeHead(206, {
+                            'Content-Range': 'bytes ' + start + '-' + end + "/" + stats.size,
+                            'Content-length': end - start,
+                            'Accept-Ranges': 'bytes',
+                            'Content-Type': 'video/mp4'
+                            // ADD CODE - see tutorial 7 classroom slide #22
+                        });
+
+                        // create ReadStream object, specifying start, end values computed
+                        // above to read range of bytes rather than entire file
+                        var stream = fs.createReadStream(file, {start: start, end: end})
+                            // when ReadStream is open
+                            .on("open", function () {
+                                stream.pipe(res);
+                                // use stream pipe() method to send the HTTP response object,
+                                // with flow automatically managed so destination is not overwhelmed
+                                // ADD CODE
+                                // when error receiving data from stream, send error back to client.
+                                // stream is auto closed
+                            }).on("error", function (err) {
+                                res.status(500).send("Sorry, unable to retrieve movie trailer"
+                                    + err.message + ")");
+                            });
+
+                    }else{
+                        res.status(404).send('movie trailer not found' );
+                    }
                 });
+            }
+        }
+    });
 
-            // create ReadStream object, specifying start, end values computed
-            // above to read range of bytes rather than entire file
-            var stream = fs.createReadStream(file, { start: start, end: end })
-                // when ReadStream is open
-                .on("open", function() {
-                    // use stream pipe() method to send the HTTP response object,
-                    // with flow automatically managed so destination is not overwhelmed
-                    // ADD CODE
-                    // when error receiving data from stream, send error back to client.
-                    // stream is auto closed
-                }).on("error", function(err) {
-                    // ADD CODE
-                });
-        });
-};*/
+
+};
 
 exports.addMovie = function(req, res){
     var movie= new MovieModel(req.body);
     var Image = movie['poster'];
     var posterUrl = uploadImage(Image,movie._id);
     movie.poster = posterUrl;
-    console.log(movie);
     movie.save(function(err,movie){
     if (err) {
         res.status(500).send("Sorry, unable to add movie at this time (" 

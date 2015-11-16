@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({limit:'1mb',
 //client can log
 // set file-upload directory for poster images
 app.use(multer({dest: __dirname + '/public/img/uploads/'}));
-
+app.use(multer({dest: __dirname + '/public/img/videos/'}));
 // checks req.body for HTTP method overrides
 app.use(methodOverride());
 
@@ -86,7 +86,7 @@ app.get('/movies/:id/reviews', splat.getReviews);
 
 app.post('/movies/:id/reviews', splat.addReview);
 
-//app.get('/movies/:id/video', splat.playMovie);
+app.get('/movies/:id/video', splat.playMovie);
 
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
