@@ -109,6 +109,7 @@ exports.addReview = function(req, res){
         } else if (!review) {
             res.status(404).send("Sorry, review error");
         } else {
+            //review sucessfully add. modify the movie model freshness
             MovieModel.findById(review.movieId, function(err, movie) {
                 if (err) {
                     res.status(500).send("Sorry, unable to retrieve movie at this time ("

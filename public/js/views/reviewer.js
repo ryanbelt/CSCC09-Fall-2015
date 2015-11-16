@@ -55,8 +55,8 @@ splat.Reviewer = Backbone.View.extend({
             this.model.save ({},
                 {wait:true,
                 success: function(){
-
-                    //self.render();
+                    //success save, update collection and movie model.
+                    //reset input form
                     self.collection.fetch();
                     self.movie.fetch();
                     self._successReset();
@@ -100,6 +100,7 @@ splat.Reviewer = Backbone.View.extend({
         }
     },
 
+    //reset form formula
     _successReset: function(){
         var allInput = document.getElementsByClassName("form-control");
         var length= allInput.length;
