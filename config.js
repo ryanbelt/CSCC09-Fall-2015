@@ -1,6 +1,7 @@
 var config = {
 	port:41127,
 	env:"development",
+	videoPath:"/public/img/videos/",
 	//school db
 	//db:"mongodb://herozadmin:herozpassword@10.15.2.164/panjian2",
 

@@ -56,7 +56,7 @@ app.use(bodyParser.urlencoded({limit:'1mb',
 //client can log
 // set file-upload directory for poster images
 app.use(multer({dest: __dirname + '/public/img/uploads/'}));
-app.use(multer({dest: __dirname + '/public/img/videos/'}));
+app.use(multer({dest: __dirname + config.videoPath}));
 // checks req.body for HTTP method overrides
 app.use(methodOverride());
 

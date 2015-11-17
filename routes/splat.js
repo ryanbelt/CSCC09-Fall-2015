@@ -27,7 +27,7 @@ exports.playMovie = function(req, res) {
             if(movie.trailer==''){
                 res.status(404).send('movie trailer undefiend' );
             }else {
-                var file = __dirname + '/../public/img/videos/' + movie.trailer;// ADD CODE
+                var file = __dirname + '/..'+config.videoPath + movie.trailer;// ADD CODE
                 // get HTTP request "range" header, and parse it to get starting byte position
                 var range = req.headers.range; // ADD CODE to access range header
                 var pos = range.split("=")[1].split('-');
