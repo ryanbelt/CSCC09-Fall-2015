@@ -24,10 +24,7 @@ exports.playMovie = function(req, res) {
         } else if (!movie) {
             res.status(404).send("Sorry, that movie doesn't exist; try reselecting from Browse view");
         } else {
-            if(movie.trailer==''){
-                res.status(404).send('movie trailer undefiend' );
-            }else {
-                var file = __dirname + '/..'+config.videoPath + movie.trailer;// ADD CODE
+                var file = __dirname + '/..'+config.videoPath + movie._id+".mp4";// ADD CODE
                 // get HTTP request "range" header, and parse it to get starting byte position
                 var range = req.headers.range; // ADD CODE to access range header
                 var pos = range.split("=")[1].split('-');
@@ -72,10 +69,10 @@ exports.playMovie = function(req, res) {
                             });
 
                     }else{
-                        res.status(404).send('movie trailer not found' );
+                        res.status(404).send("no movie trailerurl or server movie found");
                     }
                 });
-            }
+
         }
     });
 
@@ -87,6 +84,9 @@ exports.addMovie = function(req, res){
     var Image = movie['poster'];
     var posterUrl = uploadImage(Image,movie._id);
     movie.poster = posterUrl;
+    if(movie.trailer==""){
+        movie.trailer="movies/"+movie._id+"/video";
+    }
     movie.save(function(err,movie){
     if (err) {
         res.status(500).send("Sorry, unable to add movie at this time (" 
@@ -195,7 +195,9 @@ exports.editMovie = function(req, res){
             var Image = movie['poster'];
             var posterUrl = uploadImage(Image,movie._id);
             movie.poster = posterUrl;
-            console.log(movie);
+            if(movie.trailer==""){
+                movie.trailer="movies/"+movie._id+"/video";
+            }
             movie.save(function(serr,movie){
                     if(serr){
                         res.send("something wrong to add");
