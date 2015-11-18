@@ -36,7 +36,7 @@ splat.Details = Backbone.View.extend({
         //if no validation error in boxes, then we save all the change
         if (i==0){
             //reset last edit date
-            this.model.set("dated",(new Date).toISOString().substr(0,10));
+            this.model.set("dated",(new Date));
             this.model.save ({},{wait:true,
                 success: function(model,response){
                     //var mId = model.id;

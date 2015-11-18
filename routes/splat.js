@@ -84,9 +84,6 @@ exports.addMovie = function(req, res){
     var Image = movie['poster'];
     var posterUrl = uploadImage(Image,movie._id);
     movie.poster = posterUrl;
-    if(movie.trailer==""){
-        movie.trailer="movies/"+movie._id+"/video";
-    }
     movie.save(function(err,movie){
     if (err) {
         res.status(500).send("Sorry, unable to add movie at this time (" 
@@ -119,16 +116,6 @@ exports.addReview = function(req, res){
                 } else {
                     movie.freshTotal=movie.freshTotal+1;
                     movie.freshVotes=movie.freshVotes+review.freshness;
-                    var score=(movie.freshVotes/movie.freshTotal *100);
-                    if(movie.freshTotal!=0){
-                        movie.scoreVotes=score.toFixed(0)+'%('+movie.freshTotal+')';
-                        if(score>=50){
-                            movie.scoreImg='img/fresh_lg.png';
-                        }
-                        else{
-                            movie.scoreImg='img/rotten_lg.png';
-                        }
-                    }
                     movie.save(function(serr,movie){
                         if(serr){
                             res.send("something wrong to add");
@@ -195,9 +182,6 @@ exports.editMovie = function(req, res){
             var Image = movie['poster'];
             var posterUrl = uploadImage(Image,movie._id);
             movie.poster = posterUrl;
-            if(movie.trailer==""){
-                movie.trailer="movies/"+movie._id+"/video";
-            }
             movie.save(function(serr,movie){
                     if(serr){
                         res.send("something wrong to add");
@@ -271,12 +255,10 @@ var MovieSchema = new mongoose.Schema({
     genre:{ type: [String], required:true},
     synopsis:{ type: String, required:true},
     poster:{ type: String, required:true},
-    dated:{ type: String, required:true},
-    trailer:{ type: String, required:false},
+    dated:{ type: Date, required:true},
+    trailer:{ type: String},
     freshTotal:{ type: Number, required:true},
     freshVotes:{ type: Number, required:true},
-    scoreVotes:{ type: String, required:true},
-    scoreImg:{ type: String, required:true},
     // ADD CODE for other Movie attributes
 });
 
@@ -285,7 +267,7 @@ var ReviewSchema = new mongoose.Schema({
     reviewName:{type: String, required: true},
     reviewAffil:{type: String, required: true},
     reviewText:{type: String, required: true},
-    movieId:{type: String, required: true},
+    movieId:{type: mongoose.Schema.Types.ObjectId, required: true},
 });
 
 

@@ -76,7 +76,14 @@
   <!--edit img form-->
   <div class="img-form col-xs-10 col-sm-5 col-md-5 col-lg-5">
       <!--review button-->
-      <div id="moviereview" style="background-image: url(<%=scoreImg%>)"><span><%=scoreVotes%></span></div>
+      <%if(freshTotal==0){%>
+      <div id="moviereview" style="background-image: url('/img/rotten_lg.png')"><span>NA/A</span></div>
+      <%}else{ var score =freshVotes/freshTotal*1000/10;%>
+      <%if(score>=50){%>
+      <div id="moviereview" style="background-image: url('/img/fresh_lg.png')"><span><%=score%>%(<%=freshTotal%>)</span></div>
+      <%}else{%>
+      <div id="moviereview" style="background-image: url('/img/rotten_lg.png')"><span><%=score%>%(<%=freshTotal%>)</span></div>
+      <%}}%>
     <div id="detail-picture">
     <img src="<%=poster%>" class="img-responsive"/>
     </div>

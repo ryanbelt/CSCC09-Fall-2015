@@ -22,7 +22,7 @@ splat.Movie = Backbone.Model.extend({
       	freshVotes : 0.0,  // number of review ratings
       	trailer : null,  // URL for trailer/movie-streaming
       	poster : "img/placeholder.png",  // movie-poster image URL
-      	dated: (new Date).toISOString().substr(0,10),// date of movie posting
+      	dated: (new Date),// date of movie posting
       	scoreVotes:"NA/A",
         scoreImg:'img/rotten_lg.png',
       },
