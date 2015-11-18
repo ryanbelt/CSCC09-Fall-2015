@@ -17,7 +17,7 @@
           <div class="review-flex">
             <%if(freshTotal==0){%>
             <div id="moviereview" style="background-image: url('/img/rotten_lg.png')"><span>NA/A</span></div>
-            <%}else{ var score =freshVotes/freshTotal*1000/10;%>
+            <%}else{ var score =Math.round(freshVotes/freshTotal*1000)/10;%>
             <%if(score>=50){%>
             <div id="moviereview" style="background-image: url('/img/fresh_lg.png')"><span><%=score%>%(<%=freshTotal%>)</span></div>
             <%}else{%>
