@@ -286,7 +286,6 @@ var ReviewSchema = new mongoose.Schema({
     reviewAffil:{type: String, required: true},
     reviewText:{type: String, required: true},
     movieId:{type: String, required: true},
-    reviewImg:{type: String, required: true},
 });
 
 
