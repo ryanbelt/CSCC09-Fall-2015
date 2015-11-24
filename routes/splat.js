@@ -270,12 +270,21 @@ var ReviewSchema = new mongoose.Schema({
     movieId:{type: mongoose.Schema.Types.ObjectId, required: true},
 });
 
+var UserSchema = new mongoose.Schema({
+    username: {type: Number, required: true},
+    password:{type: String, required: true},
+    email:{type: String, required: true},
+});
+
 
 // Constraints
 // each title:director pair must be unique; duplicates are dropped
 MovieSchema.index({title:1, director:1},{unique: true});  // ADD CODE
 ReviewSchema.index({reviewName:1, reviewAffil:1},   {unique: true});
+UserSchema.index({username:1},   {unique: true});
 // Models
 var MovieModel = mongoose.model('Movie', MovieSchema);
 
 var ReviewModel = mongoose.model('Review', ReviewSchema);
+
+var UserModel = mongoose.model('User', UserSchema);
