@@ -10,6 +10,15 @@ splat.Header = Backbone.View.extend({
     render: function () {
 	// set the view element ($el) HTML content using its template
 	this.$el.html(this.template());
+
+        var newuser = new splat.User();
+
+        this.signupform = new splat.Signup({ model:newuser });
+        this.$('#signupDiv').append(this.signupform.render().el);
+
+        this.signinform = new splat.Signin({ model:newuser });
+        this.$('#signinDiv').append(this.signinform.render().el);
+
 	return this;    // support method chaining
     },
 

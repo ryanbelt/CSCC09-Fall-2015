@@ -219,9 +219,9 @@ span.sparetext{
   font-size: 14px;
 }
 
-.dropdown:hover .dropdown-menu {
+.dropdown:hover #orderDiv.dropdown-menu {
   display: block;
-  margin-top: 0; // remove the gap so it doesn't close
+  margin-top: 0;
 }
 
 #moviereview{
