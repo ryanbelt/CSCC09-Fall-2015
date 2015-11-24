@@ -1,6 +1,7 @@
 
 var fs = require('fs'),
     // path is "../" since splat.js is in routes/ sub-dir
+    bcrypt = require("bcrypt"),
     config = require(__dirname + '/../config'),  // port#, other params
     express = require("express"),
     url = require("url");
@@ -13,6 +14,10 @@ var fs = require('fs'),
 // heartbeat response for server API
 exports.api = function(req, res){
   res.status(200).send('<h3>Heroz API is running!</h3>');
+};
+
+exports.signup = function(req,res){
+
 };
 
 exports.playMovie = function(req, res) {
@@ -271,7 +276,7 @@ var ReviewSchema = new mongoose.Schema({
 });
 
 var UserSchema = new mongoose.Schema({
-    username: {type: Number, required: true},
+    username: {type: Number, required: true ,index:{unique: true}},
     password:{type: String, required: true},
     email:{type: String, required: true},
 });
@@ -281,7 +286,6 @@ var UserSchema = new mongoose.Schema({
 // each title:director pair must be unique; duplicates are dropped
 MovieSchema.index({title:1, director:1},{unique: true});  // ADD CODE
 ReviewSchema.index({reviewName:1, reviewAffil:1},   {unique: true});
-UserSchema.index({username:1},   {unique: true});
 // Models
 var MovieModel = mongoose.model('Movie', MovieSchema);
 
