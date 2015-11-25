@@ -68,7 +68,7 @@ splat.Signup = Backbone.View.extend({
                 splat.utils.removeValidationError('password');
                 splat.utils.removeValidationError('password2');
                 console.log(this.model);
-                this.model.save(null, {
+                this.model.save({}, {
                     wait: true,
                     success: function(model, response) {
                         if (response.error) {
@@ -86,7 +86,7 @@ splat.Signup = Backbone.View.extend({
                         }
                     },
                     error: function (model, err) {
-                        splat.utils.showNotice('Error', 'danger', err.responseText);
+                        splat.utils.showNotice('Error:', 'danger', err.responseText);
                     }
                 });
             }

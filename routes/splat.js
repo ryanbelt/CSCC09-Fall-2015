@@ -353,7 +353,7 @@ var ReviewSchema = new mongoose.Schema({
 });
 
 var UserSchema = new mongoose.Schema({
-    username: {type: Number, required: true ,index:{unique: true}},
+    username: {type: String, required: true ,index:{unique: true}},
     password:{type: String, required: true},
     email:{type: String, required: true},
 });
