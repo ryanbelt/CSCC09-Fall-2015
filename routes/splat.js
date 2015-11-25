@@ -43,9 +43,9 @@ exports.auth = function(req,res){
                         //req.session.userid = user.id ;
                         // extend session-life if "remember-me" checked on login form
 
-                        if (req.body.remember == 1 ) {
-                            req.session.cookie.maxAge = 1000*60*10; // ... update cookie age ...
-                        }
+                        //if (req.body.remember == 1 ) {
+                        //    req.session.cookie.maxAge = 1000*60*10; // ... update cookie age ...
+                        //}
                         res.send({'_id': user.id, 'username': user.username});  // return userid/username set to session values
                     } else { // handle various error conditions
                         res.send(403, 'wrong password');
@@ -76,11 +76,12 @@ exports.signup = function(req,res){
 
                 if (!serr) {
                     // set username, userid, and auth status on the session
+                    console.log(req.session);
                     //req.session.auth = true;
                     //req.session.username = result.username;
                     //req.session.userid = result.id;
-                    //console.log(result);
-                    //console.log(req.session);
+                    console.log(result);
+                    //
                     res.status(200).send({'_id': result.id, 'username': result.username});
                 } else {
                     if (serr["code"] == 11000) {
