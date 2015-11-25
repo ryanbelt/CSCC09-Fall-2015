@@ -23,7 +23,7 @@ var http = require("http"),   // ADD CODE
     methodOverride = require("method-override"),
     directory = require("serve-index"),
     errorHandler = require("errorhandler"),
-    //basicAuth = require("basic-auth-connect"),  // optional, for HTTP auth
+    basicAuth = require("basic-auth-connect"),  // optional, for HTTP auth
 
     // config is an object module, that defines app-config attribues,
     // such as "port", DB parameters
@@ -56,6 +56,16 @@ app.use(bodyParser.urlencoded({limit:'1mb',
         extended: true
 }));
 
+app.use(session({
+    name: config.sessionKey,
+    secret: config.sessionSecret,  // A3 ADD CODE
+    rolling: true,  // reset session timer on every client access
+    cookie: { maxAge:config.sessionTimeout,  // A3 ADD CODE
+        // maxAge: null,  // no-expire session-cookies for testing
+        httpOnly: true },
+    saveUninitialized: false,
+    resave: false
+}));
 
 //client can log
 // set file-upload directory for poster images
@@ -94,14 +104,17 @@ app.get('/movies/:id/video', splat.playMovie);
 
 app.post('/auth', splat.signup);
 
+app.put('/auth', splat.auth);
+
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
 
 // location of app's static content ... may need to ADD CODE
 app.use(express.static(__dirname + "/public"));
 // Default-route middleware, in case none of above match
+
 app.use(function (req, res) {
-	// ADD CODE
+    res.status(404).send('<h3>File Not Found</h3>');
 });
 
 

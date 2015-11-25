@@ -2,6 +2,9 @@ var config = {
 	port:41127,
 	env:"development",
 	videoPath:"/public/img/videos/",
+	sessionKey: 'splat.sess',
+	sessionSecret: 'login_secret',
+	sessionTimeout: 1000*60*20,  // 2 minute session timeout
 	//school db
 	//db:"mongodb://herozadmin:herozpassword@10.15.2.164/panjian2",
 

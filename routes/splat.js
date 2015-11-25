@@ -8,6 +8,16 @@ var fs = require('fs'),
 
 // Implemention of splat API handlers:
 
+fs.exists(__dirname + '/../public/img/uploads', function (exists) {
+    if (!exists) {
+        fs.mkdir(__dirname + '/../public/img/uploads', function (err) {
+            if (err) {
+                process.exit(1);  // can this be cleaned up with throw error???
+            };
+        });
+    }
+});
+
 // "exports" is used to make the associated name visible
 // to modules that "require" this file (in particular app.js)
 
@@ -16,26 +26,66 @@ exports.api = function(req, res){
   res.status(200).send('<h3>Heroz API is running!</h3>');
 };
 
+exports.auth = function(req,res){
+    //console.log('login/loginout');
+    if (req.body.login == 1 ) {
+        var username =  req.body.username;   // get username ;
+        var password =  req.body.password;    // get password ;
+        if (!username || !password) {  // client should have ensured this, but just in case
+            res.send(403, 'you forget to put username and password');
+        };
+        UserModel.findOne({'username': username}, function(err, user){
+            if (user) {
+                bcrypt.compare(password, user.password , function(err, result) {
+                    if (result) { // username-password OK
+                        //req.session.auth = true ; // user logged in
+                        //req.session.username = user.username ;
+                        //req.session.userid = user.id ;
+                        // extend session-life if "remember-me" checked on login form
+
+                        if (req.body.remember == 1 ) {
+                            req.session.cookie.maxAge = 1000*60*10; // ... update cookie age ...
+                        }
+                        res.send({'_id': user.id, 'username': user.username});  // return userid/username set to session values
+                    } else { // handle various error conditions
+                        res.send(403, 'wrong password');
+                    }
+                });
+            } else {
+                res.send(403, 'No this user in database!')
+                // handle various error conditions
+            }
+        });
+    } else {
+        //console.log('logout');
+        req.session.auth = false ; // ... and reset other session fields;
+        req.session.userid = null;
+        req.session.username = null;
+        res.send({'userid': null, 'username':null });  // return userid and username set to null
+    }
+};
+
 exports.signup = function(req,res){
     var user = new UserModel(req.body);
+    console.log(user);
     bcrypt.genSalt(10, function(err, salt) {
         // store the hashed-with-salt password in the DB
         bcrypt.hash(user.password, salt, function(err, hash) {
             user.password = hash;// incorporate hash output and salt value
-            user.save(function (err, result) {
-                //console.error(err);
-                if (!err) {
+            user.save(function (serr, result) {
+
+                if (!serr) {
                     // set username, userid, and auth status on the session
                     //req.session.auth = true;
                     //req.session.username = result.username;
                     //req.session.userid = result.id;
                     //console.log(result);
                     //console.log(req.session);
-                    res.send({'_id': result.id, 'username': result.username});
+                    res.status(200).send({'_id': result.id, 'username': result.username});
                 } else {
-                    if (!result) {
+                    if (serr["code"] == 11000) {
                         // return duplicate-username error response to client
-                        res.status(404).send("duplicate username error: " + user.username);
+                        res.status(403).send("duplicate username error: " + user.username);
                     } else {
                         // return DB error response to client
                         res.status(500).send("DataBase error");

@@ -67,6 +67,7 @@ splat.Signup = Backbone.View.extend({
 
                 splat.utils.removeValidationError('password');
                 splat.utils.removeValidationError('password2');
+                console.log(this.model);
                 this.model.save(null, {
                     wait: true,
                     success: function(model, response) {
@@ -75,6 +76,7 @@ splat.Signup = Backbone.View.extend({
                                 'Failed to create account', 'alert-danger');
                         } else {
                             //splat.token = response.token;
+                            //console.log(response.token);
                             splat.userid = response.userid;
                             splat.username = response.username;
                             splat.utils.showNotice('Signup Successful!', 'success',
