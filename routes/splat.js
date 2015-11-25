@@ -23,6 +23,7 @@ exports.signup = function(req,res){
         bcrypt.hash(user.password, salt, function(err, hash) {
             user.password = hash;// incorporate hash output and salt value
             user.save(function (err, result) {
+                console.error(err);
                 if (!err) {
                     // set username, userid, and auth status on the session
                     req.session.auth = true;
