@@ -94,6 +94,7 @@ splat.Signup = Backbone.View.extend({
         var value = "";
         var changed={};
         var allInput = document.getElementsByClassName("form-control");
+        console.log(allInput);
         var length= allInput.length;
         for (var k=0; k<length;k++){
             field = allInput[k].name;
