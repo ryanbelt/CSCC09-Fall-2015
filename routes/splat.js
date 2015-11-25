@@ -26,19 +26,19 @@ exports.signup = function(req,res){
                 //console.error(err);
                 if (!err) {
                     // set username, userid, and auth status on the session
-                    req.session.auth = true;
-                    req.session.username = result.username;
-                    req.session.userid = result.id;
+                    //req.session.auth = true;
+                    //req.session.username = result.username;
+                    //req.session.userid = result.id;
                     //console.log(result);
                     //console.log(req.session);
                     res.send({'_id': result.id, 'username': result.username});
                 } else {
-                    if (err.err.indexOf("E11000") != -1) {
+                    if (!result) {
                         // return duplicate-username error response to client
-                        res.send(404, "duplicate username error: " + user.username);
+                        res.status(404).send("duplicate username error: " + user.username);
                     } else {
                         // return DB error response to client
-                        res.send(500, "DataBase error");
+                        res.status(500).send("DataBase error");
                     }
                 }
             });

@@ -21,7 +21,7 @@ splat.User = Backbone.Model.extend({
 
     initialize: function () {
         this.validators={};
-
+        var self = this;
         //validation regex
         var emailRegex=/^\w+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
         var stringRegex = /^[a-zA-Z0-9]+$/;
@@ -42,16 +42,13 @@ splat.User = Backbone.Model.extend({
         };
 
         this.validators.password2 = function (value) {
-            console.log(this.password);
-            return ((value && stringRegex.test(value)) && (value == password)) ?
-            {isValid: true} : {isValid: false, message: "Password values must match"};
+            return ((value && stringRegex.test(value))  ?
+            {isValid: true} : {isValid: false, message: "Password values must match"});
         };
 
     },
 
     validateField: function(field, value){
-        console.log(field+":"+value);
-        console.log(this.password);
         return this.validators[field](value);
     },
 });
