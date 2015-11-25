@@ -28,7 +28,11 @@ var http = require("http"),   // ADD CODE
     // config is an object module, that defines app-config attribues,
     // such as "port", DB parameters
     config = require("./config"),
-    splat = require('./routes/splat.js');  // route handlers ... ADD CODE
+    splat = require('./routes/splat.js'),
+    options = {
+        key: fs.readFileSync('key.pem'),  // RSA private-key
+        cert: fs.readFileSync('cert.pem')  // RSA public-key certificate
+    };  // route handlers ... ADD CODE
 
 var app = express();  // Create Express app server
 

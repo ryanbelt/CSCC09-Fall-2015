@@ -17,7 +17,32 @@ exports.api = function(req, res){
 };
 
 exports.signup = function(req,res){
-
+    var user = new UserModel(req.body);
+    bcrypt.genSalt(10, function(err, salt) {
+        // store the hashed-with-salt password in the DB
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            user.password = hash;// incorporate hash output and salt value
+            user.save(function (err, result) {
+                if (!err) {
+                    // set username, userid, and auth status on the session
+                    req.session.auth = true;
+                    req.session.username = result.username;
+                    req.session.userid = result.id;
+                    //console.log(result);
+                    //console.log(req.session);
+                    res.send({'_id': result.id, 'username': result.username});
+                } else {
+                    if (err.err.indexOf("E11000") != -1) {
+                        // return duplicate-username error response to client
+                        res.send(404, "duplicate username error: " + user.username);
+                    } else {
+                        // return DB error response to client
+                        res.send(500, "DataBase error");
+                    }
+                }
+            });
+        });
+    });
 };
 
 exports.playMovie = function(req, res) {

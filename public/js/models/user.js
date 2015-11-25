@@ -24,10 +24,11 @@ splat.User = Backbone.Model.extend({
 
         //validation regex
         var emailRegex=/^\w+@[a-zA-Z]+\.[a-zA-Z]{2,3}$/;
+        var stringRegex = /^[a-zA-Z0-9]+$/;
 
         this.validators.username = function (value) {
-            return value.length > 0 ? {isValid: true} :
-            {isValid: false, message: "You must enter a non-empty username"};
+            return ((stringRegex.test(value))?
+            {isValid: true} : {isValid: false, message: "You must enter a non-empty username"});
         };
 
         this.validators.email = function (value) {
@@ -36,12 +37,12 @@ splat.User = Backbone.Model.extend({
         };
 
         this.validators.password = function (value) {
-            return value.length > 0 ? {isValid: true} :
-            {isValid: false, message: "You must enter a non-empty password"};
+            return ((stringRegex.test(value))?
+            {isValid: true} : {isValid: false, message: "You must enter a non-empty password"});
         };
 
-        this.validators.repassword = function (value) {
-            return ((value.length > 0) && (value == self.model.get("password"))) ?
+        this.validators.password2 = function (value) {
+            return ((stringRegex.test(value)) && (value == self.model.get("password"))) ?
             {isValid: true} : {isValid: false, message: "Password values must match"};
         };
 
