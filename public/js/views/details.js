@@ -48,9 +48,8 @@ splat.Details = Backbone.View.extend({
                 },
                 error: function(model, response) {
                  // display the error response from the server
-                //splat.utils.requestFailed(response);
                     console.error(response);
-                splat.utils.showNotice('Failur:', "danger", "Something wrong with saving");
+                splat.utils.showNotice('Failur:', "danger", response.responseText);
                 }
             });
         }
@@ -72,7 +71,7 @@ splat.Details = Backbone.View.extend({
         },
         error: function(model, response) {
         // display the error response from the server
-            splat.utils.showNotice('Failur:', "danger", "Something wrong with deletion");
+            splat.utils.showNotice('Failur:', "danger",response.responseText);
             }
         });
 
