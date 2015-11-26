@@ -106,6 +106,7 @@ app.post('/auth', splat.signup);
 
 app.put('/auth', splat.auth);
 
+app.put('/auth/:id', splat.auth);
 // return error details to client - use only during development
 app.use(errorHandler({ dumpExceptions:true, showStack:true }));
 

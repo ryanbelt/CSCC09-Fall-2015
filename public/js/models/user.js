@@ -46,6 +46,10 @@ splat.User = Backbone.Model.extend({
             {isValid: true} : {isValid: false, message: "Password values must match"});
         };
 
+        this.validators.remember = function(value){
+            return {isValid: true};
+        }
+
     },
 
     validateField: function(field, value){

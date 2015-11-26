@@ -38,9 +38,9 @@ splat.Signin = Backbone.View.extend({
         var validation = this.model.validateField(field,value);
         //if the validation fail, we highlight the box and show the error message
         if(!validation.isValid){
-            splat.utils.addValidationError(field, validation.message);
+            splat.utils.addValidationError("signin-"+field, validation.message);
         }else{
-            splat.utils.removeValidationError(field);
+            splat.utils.removeValidationError("signin-"+field);
             //if the attribute is either genre or starring, we split the
             //value into array,
             //add the value into corresponding field of the model
@@ -50,20 +50,25 @@ splat.Signin = Backbone.View.extend({
 
     signin: function(e) {
         e.preventDefault();
+        var allInput = document.getElementsByClassName("signinput");
 	var self = this;
-        var checku = self.model.validateField('username');
+        var checku = self.model.validateField('username',allInput[0].value);
         checku.isValid ?
-              splat.utils.removeValidationError('username')
-            : splat.utils.addValidationError('username', checku.message);
-        var checkp = self.model.validateField('password');
+              splat.utils.removeValidationError('signin-username')
+            : splat.utils.addValidationError('signin-username', checku.message);
+        var checkp = self.model.validateField('password',allInput[1].value);
         checkp.isValid ?
-              splat.utils.removeValidationError('password')
-            : splat.utils.addValidationError('password', checkp.message);
+              splat.utils.removeValidationError('signin-password')
+            : splat.utils.addValidationError('signin-password', checkp.message);
 
 	if (! (checku.isValid && checkp.isValid)) {
 	    return false;
 	}
-	this.model.set({login: 1});
+        if(allInput[2].checked){
+            this.model.set({remember: 1,login: 1});
+        }else{
+            this.model.set({login: 1,remember: 0});
+        }
 	this.model.save(null, {
 	    type: 'put',
             wait: true,
@@ -72,9 +77,9 @@ splat.Signin = Backbone.View.extend({
                     splat.utils.showNotice('Signin Failed', 'danger',
                         response.error);
 		} else {
-		    //splat.token = response.token;
-		    //splat.userid = response.userid;
-		    //splat.username = response.username;
+		    splat.token = response.token;
+		    splat.userid = response.userid;
+		    splat.username = response.username;
                     splat.utils.showNotice('Signin Successful!', 'success' ,
                         'Welcome back ' + splat.username);
 		    Backbone.trigger('signedIn', response);
@@ -87,9 +92,9 @@ splat.Signin = Backbone.View.extend({
     },
 
     signout: function(e){
-	e.preventDefault();
-	$('#logoutdrop').removeClass('open');
-	this.model.set({login: 0, username:"", password:""});
+	    e.preventDefault();
+	    $('#logoutdrop').removeClass('open');
+        this.model.set({login: 0});
 	this.model.save(null, {
 	    type: 'put',
 	    success: function(model, response) {
@@ -103,6 +108,4 @@ splat.Signin = Backbone.View.extend({
             }
         });
     },
-
-
 });

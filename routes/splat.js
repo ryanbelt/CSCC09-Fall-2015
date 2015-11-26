@@ -27,8 +27,7 @@ exports.api = function(req, res){
 };
 
 exports.auth = function(req,res){
-    //console.log('login/loginout');
-    if (req.body.login == 1 ) {
+    if (req.body.login ) {
         var username =  req.body.username;   // get username ;
         var password =  req.body.password;    // get password ;
         if (!username || !password) {  // client should have ensured this, but just in case
@@ -38,36 +37,34 @@ exports.auth = function(req,res){
             if (user) {
                 bcrypt.compare(password, user.password , function(err, result) {
                     if (result) { // username-password OK
-                        //req.session.auth = true ; // user logged in
-                        //req.session.username = user.username ;
-                        //req.session.userid = user.id ;
+                        req.session.auth = true ; // user logged in
+                        req.session.username = user.username ;
+                        req.session.userid = user.id ;
                         // extend session-life if "remember-me" checked on login form
-
-                        //if (req.body.remember == 1 ) {
-                        //    req.session.cookie.maxAge = 1000*60*10; // ... update cookie age ...
-                        //}
-                        res.send({'_id': user.id, 'username': user.username});  // return userid/username set to session values
+                        if (req.body.remember) {
+                            req.session.cookie.maxAge = config.sessionTimeout; // ... update cookie age ...
+                        }
+                        res.status(200).send({'_id': user.id, 'username': user.username,'token': req.session.auth});  // return userid/username set to session values
                     } else { // handle various error conditions
-                        res.send(403, 'wrong password');
+                        res.status(403).send('Invalid username-password combination, please try again');
                     }
                 });
-            } else {
-                res.send(403, 'No this user in database!')
-                // handle various error conditions
+            } else if (!err) {  // unrecognized username, but not DB error
+                res.status(403).send('Invalid username-password combination, please try again');
+            } else {  // error response from DB
+                res.status(500).send("Unable to login at this time; please try again later "
+                + err.message);
             }
         });
     } else {
         //console.log('logout');
-        req.session.auth = false ; // ... and reset other session fields;
-        req.session.userid = null;
-        req.session.username = null;
+        req.session.destroy();
         res.send({'userid': null, 'username':null });  // return userid and username set to null
     }
 };
 
 exports.signup = function(req,res){
     var user = new UserModel(req.body);
-    console.log(user);
     bcrypt.genSalt(10, function(err, salt) {
         // store the hashed-with-salt password in the DB
         bcrypt.hash(user.password, salt, function(err, hash) {
@@ -76,11 +73,9 @@ exports.signup = function(req,res){
 
                 if (!serr) {
                     // set username, userid, and auth status on the session
-                    console.log(req.session);
                     req.session.auth = true;
                     req.session.username = result.username;
                     req.session.userid = result.id;
-                    console.log(result);
                     //
                     res.status(200).send({'_id': result.id, 'username': result.username});
                 } else {
