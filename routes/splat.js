@@ -77,9 +77,9 @@ exports.signup = function(req,res){
                 if (!serr) {
                     // set username, userid, and auth status on the session
                     console.log(req.session);
-                    //req.session.auth = true;
-                    //req.session.username = result.username;
-                    //req.session.userid = result.id;
+                    req.session.auth = true;
+                    req.session.username = result.username;
+                    req.session.userid = result.id;
                     console.log(result);
                     //
                     res.status(200).send({'_id': result.id, 'username': result.username});

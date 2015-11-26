@@ -75,8 +75,8 @@ splat.Signup = Backbone.View.extend({
                             splat.utils.showNotice('Signup Failed',
                                 'Failed to create account', 'alert-danger');
                         } else {
-                            //splat.token = response.token;
-                            //console.log(response.token);
+                            splat.token = response.token;
+                            console.log(response.token);
                             splat.userid = response.userid;
                             splat.username = response.username;
                             splat.utils.showNotice('Signup Successful!', 'success',
