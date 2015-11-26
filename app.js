@@ -36,15 +36,24 @@ var http = require("http"),   // ADD CODE
 
 // middleware check that req is associated with an authenticated session
 function isAuthd(req, res, next) {
-    // A3 ADD CODE BLOCK
-    return next();
+    if(req.session.auth){
+        return next();
+    }
+    else{
+        res.status(403).send("please signin to countinue your application.")
+    }
 };
 
 // middleware check that the session-userid matches the userid passed
 // in the request body, e.g. when deleting or updating a model
 function hasPermission(req, res, next) {
     // A3 ADD CODE BLOCK
-    return next();
+    if(req.session.username == req.body.username && req.session.userid == req.body._id ){
+        return next();
+    }
+    else{
+        res.status(403).send("please signin to do the modification work.")
+    }
 };
 
 var app = express();  // Create Express app server
@@ -88,7 +97,6 @@ app.use(multer({dest: __dirname + config.videoPath}));
 // checks req.body for HTTP method overrides
 app.use(methodOverride());
 
-app.method('./route/splat.js', middlewareFunc, splat.handlerFunc)
 
 // App routes (RESTful API) - handler implementation resides in routes/splat.js
 
@@ -106,15 +114,15 @@ app.get('/movies/:id', splat.getMovie);
 // ADD CODE to support other routes listed on assignment handout
 app.get('/movies', splat.getMovies);
 
-app.post('/movies', splat.addMovie);
+app.post('/movies', isAuthd,splat.addMovie);
 
-app.put('/movies/:id', splat.editMovie);
+app.put('/movies/:id',[isAuthd, hasPermission], splat.editMovie);
 
-app.delete('/movies/:id', splat.deleteMovie);
+app.delete('/movies/:id',[isAuthd, hasPermission], splat.deleteMovie);
 
 app.get('/movies/:id/reviews', splat.getReviews);
 
-app.post('/movies/:id/reviews', splat.addReview);
+app.post('/movies/:id/reviews', isAuthd,splat.addReview);
 
 app.get('/movies/:id/video', splat.playMovie);
 
