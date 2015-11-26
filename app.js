@@ -34,6 +34,19 @@ var http = require("http"),   // ADD CODE
         cert: fs.readFileSync('cert.pem')  // RSA public-key certificate
     };  // route handlers ... ADD CODE
 
+// middleware check that req is associated with an authenticated session
+function isAuthd(req, res, next) {
+    // A3 ADD CODE BLOCK
+    return next();
+};
+
+// middleware check that the session-userid matches the userid passed
+// in the request body, e.g. when deleting or updating a model
+function hasPermission(req, res, next) {
+    // A3 ADD CODE BLOCK
+    return next();
+};
+
 var app = express();  // Create Express app server
 
 // Configure app server
@@ -43,6 +56,7 @@ app.set('port', process.env.PORT || config.port);
 
 // activate basic HTTP authentication (to protect your solution files)
 //app.use(basicAuth('username', 'password'));  // REPLACE username/password
+
 
 // change param value to control level of logging  ... ADD CODE
 app.use(logger('dev'));  // 'default', 'short', 'tiny', 'dev'
@@ -73,6 +87,8 @@ app.use(multer({dest: __dirname + '/public/img/uploads/'}));
 app.use(multer({dest: __dirname + config.videoPath}));
 // checks req.body for HTTP method overrides
 app.use(methodOverride());
+
+app.method('./route/splat.js', middlewareFunc, splat.handlerFunc)
 
 // App routes (RESTful API) - handler implementation resides in routes/splat.js
 
