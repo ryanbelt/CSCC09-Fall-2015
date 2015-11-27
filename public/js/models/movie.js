@@ -54,7 +54,7 @@ splat.Movie = Backbone.Model.extend({
 
           this.validators.director = function (value) {
               return ((value && stringRegex.test(value))?{isValid: true}
-              : {isValid: false, 
+              : {isValid: false,
                 message: "name require, Only 1 or more letters-digits-spaces allowed"});
           },
 

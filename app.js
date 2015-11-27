@@ -23,7 +23,8 @@ var https = require("https"),   // ADD CODE
     methodOverride = require("method-override"),
     directory = require("serve-index"),
     errorHandler = require("errorhandler"),
-    basicAuth = require("basic-auth-connect"),  // optional, for HTTP auth
+    basicAuth = require("basic-auth-connect"),
+     csurf= require('csurf'),// optional, for HTTP auth
 
     // config is an object module, that defines app-config attribues,
     // such as "port", DB parameters
@@ -78,6 +79,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false
 }));
+
 
 //client can log
 // set file-upload directory for poster images
