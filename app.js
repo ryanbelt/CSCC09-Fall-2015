@@ -36,6 +36,7 @@ var http = require("http"),   // ADD CODE
 
 // middleware check that req is associated with an authenticated session
 function isAuthd(req, res, next) {
+    console.log(req.session.auth);
     if(req.session.auth){
         return next();
     }
@@ -44,17 +45,6 @@ function isAuthd(req, res, next) {
     }
 };
 
-// middleware check that the session-userid matches the userid passed
-// in the request body, e.g. when deleting or updating a model
-function hasPermission(req, res, next) {
-    // A3 ADD CODE BLOCK
-    if(req.session.username == req.body.username && req.session.userid == req.body._id ){
-        return next();
-    }
-    else{
-        res.status(403).send("You have no permission to doing this.")
-    }
-};
 
 var app = express();  // Create Express app server
 
@@ -116,9 +106,9 @@ app.get('/movies', splat.getMovies);
 
 app.post('/movies', isAuthd,splat.addMovie);
 
-app.put('/movies/:id',[isAuthd, hasPermission], splat.editMovie);
+app.put('/movies/:id',isAuthd, splat.editMovie);
 
-app.delete('/movies/:id',[isAuthd, hasPermission], splat.deleteMovie);
+app.delete('/movies/:id',isAuthd, splat.deleteMovie);
 
 app.get('/movies/:id/reviews', splat.getReviews);
 

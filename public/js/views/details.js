@@ -37,6 +37,7 @@ splat.Details = Backbone.View.extend({
         if (i==0){
             //reset last edit date
             this.model.set("dated",(new Date));
+            this.model.set({userid:splat.userid});
             this.model.save ({},{wait:true,
                 success: function(model,response){
                     //var mId = model.id;
@@ -48,7 +49,6 @@ splat.Details = Backbone.View.extend({
                 },
                 error: function(model, response) {
                  // display the error response from the server
-                    console.error(response);
                 splat.utils.showNotice('Failur:', "danger", response.responseText);
                 }
             });
@@ -60,7 +60,7 @@ splat.Details = Backbone.View.extend({
 
     //function for delete
     delete: function(){
-        var title=this.$("#title").val();  
+        var title=this.$("#title").val();
         this.model.destroy ({
         wait: true,  // don't destroy client model until save-handlerver responds
         success: function(model, response) {

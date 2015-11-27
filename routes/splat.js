@@ -44,7 +44,7 @@ exports.auth = function(req,res){
                         if (req.body.remember) {
                             req.session.cookie.maxAge = config.sessionTimeout; // ... update cookie age ...
                         }
-                        res.status(200).send({'_id': user.id, 'username': user.username,'token': req.session.auth});  // return userid/username set to session values
+                        res.status(200).send({'userid': user.id, 'username': user.username,'token': req.session.auth});  // return userid/username set to session values
                     } else { // handle various error conditions
                         res.status(403).send('Invalid username-password combination, please try again');
                     }
@@ -77,7 +77,7 @@ exports.signup = function(req,res){
                     req.session.username = result.username;
                     req.session.userid = result.id;
                     //
-                    res.status(200).send({'_id': result.id, 'username': result.username});
+                    res.status(200).send({'userid': result.id, 'username': result.username});
                 } else {
                     if (serr["code"] == 11000) {
                         // return duplicate-username error response to client
@@ -193,11 +193,11 @@ exports.addReview = function(req, res){
                 } else {
                     movie.freshTotal=movie.freshTotal+1;
                     movie.freshVotes=movie.freshVotes+review.freshness;
-                    movie.save(function(serr,movie){
+                    movie.save(function(serr){
                         if(serr){
-                            res.send("something wrong to add");
+                            res.status(500).send("error with adding review");
                         }else{
-                            res.status(200).send(review);
+                            res.status(200).send("review adding success");
                         }
                     });
                 }
@@ -253,40 +253,51 @@ exports.editMovie = function(req, res){
            }else if(!movie){
                 res.send(404, "Sorry, no movies were found!" );
             }else {
-            for(var attr in req.body){
-               movie[attr]=req.body[attr];
+            if (movie.userid && req.session.userid != movie.userid) {
+                res.status(403).send("you are not permit to update movie info");
             }
-            var Image = movie['poster'];
-            var posterUrl = uploadImage(Image,movie._id);
-            movie.poster = posterUrl;
-            movie.save(function(serr,movie){
-                    if(serr){
-                        res.send("something wrong to add");
-                    }else{
+            else{
+                for (var attr in req.body) {
+                    if(attr != "userid") {
+                        movie[attr] = req.body[attr];
+                    }
+                }
+                var Image = movie['poster'];
+                var posterUrl = uploadImage(Image, movie._id);
+                movie.poster = posterUrl;
+                movie.save(function (serr, movie) {
+                    if (serr) {
+                        res.send("something wrong to edit movie");
+                    } else {
                         res.send(movie);
                     }
                 });
-           }
+            }
+        }
     });
 };
 
 exports.deleteMovie = function(req, res){
+    console.log("i am here for delete");
     MovieModel.findById(req.params.id, function(err, movie) {
-                    console.error(err);
         if(err){
             res.send(500, "Error with finding this movie");
         }else if(!movie){
                 res.send(404, "Sorry, no movies were found!" );
             }else{
-            movie.remove(function(err){
-                if(!err){
-                    console.log(req.params.id+"movie delete success");
-                    res.status(200).send(movie);
-                }else{
-                    console.log(req.params.id+"movie delete fail");
-                    res.send(404,"cannot delete this movie");
-                }
-            })
+            if (movie.userid && req.session.userid != movie.userid) {
+                res.status(403).send("you are not permit to update movie info");
+            }else {
+                movie.remove(function (err) {
+                    if (!err) {
+                        console.log(req.params.id + "movie delete success");
+                        res.status(200).send(movie);
+                    } else {
+                        console.log(req.params.id + "movie delete fail");
+                        res.send(404, "cannot delete this movie");
+                    }
+                })
+            }
         }
     });
 };
@@ -336,6 +347,7 @@ var MovieSchema = new mongoose.Schema({
     trailer:{ type: String},
     freshTotal:{ type: Number, required:true},
     freshVotes:{ type: Number, required:true},
+    userid:{type: mongoose.Schema.Types.ObjectId},
     // ADD CODE for other Movie attributes
 });
 
