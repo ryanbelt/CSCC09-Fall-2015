@@ -36,7 +36,6 @@ var http = require("http"),   // ADD CODE
 
 // middleware check that req is associated with an authenticated session
 function isAuthd(req, res, next) {
-    console.log(req.session.auth);
     if(req.session.auth){
         return next();
     }

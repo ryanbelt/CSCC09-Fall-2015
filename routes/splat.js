@@ -193,11 +193,11 @@ exports.addReview = function(req, res){
                 } else {
                     movie.freshTotal=movie.freshTotal+1;
                     movie.freshVotes=movie.freshVotes+review.freshness;
-                    movie.save(function(serr){
+                    movie.save(function(serr,movie){
                         if(serr){
                             res.status(500).send("error with adding review");
                         }else{
-                            res.status(200).send("review adding success");
+                            res.status(200).send(review);
                         }
                     });
                 }
