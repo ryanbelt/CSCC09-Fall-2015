@@ -2,12 +2,12 @@
   <div class="thumbnail plain" title="<%= title%>">
     <div class="thumb_video">
       <a href="#movies/<%=_id%>" class="plain">
-        <video class="img-responsive" controls preload="none" controls poster="<%=poster%>" >
+        <video class="img-responsive" controls preload="none" controls poster="<%-poster%>" >
           <!--mp4 will only accept from the server-->
           <%if(trailer==""){%>
-          <source src="/movies/<%=_id%>/video" type="video/mp4"/>
+          <source src="/movies/<%-_id%>/video" type="video/mp4"/>
           <%}else{%>
-          <source src="<%=trailer%>" type="video/mp4"/>
+          <source src="<%-trailer%>" type="video/mp4"/>
           <%}%>
             <!-- fallback -->
         </video>
@@ -19,29 +19,29 @@
             <div id="moviereview" style="background-image: url('/img/rotten_lg.png')"><span>NA/A</span></div>
             <%}else{ var score =Math.round(freshVotes/freshTotal*1000)/10;%>
             <%if(score>=50){%>
-            <div id="moviereview" style="background-image: url('/img/fresh_lg.png')"><span><%=score%>%(<%=freshTotal%>)</span></div>
+            <div id="moviereview" style="background-image: url('/img/fresh_lg.png')"><span><%-score%>%(<%-freshTotal%>)</span></div>
             <%}else{%>
-            <div id="moviereview" style="background-image: url('/img/rotten_lg.png')"><span><%=score%>%(<%=freshTotal%>)</span></div>
+            <div id="moviereview" style="background-image: url('/img/rotten_lg.png')"><span><%-score%>%(<%-freshTotal%>)</span></div>
             <%}}%>
             </div>
           <div class="info-flex">
         <div class="flex-item">
-          <span class="maintext"><%= title %></span><span class="sparetext">{<%= released %>}</span>
+          <span class="maintext"><%- title %></span><span class="sparetext">{<%- released %>}</span>
           </div>
           <div class="flex-item">
-          <span class="maintext">Director: </span><span class="sparetext"> <%= director %></span>
+          <span class="maintext">Director: </span><span class="sparetext"> <%- director %></span>
           </div>
           <div class="flex-item">
-          <span class="maintext">Starring: </span><span class="sparetext"> <%= starring %></span>
+          <span class="maintext">Starring: </span><span class="sparetext"> <%- starring %></span>
           </div>
           <div class="flex-item">
-          <span class="maintext">Genres: </span><span class="sparetext"> <%= genre %>
+          <span class="maintext">Genres: </span><span class="sparetext"> <%- genre %>
           </div>
           <div class="flex-item">
-           </span><span class="maintext">Rating: </span><span class="sparetext"> <%= rating %></span>
+           </span><span class="maintext">Rating: </span><span class="sparetext"> <%- rating %></span>
           </div>
           <div class="flex-item">
-           </span><span class="maintext">(L)Edit: </span><span class="sparetext"> <%= dated %></span>
+           </span><span class="maintext">(L)Edit: </span><span class="sparetext"> <%- dated %></span>
           </div>
           </div>
           <!-- ADD-CODE -->

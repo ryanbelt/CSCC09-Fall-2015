@@ -4,12 +4,12 @@
         <!--message-->
     <div class="sub-view review-back">
         <div id="thumbview-text"><%if(freshness==0){%><img src="/img/rotten.gif"/> <%}else{%><img src="/img/fresh.gif"/><%}%>
-            <span class="sparetext" style="color:black;"><%= reviewText %></span></div>
+            <span class="sparetext" style="color:black;"><%- reviewText %></span></div>
     </div>
         <!--reviewer-->
-    <div id=""><img src="img/critic.gif"/><span class="sparetext" style="color:white;"><%= reviewAffil %></span>
+    <div id=""><img src="img/critic.gif"/><span class="sparetext" style="color:white;"><%- reviewAffil %></span>
     </div>
-        <div class="sparetext" style="color:white;"><%= reviewName %></div>
+        <div class="sparetext" style="color:white;"><%- reviewName %></div>
         </div>
 </div>
 
