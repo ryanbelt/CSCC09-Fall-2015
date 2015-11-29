@@ -21,7 +21,7 @@ splat.AppRouter = Backbone.Router.extend({
 
     initialize: function() {
         // instantiate a Header view
-        console.log(splat.token);
+        console.log(splat.csrftoken);
         this.headerView = new splat.Header();
         // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);

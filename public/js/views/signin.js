@@ -50,6 +50,7 @@ splat.Signin = Backbone.View.extend({
 
     signin: function(e) {
         e.preventDefault();
+        console.log("singin token:"+splat.csrftoken);
         var allInput = document.getElementsByClassName("signinput");
 	var self = this;
         var checku = self.model.validateField('username',allInput[0].value);
@@ -69,6 +70,13 @@ splat.Signin = Backbone.View.extend({
         }else{
             this.model.set({login: 1,remember: 0});
         }
+        Backbone.ajax = function() {
+            // Invoke $.ajaxSetup in the context of Backbone.$
+            Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
+                jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
+            }});
+            return Backbone.$.ajax.apply(Backbone.$, arguments);
+        };
 	this.model.save(null, {
 	    type: 'put',
             wait: true,
@@ -77,7 +85,6 @@ splat.Signin = Backbone.View.extend({
                     splat.utils.showNotice('Signin Failed', 'danger',
                         response.error);
 		} else {
-		    splat.token = response.token;
 		    splat.userid = response.userid;
 		    splat.username = response.username;
                     splat.utils.showNotice('Signin Successful!', 'success' ,
@@ -95,10 +102,16 @@ splat.Signin = Backbone.View.extend({
 	    e.preventDefault();
 	    $('#logoutdrop').removeClass('open');
         this.model.set({login: 0});
+        Backbone.ajax = function() {
+            // Invoke $.ajaxSetup in the context of Backbone.$
+            Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
+                jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
+            }});
+            return Backbone.$.ajax.apply(Backbone.$, arguments);
+        };
 	this.model.save(null, {
 	    type: 'put',
 	    success: function(model, response) {
-                splat.token = response.token;
 		splat.utils.showNotice('Signout Successful!', 'success',
             'Please Come Back Soon');
 		Backbone.trigger('signedOut', response);
@@ -107,5 +120,6 @@ splat.Signin = Backbone.View.extend({
                 splat.utils.showNotice('Error', 'danger', err.responseText);
             }
         });
+        console.log("after singout token:"+splat.csrftoken);
     },
 });

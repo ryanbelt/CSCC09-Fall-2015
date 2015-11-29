@@ -44,7 +44,7 @@ exports.auth = function(req,res){
                         if (req.body.remember) {
                             req.session.cookie.maxAge = config.sessionTimeout; // ... update cookie age ...
                         }
-                        res.status(200).send({'userid': user.id, 'username': user.username,'token': req.session.auth});  // return userid/username set to session values
+                        res.status(200).send({'userid': user.id, 'username': user.username});  // return userid/username set to session values
                     } else { // handle various error conditions
                         res.status(403).send('Invalid username-password combination, please try again');
                     }
@@ -59,7 +59,7 @@ exports.auth = function(req,res){
     } else {
         //console.log('logout');
         req.session.destroy();
-        res.send({'userid': null, 'username':null });  // return userid and username set to null
+        res.send({'userid': null, 'username':null});  // return userid and username set to null
     }
 };
 

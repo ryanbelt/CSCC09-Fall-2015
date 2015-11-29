@@ -54,7 +54,7 @@ splat.Signup = Backbone.View.extend({
 
     signup: function(event) {
         event.preventDefault();
-
+        console.log("singup token:"+splat.csrftoken);
         var i = 0; //number of validation error variable
         //check all the input boxes validation
         i= this._allValidation();
@@ -68,6 +68,13 @@ splat.Signup = Backbone.View.extend({
                 splat.utils.removeValidationError('password');
                 splat.utils.removeValidationError('password2');
                 console.log(this.model);
+                Backbone.ajax = function() {
+                    // Invoke $.ajaxSetup in the context of Backbone.$
+                    Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
+                        jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
+                    }});
+                    return Backbone.$.ajax.apply(Backbone.$, arguments);
+                };
                 this.model.save({}, {
                     wait: true,
                     success: function(model, response) {
@@ -75,8 +82,7 @@ splat.Signup = Backbone.View.extend({
                             splat.utils.showNotice('Signup Failed',
                                 'Failed to create account', 'alert-danger');
                         } else {
-                            splat.token = response.token;
-                            console.log(response.token);
+                            console.log(response.csrftoken);
                             splat.userid = response.userid;
                             splat.username = response.username;
                             splat.utils.showNotice('Signup Successful!', 'success',

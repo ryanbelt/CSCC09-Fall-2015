@@ -84,7 +84,7 @@ app.use(csurf());
 
 app.use(function(err, req, res, next) {
     if(err.code === 'EBADCSRFTOKEN'){
-        res.status(403).send("please re-login to your app");
+        res.status(403).send("please refresh and re-login to your app");
     }else{
         return next();
     }
@@ -96,7 +96,6 @@ app.set('views', __dirname + '/public');
 // When client-side requests index.html, perform template substitution on it
 app.get('/index.html', function(req, res) {
     // req.csrfToken() returns a fresh random CSRF token value
-    console.log(req.csrfToken());
     res.render('index.html', {csrftoken: req.csrfToken()});
 });
 
