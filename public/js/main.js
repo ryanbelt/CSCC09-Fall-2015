@@ -3,8 +3,10 @@
 // declare splat-app namespace if it doesn't already exist
 var splat =  splat || {};
 
+
 // Define Backbone router
 splat.AppRouter = Backbone.Router.extend({
+
 
     // Map "URL paths" to "router functions"
     routes: {
@@ -19,6 +21,7 @@ splat.AppRouter = Backbone.Router.extend({
 
     initialize: function() {
         // instantiate a Header view
+        console.log(splat.token);
         this.headerView = new splat.Header();
         // insert the rendered Header view element into the document DOM
         $('.header').html(this.headerView.render().el);
