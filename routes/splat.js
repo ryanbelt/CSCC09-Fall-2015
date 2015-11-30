@@ -58,7 +58,7 @@ exports.auth = function(req,res){
         });
     } else {
         //console.log('logout');
-        req.session.destroy();
+        req.session.auth = false;
         res.send({'userid': null, 'username':null});  // return userid and username set to null
     }
 };
