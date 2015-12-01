@@ -82,13 +82,6 @@ app.use(session({
 
 app.use(csurf());
 
-app.use(function(err, req, res, next) {
-    if(err.code === 'EBADCSRFTOKEN'){
-        res.status(403).send("please refresh and re-login to your app");
-    }else{
-        return next();
-    }
-});
 
 // Setup for rendering csurf token into index.html at app-startup
 app.engine('.html', require('ejs').__express);
@@ -98,6 +91,15 @@ app.get('/index.html', function(req, res) {
     // req.csrfToken() returns a fresh random CSRF token value
     res.render('index.html', {csrftoken: req.csrfToken()});
 });
+
+app.use(function(err, req, res, next) {
+    if(err.code === 'EBADCSRFTOKEN'){
+        res.status(403).send("please refresh and re-login to your app");
+    }else{
+        return next();
+    }
+});
+
 
 
 
