@@ -1,23 +1,5 @@
-Skip to content
-This repository  
-Search
-Pull requests
-Issues
-Gist
- @KaiSong2014
- Switch to new design
-Introducing a new repository design
-Hey there! We're rolling out a faster, more streamlined repository experience and would love to give you early access.
- Watch 14
-  Star 35
- Fork 25 JamesMGreene/qunit-reporter-junit
- Branch: master  qunit-reporter-junit/qunit-reporter-junit.js
-4b08be0  on Jan 6
-@JamesMGreene JamesMGreene Revved version to v1.0.3-pre
-3 contributors @Krinkle @JamesMGreene @agcolom
-RawBlameHistory     318 lines (258 sloc)  7.27 KB
 /**
- * JUnit reporter for QUnit v1.0.3-pre
+ * JUnit reporter for QUnit v1.0.2
  *
  * https://github.com/JamesMGreene/qunit-reporter-junit
  *
@@ -333,5 +315,3 @@ RawBlameHistory     318 lines (258 sloc)  7.27 KB
 	};
 
 })();
-Status API Training Shop Blog About Pricing
-© 2015 GitHub, Inc. Terms Privacy Security Contact Help
