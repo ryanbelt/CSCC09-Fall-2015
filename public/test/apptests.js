@@ -60,13 +60,6 @@ test("Test movie model/collection add/save, and callback functions.", function(a
     ok( addModelCallback.called,
         "add callback triggered by movies collection add()" );
     // make sure user is logged out
-    Backbone.ajax = function() {
-        // Invoke $.ajaxSetup in the context of Backbone.$
-        Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
-            jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
-        }});
-        return Backbone.$.ajax.apply(Backbone.$, arguments);
-    };
     var user = new splat.User({username:"test", password:"test",login:0});
     var auth = user.save(null, {
         type: 'put',
