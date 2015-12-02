@@ -21,6 +21,13 @@ splat.AppRouter = Backbone.Router.extend({
 
     initialize: function() {
         // instantiate a Header view
+        Backbone.ajax = function() {
+            // Invoke $.ajaxSetup in the context of Backbone.$
+            Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
+                jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
+            }});
+            return Backbone.$.ajax.apply(Backbone.$, arguments);
+        };
         console.log(splat.csrftoken);
         this.headerView = new splat.Header();
         // insert the rendered Header view element into the document DOM

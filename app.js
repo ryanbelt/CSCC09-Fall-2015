@@ -45,6 +45,11 @@ function isAuthd(req, res, next) {
     }
 };
 
+function isToken(req, res, next) {
+    console.log(req.headers['x-csrf-token']+"\n\n");
+        return next();
+
+};
 
 var app = express();  // Create Express app server
 
@@ -96,7 +101,7 @@ app.use(function(err, req, res, next) {
     if(err.code === 'EBADCSRFTOKEN'){
         res.status(403).send("please refresh and re-login to your app");
     }else{
-        return next();
+        return next(err);
     }
 });
 

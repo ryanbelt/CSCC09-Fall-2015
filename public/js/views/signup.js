@@ -68,13 +68,7 @@ splat.Signup = Backbone.View.extend({
                 splat.utils.removeValidationError('password');
                 splat.utils.removeValidationError('password2');
                 console.log(this.model);
-                Backbone.ajax = function() {
-                    // Invoke $.ajaxSetup in the context of Backbone.$
-                    Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
-                        jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
-                    }});
-                    return Backbone.$.ajax.apply(Backbone.$, arguments);
-                };
+
                 this.model.save({}, {
                     wait: true,
                     success: function(model, response) {

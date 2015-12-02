@@ -70,13 +70,6 @@ splat.Signin = Backbone.View.extend({
         }else{
             this.model.set({login: 1,remember: 0});
         }
-        Backbone.ajax = function() {
-            // Invoke $.ajaxSetup in the context of Backbone.$
-            Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
-                jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
-            }});
-            return Backbone.$.ajax.apply(Backbone.$, arguments);
-        };
 	this.model.save(null, {
 	    type: 'put',
             wait: true,
@@ -102,13 +95,7 @@ splat.Signin = Backbone.View.extend({
 	    e.preventDefault();
 	    $('#logoutdrop').removeClass('open');
         this.model.set({login: 0});
-        Backbone.ajax = function() {
-            // Invoke $.ajaxSetup in the context of Backbone.$
-            Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
-                jqXHR.setRequestHeader("X-CSRF-Token", splat.csrftoken);
-            }});
-            return Backbone.$.ajax.apply(Backbone.$, arguments);
-        };
+
 	this.model.save(null, {
 	    type: 'put',
 	    success: function(model, response) {
