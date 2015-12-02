@@ -49,7 +49,10 @@ function isAuthd(req, res, next) {
 var app = express();  // Create Express app server
 
 // Configure app server
-
+app.use(function (req,res,next){
+   res.setHeader("Strict-Transport-Security","max-age=36000");
+    next();
+});
 // use PORT environment variable, or local config file value
 app.set('port', process.env.PORT || config.port);
 
