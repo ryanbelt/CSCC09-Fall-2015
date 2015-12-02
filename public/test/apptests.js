@@ -64,7 +64,7 @@ test("Test movie model/collection add/save, and callback functions.", function(a
     var auth = user.save(null, {
         type: 'put',
         success: function (model, resp) {
-            assert.deepEqual( resp, {}, "Signout returns empty response object" );
+            assert.deepEqual( resp, {'userid': null, 'username':null}, "Signout returns empty response object" );
             done1();
 
         },error: function(model,resp){
@@ -95,7 +95,7 @@ test("Test movie-delete triggers an error event if unauthenticated.", function(a
     var auth = user.save(null, {
         type: 'put',
         success: function (model, resp) {
-            assert.deepEqual( resp, {}, "Signout returns empty response object" );
+            assert.deepEqual( resp, {'userid': null, 'username':null}, "Signout returns empty response object" );
             done1();
 
         }
@@ -118,17 +118,21 @@ test("Test movie-save succeeds if session is authenticated.", function(assert) {
     var done2 = assert.async();
     var done3 = assert.async();
     var movie = new splat.Movie();  // model
-    movie.set("_id", "5650bf6b6f3c0a143c50994e");
+    movie.set("_id", "564cd1b520a032ac2eb4f078");
     movie.urlRoot = '/movies';
     // fetch existing movie model
     var movieFetch = movie.fetch({
         success: function(movie, resp) {
-            assert.equal( resp._id, "5650bf6b6f3c0a143c50994e",
+            assert.equal( resp._id, "564cd1b520a032ac2eb4f078",
                 "Successful movie fetch" );
             done1();
+        },
+        error: function(movie, resp){
+            console.log(resp);
         }
     });
     // authenticate user with valid credentials
+    console.log("logging");
     var user = new splat.User({username:"a", password:"a", login: 1});
     var auth = user.save(null, {
         type: 'put',
@@ -136,6 +140,9 @@ test("Test movie-save succeeds if session is authenticated.", function(assert) {
             assert.equal( resp.username, "a",
                 "Successful login with valid credentials" );
             done2();
+        },
+        error: function(model,resp){
+            console.log(resp);
         }
     });
     $.when(movieFetch, auth).done(function() {

@@ -20,7 +20,6 @@
 <script type="text/javascript">
     var tester =  tester || {};
     tester.csrftoken = '<%- csrftoken %>';
-    console.log(tester.csrftoken);
     Backbone.ajax = function() {
         // Invoke $.ajaxSetup in the context of Backbone.$
         Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
