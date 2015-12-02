@@ -278,7 +278,6 @@ exports.editMovie = function(req, res){
 };
 
 exports.deleteMovie = function(req, res){
-    console.log("i am here for delete");
     MovieModel.findById(req.params.id, function(err, movie) {
         if(err){
             res.send(500, "Error with finding this movie");
@@ -291,7 +290,7 @@ exports.deleteMovie = function(req, res){
                 movie.remove(function (err) {
                     if (!err) {
                         console.log(req.params.id + "movie delete success");
-                        res.status(200).send(movie);
+                        res.status(200).send({responseText:"movie deleted"});
                     } else {
                         console.log(req.params.id + "movie delete fail");
                         res.send(404, "cannot delete this movie");
