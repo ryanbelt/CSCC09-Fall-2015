@@ -17,6 +17,19 @@
 <script src="../js/lib/jquery-min.js"></script>
 <script src="../js/lib/underscore-min.js"></script>
 <script src="../js/lib/backbone-min.js"></script>
+<script type="text/javascript">
+    var tester =  tester || {};
+    tester.csrftoken = '<%- csrftoken %>';
+    console.log(tester.csrftoken);
+    Backbone.ajax = function() {
+        // Invoke $.ajaxSetup in the context of Backbone.$
+        Backbone.$.ajaxSetup.call(Backbone.$, {beforeSend: function(jqXHR){
+            jqXHR.setRequestHeader("X-CSRF-Token", tester.csrftoken);
+        }});
+        return Backbone.$.ajax.apply(Backbone.$, arguments);
+    };
+</script>
+
 <script src="../js/lib/qunit.js"></script>
 <script src="../js/lib/qunit-reporter-junit.js"></script>
 <script src="../js/lib/sinon-1.15.0.js"></script>
@@ -28,5 +41,6 @@
 <script src="../js/collections/movies.js"></script>
 <!-- App tests -->
 <script src="apptests.js"></script>
+
 </body>
 </html>

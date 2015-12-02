@@ -23,7 +23,7 @@ var https = require("https"),   // ADD CODE
     methodOverride = require("method-override"),
     directory = require("serve-index"),
     errorHandler = require("errorhandler"),
-    basicAuth = require("basic-auth-connect"),
+    //basicAuth = require("basic-auth-connect"),
      csurf= require('csurf'),// optional, for HTTP auth
 
     // config is an object module, that defines app-config attribues,
@@ -91,9 +91,13 @@ app.get('/index.html', function(req, res) {
     // req.csrfToken() returns a fresh random CSRF token value
     res.render('index.html', {csrftoken: req.csrfToken()});
 });
+app.get('/test/test.html', function(req, res) {
+    // req.csrfToken() returns a fresh random CSRF token value
+    res.render('test/test.html', {csrftoken: req.csrfToken()});
+});
 
 app.use(function(err, req, res, next) {
-    if(err.code === 'EBADCSRFTOKEN'){
+    if(err.code == 'EBADCSRFTOKEN'){
         res.status(403).send("please refresh and re-login to your app");
     }else{
         return next(err);

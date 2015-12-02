@@ -37,7 +37,7 @@ test("Fires a custom event when the state changes.", function() {
 });
 
 test("Test movie model/collection add/save, and callback functions.", function(assert) {
-    assert.expect(5);   // 4 assertions to be run
+    assert.expect(4);   // 4 assertions to be run
     var done1 = assert.async();
     var done2 = assert.async();
 
@@ -60,7 +60,7 @@ test("Test movie model/collection add/save, and callback functions.", function(a
     ok( addModelCallback.called,
         "add callback triggered by movies collection add()" );
     // make sure user is logged out
-    var user = new splat.User({username:"test", password:"test",login:0});
+    var user = new splat.User({username:"a", password:"a"});
     var auth = user.save(null, {
         type: 'put',
         success: function (model, resp) {
