@@ -45,11 +45,6 @@ function isAuthd(req, res, next) {
     }
 };
 
-function isToken(req, res, next) {
-    console.log(req.headers['x-csrf-token']+"\n\n");
-        return next();
-
-};
 
 var app = express();  // Create Express app server
 
