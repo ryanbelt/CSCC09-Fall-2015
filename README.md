@@ -1,2 +1,2 @@
 ##SPA HEROZ
-#running node.js to activate the server
+Srunning node.js to activate the server
