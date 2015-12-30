@@ -1,2 +1,2 @@
-# CSCC09-Fall-2015
-CSCC09 web development
+SPA HEROZ
+running node.js to activate the server
